@@ -58,3 +58,16 @@ background-image: linear-gradient(#ed2e8a 0%, #ff8b42 100%);
   border-bottom: 15px solid #ed2e8a;
 
 }
+
+.btn-primary{
+    background-color: #d23396;
+    font-family: Tahoma;
+font-size: 16px;
+color: #ffffff;
+text-align: center;
+border-width: 0px;
+}
+
+.btn-primary:hover{
+    background-color: #d23396;    
+}

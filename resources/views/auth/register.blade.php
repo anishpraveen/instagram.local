@@ -1,19 +1,26 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('content')
-<div class="container">
+<div class="container" id="mydiv" >
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-default">
-                <div class="panel-heading"><div class="col-md-offset-5"> Register</div></div>
-                <div class="panel-body" style="background-color: grey;">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }} " enctype="multipart/form-data">
+            <div class="panel panel-default transbox">
+                <div class="panel-heading transbox"><div class="col-md-offset-5"><img src="/icons/Instagram_Signup_Logo.svg" alt=""> </div></div>
+                <div class="panel-body "  >
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }} " enctype="multipart/form-data" >
                         {{ csrf_field() }}
 
+                        <div class="form-group">
+                            <div class="boxHead" >
+                                    Sign Up
+                            </div>
+                        </div>
                         <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                            
-                            <div class="col-md-7 col-md-offset-3">
+                            <div class="col-md-7 col-md-offset-5">
+                                
                                 <input name="image" type="file">
+                                <img src="/icons/Avatar.svg" class="imgCircle" id="avatar" alt="Profile picture">
 
                                 @if ($errors->has('image'))
                                     <span class="help-block">
@@ -87,7 +94,7 @@
                             .ddl {
                                 
                                 height: 36px;
-                                padding: 6px 5px;
+                                padding: 6px 5px;                               
                                 background-color: #fff;
                                 border: 1px solid #ccd0d2;                                       
                                 box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
@@ -99,7 +106,7 @@
                         </style>
                         <div class="form-group{{ $errors->has('DOBMonth') ? ' has-error' : '' }}{{ $errors->has('DOBYear') ? ' has-error' : '' }}">
                             <div class="col-md-7 col-md-offset-3">
-                                <label for="birthday" >Birthday</label>
+                                <label for="birthday" class="subHeading">Birthday</label>
 
                                 <div >
                                     <!-- <input id="birthday" type="date" class="form-control" name="birthday" required>
@@ -183,36 +190,36 @@
                                 cursor: pointer;
                                 
                                 
-                                background-image: url(/icons/a.png);
+                                background-image: url(/icons/round.svg);
                                 background-repeat: no-repeat;
                                 
                                 text-indent: 25px;
                             }
                             
                             input[type=radio]:checked + label.male{   
-                                background-image: url(/icons/b.png);
+                                background-image: url(/icons/round_select.svg);
                                 }
 
                             input[type=radio] + label.female{
                                 display:inline-block;
                                 cursor: pointer;
                             
-                                background-image: url(/icons/a.png);
+                                background-image: url(/icons/round.svg);
                                 background-repeat: no-repeat;
                                 
                                 text-indent: 25px;
                             }
                             
                             input[type=radio]:checked + label.female{   
-                                background-image: url(/icons/b.png);
+                                background-image: url(/icons/round_select.svg);
                                 }
 
 
 
                         </style>
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }} ">
-                            <div class="col-md-6 col-md-offset-3">
-                                <label for="gender" >Gender</label>
+                            <div class="col-md-6 col-md-offset-3 ">
+                                <label for="gender" class="subHeading">Gender</label>
 
                                 <br>
                                 <input type="radio" id="radio-img-1" name="gender" value="male">
@@ -228,13 +235,18 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-7 col-md-offset-3">
+                                <button type="submit" class="btn btn-primary form-control">
                                     SIGN UP
                                 </button>
                             </div>
                         </div>
                     </form>
+                    <div>
+                        <div>
+                            <a href="/login" id="aBack">Back</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

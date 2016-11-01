@@ -1,0 +1,103 @@
+div.transbox{
+
+	//background-color: transparent;
+	background-image: url('/uploads/images/SINGUP_BG.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+    //border: 1px solid black;
+    opacity: 0.9;
+    //filter: alpha(opacity=60);
+    //z-index: -1;
+}
+
+div.transbox input {
+    //margin: 5%;
+    background-color: transparent;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: ProximaNova-Regular;
+    font-size: 15px;
+
+}
+
+div.transbox select {
+    //margin: 5%;
+    background-color: transparent;
+    font-weight: bold;
+    //color: #000000;
+    font-family: ProximaNova-Regular;
+    font-size: 15px;
+}
+
+
+
+
+#bg {
+    position: fixed; 
+    top: -50%; 
+    left: -50%; 
+    width: 200%; 
+    height: 200%;
+}
+#bg img {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    margin: auto; 
+    min-width: 50%;
+    min-height: 50%;
+}
+
+#mydiv {
+   margin-top: 4%;
+    
+}
+
+.boxHead{
+	font-family: Tahoma;
+	font-size: 21px;
+	color: #ff9c41;
+	text-align: center;
+	line-height: 24px;
+}
+
+#aBack{
+	font-family: Tahoma;
+font-size: 14px;
+color: #ffffff;
+text-align: left;
+line-height: 24px;
+}
+.subHeading{
+	font-family: ProximaNova-Regular;
+	font-size: 14px;
+	color: #ffa141;
+	text-align: left;
+	line-height: 24px;
+}
+
+
+/**************************************/
+/* Checkboxes sprite background image */
+/**************************************/
+
+input[type=checkbox]{display:none;}
+ 
+input[type=checkbox] + label.check{
+    
+    cursor: pointer; 
+	background-image: url(/icons/checkbox.svg);
+    background-repeat: no-repeat;	
+    
+}
+
+input[type=checkbox] + label.check span{}
+ 
+input[type=checkbox]:checked + label.check{background-image: url(/icons/add_button.svg);}
+
+
+/**************************************/
+/* Upload Type                        */
+/**************************************/

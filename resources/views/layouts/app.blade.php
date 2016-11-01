@@ -26,7 +26,7 @@
     </script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" >
         <nav class="navbar navbar-default navbar-static-top gradiantleft" >
             <div class="container">
                 <div class="navbar-header" >
@@ -40,7 +40,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                     <img src="/icons/instagram_logo_inner.svg" alt="" height="25px">
                        <!-- {{ config('app.name', 'Laravel') }}-->
                     </a>

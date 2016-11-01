@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>D765CD12-9F1F-475C-98FE-690E21FC8B7B</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M8.38747918,7 C9.47558354,7 10.514213,7.21019883 11.5033988,7.63060278 C12.4925846,8.05100674 13.341623,8.61978003 14.0505395,9.33693972 C14.7676991,10.0540994 15.3364724,10.9072594 15.7568764,11.8964451 C16.1772804,12.8856309 16.3874792,13.8665588 16.3874792,14.8392581 C16.379236,15.8119575 16.243225,16.7063329 15.9794421,17.5224111 C15.4683628,19.0886219 14.5245288,20.3910304 13.1479119,21.4296754 C11.7630519,22.4765637 10.1762568,23 8.38747918,23 C7.29937482,23 6.26074533,22.7898012 5.27155955,22.3693972 C4.28237377,21.9489933 3.43333538,21.38022 2.7244189,20.6630603 C2.00725921,19.9459006 1.43848592,19.0927406 1.01808196,18.1035549 C0.597678005,17.1143691 0.387479179,16.0798611 0.387479179,15 C0.387479179,13.9201389 0.597678005,12.8856309 1.01808196,11.8964451 C1.43848592,10.9072594 2.00725921,10.0540994 2.7244189,9.33693972 C3.43333538,8.61978003 4.28237377,8.05100674 5.27155955,7.63060278 C6.26074533,7.21019883 7.29937482,7 8.38747918,7 L8.38747918,7 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="16" height="16" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01_Sign-In" transform="translate(-578.000000, -639.000000)" stroke="#D2D6D9" stroke-width="2">
+            <g id="Already-a-member" transform="translate(384.000000, 203.000000)">
+                <g id="Remember-me-+-check-circle-2" transform="translate(194.289817, 429.836134)">
+                    <use id="checkbox" mask="url(#mask-2)" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
