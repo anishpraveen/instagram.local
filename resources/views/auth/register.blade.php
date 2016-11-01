@@ -17,11 +17,12 @@
                         </div>
                         <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                            
-                            <div class="col-md-7 col-md-offset-5">
-                                
-                                <input name="image" type="file">
-                                <img src="/icons/Avatar.svg" class="imgCircle" id="avatar" alt="Profile picture">
-
+                            <div class="col-md-6 col-md-offset-4">
+                                <div style="postion: relative; ">
+                                    <label class="btn ">
+                                    <input name="image" type="file" id="main-input" onchange="previewFile(this);"><img src="/icons/add_button.svg" class="addButton"></label>
+                                    <img src="/icons/Avatar.svg" class="imgCircle" width="95" height="95" style=" border-radius: 50%;" id="avatar" alt="Profile picture">
+                                </div>
                                 @if ($errors->has('image'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('image') }}</strong>
@@ -33,7 +34,7 @@
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                            <!-- <label for="name" class="col-md-4 control-label">Name</label> -->
 
-                            <div class="col-md-7 col-md-offset-3">
+                            <div class="col-md-6 col-md-offset-3">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required placeholder="First Name"  autofocus>
 
                                 @if ($errors->has('name'))
@@ -46,7 +47,7 @@
 
                         <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
                             
-                            <div class="col-md-7 col-md-offset-3">
+                            <div class="col-md-6 col-md-offset-3">
                                 <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" required placeholder="Last Name" >
 
                                 @if ($errors->has('lastname'))
@@ -59,7 +60,7 @@
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             
-                            <div class="col-md-7 col-md-offset-3">
+                            <div class="col-md-6 col-md-offset-3">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="Email Address" >
 
                                 @if ($errors->has('email'))
@@ -72,7 +73,7 @@
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             
-                            <div class="col-md-7 col-md-offset-3">
+                            <div class="col-md-6 col-md-offset-3">
                                 <input id="password" type="password" class="form-control" name="password" required placeholder="Password" >
 
                                 @if ($errors->has('password'))
@@ -105,7 +106,7 @@
                             }
                         </style>
                         <div class="form-group{{ $errors->has('DOBMonth') ? ' has-error' : '' }}{{ $errors->has('DOBYear') ? ' has-error' : '' }}">
-                            <div class="col-md-7 col-md-offset-3">
+                            <div class="col-md-6 col-md-offset-3">
                                 <label for="birthday" class="subHeading">Birthday</label>
 
                                 <div >
@@ -263,4 +264,6 @@
 
 @endif
 -->
+
+
 @endsection

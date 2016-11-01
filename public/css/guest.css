@@ -95,9 +95,16 @@ input[type=checkbox] + label.check{
 
 input[type=checkbox] + label.check span{}
  
-input[type=checkbox]:checked + label.check{background-image: url(/icons/add_button.svg);}
+input[type=checkbox]:checked + label.check{background-image: url(/icons/reminder_me.svg);}
 
 
 /**************************************/
-/* Upload Type                        */
+/* Upload Type file                   */
 /**************************************/
+input[type=file]{display:none;}
+ 
+img.addButton{
+	position: absolute;
+	left: 115px; 
+	top: 10px;
+}
