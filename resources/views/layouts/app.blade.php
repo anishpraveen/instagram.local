@@ -16,7 +16,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    
+    <link href="/css/style.css" rel="stylesheet">
     
     <!-- Scripts -->
     <script>
@@ -27,7 +27,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top" style="background-color: pink;">
+        <nav class="navbar navbar-default navbar-static-top gradiantleft" >
             <div class="container">
                 <div class="navbar-header" >
 
@@ -59,26 +59,36 @@
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                    
+                            <li class="dropdown" >
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background: transparent;">                                    
                                     {{ Auth::user()->name }} 
                                     <img src="uploads/profilePic/{{ Auth::user()->profilePic }}" width="25px" height="25px" class="img-circle" >
                                     <span class="caret"></span>
                                 </a>
+                                
+                                <ul class="dropdown-menu gradiantdown" role="menu" id="ulMenu"> 
+                                    <div >
+                                       
+                                        <li class="lispace">
+                                            <a href="#"><img src="/icons/settings_select.svg" alt="Settings"></a>
+                                        </li>
+                                        <li class="lispace">
+                                            <a href="#"><img src="/icons/heart_select.svg" alt="Heart"></a>
+                                        </li>
+                                        <li class="lispace">
+                                            <a href="{{ url('/logout') }}"
+                                                onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();" >
+                                            <img src="/icons/logout_select.svg" alt=" Logout ">
+                                            </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
+                                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>                                        
+                                    </div>
                                 </ul>
+                                
                             </li>
                         @endif
                     </ul>
