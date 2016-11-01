@@ -108,3 +108,8 @@ img.addButton{
 	left: 115px; 
 	top: 10px;
 }
+
+body{
+	min-width: 300px;
+	overflow-x: auto;
+}
