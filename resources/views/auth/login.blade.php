@@ -81,7 +81,7 @@
                     <div class="connectBox white">
                         Connect With 
                         <a href="{{ route('social.redirect', ['provider' => 'google']) }}"><img src="/icons/google-plus.svg" alt="google-plus"></a>
-                        <a href="#"><img src="/icons/facebook.svg" alt="facebook"></a>
+                        <a href="{{ route('social.redirect', ['provider' => 'facebook']) }}"><img src="/icons/facebook.svg" alt="facebook"></a>
                         
                     </div>
                 </div>                

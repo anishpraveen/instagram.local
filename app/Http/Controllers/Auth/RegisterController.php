@@ -105,7 +105,7 @@ class RegisterController extends Controller
         $user->birthday = $DOB;
         $user->gender = $data['gender'];
         
-        $user->profilePic=$fileName;
+        $user->profilePic='/uploads/profilePic/'.$fileName;
         $user->save();
 
         return  $user;
