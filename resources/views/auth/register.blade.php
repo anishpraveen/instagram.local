@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default transbox">
-                <div class="panel-heading transbox"><div class="col-md-offset-5"><img src="/icons/Instagram_Signup_Logo.svg" alt=""> </div></div>
+                <div class="panel-heading transbox"><div class="col-md-offset-5"><img src="/icons/Instagram_Signup_Logo.svg" alt="Instagram"> </div></div>
                 <div class="panel-body "  >
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }} " enctype="multipart/form-data" >
                         {{ csrf_field() }}
@@ -244,7 +244,7 @@
                         </div>
                     </form>
                     <div>
-                        <div>
+                        <div style="padding-left: 15px; padding-bottom: 20px;">
                             <a href="/login" id="aBack">Back</a>
                         </div>
                     </div>

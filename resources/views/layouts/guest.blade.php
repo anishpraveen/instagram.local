@@ -30,6 +30,7 @@
     <div id="app" >
         <div id="bg">
             <img src="/uploads/images/BG.png" alt="">
+            <img src="/uploads/images/black_shade.svg" alt="">
         </div>
 
      @yield('content')

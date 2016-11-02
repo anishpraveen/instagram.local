@@ -62,7 +62,13 @@ div.transbox select {
 	text-align: center;
 	line-height: 24px;
 }
-
+.boxSubHead{
+	font-family: Tahoma;
+	font-size: 14px;
+	color: #f16180;
+	text-align: center;
+	line-height: 24px;
+}
 #aBack{
 	font-family: Tahoma;
 font-size: 14px;
@@ -112,4 +118,40 @@ img.addButton{
 body{
 	min-width: 300px;
 	overflow-x: auto;
+}
+
+.white{
+	color: white;
+}
+.white:hover{
+	color: white;
+}
+#divSignUp{
+	text-align: center;
+	margin-top: 15%;
+}
+.pink{
+	color: #d23396;
+}
+.pink:hover{
+	color: #d23396;
+}
+.connectBox{
+
+	background-color: black;	
+	background-size: cover;    
+    align-content: center;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+    border-radius: 0px 0px 3px 3px;
+}
+.panel-body{
+	padding-bottom: 0px;
+	padding-left: 3px;
+	padding-right: 2px;
+}
+
+.centerDiv {
+	
+	margin-top: 10%;
 }
