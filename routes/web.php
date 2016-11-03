@@ -22,6 +22,7 @@ Route::get('/profile', 'HomeController@profile');
 Route::get('/favourites', 'HomeController@favourites');
 Route::get('/settings', 'HomeController@settings');
 Route::post('/search', 'HomeController@search');
+Route::resource('posts', 'PostsController');
 
 $s = 'social.';
 Route::get('/social/redirect/{provider}',   ['as' => $s . 'redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);

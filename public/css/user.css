@@ -1,0 +1,103 @@
+.postInput input{
+	background-color: transparent;
+	border-style: none;
+	box-shadow: none;
+	height: 72px;
+	border-radius: 0px;
+	//width: 720px;
+	
+}
+.postInput{
+	position: relative;
+	
+	padding: 0px;
+
+}
+.postInput input:focus{
+	background-color: transparent;
+	border-style: none;
+	box-shadow: none;
+
+}
+
+#btnPost{
+	position: absolute;
+	right: 21px;
+	top: 20px;
+	height: 35px;
+	width: 99px;
+	background-color: #ff6262;
+	border-radius: 18px;
+}
+/**************************************/
+/* Upload Type file                   */
+/**************************************/
+input[type=file]{display:none;}
+ 
+img.addButton{
+	//position: absolute;
+	//left: 115px; 
+	//top: 10px;
+}
+
+.panel-group {
+	border-radius: 0px;
+}
+
+.bgwhite input{
+  background-color: white;
+}
+.bgwhite input:focus{
+  background-color: white;
+}
+
+#profileFormBar{
+	height: 50px;
+	//width: 396px;
+	background-color: #34495e;
+	border-radius: 3px 10px 0px 0px;
+	padding: 0;
+	position: relative;
+}
+
+.profileFormBarIcons{
+	//text-align: center;
+	//align-items: center;
+	//align-content: center;
+	//position: absolute;
+	height: 50px;
+	width: 53px;
+	background-color: #253648;
+}
+
+#iconImage img{
+	padding-top: 10px;
+	right: 10px;
+}
+
+#lImage{
+	background-image: url('/icons/camera.svg');
+	background-repeat: no-repeat;
+	margin-top: 15px;
+}
+#lStatus{
+	background-image: url('/icons/status.svg');
+	background-repeat: no-repeat;
+	margin-top: 15px;
+}
+#lClock{
+	background-image: url('/icons/clock_post.svg');
+	background-repeat: no-repeat;
+	margin-top: 15px;
+}
+
+
+@media (max-width: 40em) {
+.iii {
+visibility:hidden;
+}
+}
+
+body{
+	min-width: 300px;
+}
