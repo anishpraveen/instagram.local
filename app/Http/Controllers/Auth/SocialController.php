@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SocialController extends Controller
 {
-   
+   /**
+     * Redirect to validation 
+     * if valid provider
+     *
+     * @return 
+     */
     public function getSocialRedirect( $provider )
     {
         $providerKey = Config::get('services.' . $provider);
@@ -23,6 +28,13 @@ class SocialController extends Controller
         } 
         return Socialite::driver( $provider )->redirect();
     }
+
+    /**
+     * Get social details 
+     * 
+     *
+     * @return 
+     */
     public function getSocialHandle( $provider )
     {
         if (Input::get('denied') != '') 
@@ -46,7 +58,7 @@ class SocialController extends Controller
         }
         else 
         {
-            // multiple login with different accounts
+            // multiple login with different social accounts
             $sameSocialId =null;// Social::where('social_id', '=', $user->id)->where('provider', '=', $provider )->first(); 
             if (empty($sameSocialId)) 
             {
@@ -62,7 +74,7 @@ class SocialController extends Controller
                 }
                 $newSocialUser->profilePic=$user->avatar;
                 $newSocialUser->password = bcrypt(str_random(16));
-                $newSocialUser->remember_token = str_random(64);//dd($user);
+                $newSocialUser->remember_token = str_random(64);
                 $newSocialUser->gender=$user['gender'];
                 $newSocialUser->save();               
                 $socialUser = $newSocialUser;

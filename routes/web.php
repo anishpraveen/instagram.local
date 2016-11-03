@@ -18,6 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/profile', 'HomeController@profile');
+Route::get('/favourites', 'HomeController@favourites');
+Route::get('/settings', 'HomeController@settings');
+Route::post('/search', 'HomeController@search');
 
 $s = 'social.';
 Route::get('/social/redirect/{provider}',   ['as' => $s . 'redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);

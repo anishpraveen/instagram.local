@@ -25,4 +25,44 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Show the profile.
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function profile()
+    {
+        return view('pages.profile');
+    }
+
+    /**
+     * Show the user favourites.
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function favourites()
+    {
+        return view('pages.favourites');
+    }
+
+    /**
+     * Show the user settings.
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function settings()
+    {
+        return view('pages.settings');
+    }
+
+    /**
+     * Show the user search.
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function search()
+    {
+        return view('pages.search');
+    }
 }

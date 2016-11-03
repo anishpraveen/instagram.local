@@ -71,3 +71,19 @@ border-width: 0px;
 .btn-primary:hover{
     background-color: #d23396;    
 }
+
+.white{
+  color: white;
+}
+.white:hover{
+  color: white;
+}
+.pink{
+	color: #d23396;
+}
+.pink:hover{
+	color: #d23396;
+}
+body{
+	background-color: #ececec;
+}
