@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Posts;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -32,8 +35,11 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
      public function profile()
-    {
-        return view('pages.profile');
+    {   
+        $user = User::Find(Auth::user()->id);
+        $posts = $user->posts->toArray(); $posts= array_reverse($posts);
+        //dd($posts);
+        return view('pages.profile', compact('posts'));
     }
 
     /**

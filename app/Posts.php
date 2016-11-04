@@ -14,4 +14,15 @@ class Posts extends Model
         'description',
         'publishedOn'
     ];
+    protected $dates = ['publishedOn'];
+
+    /**
+     * Posts are owned by a user
+     *
+     * @return Belong relation
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'userId');
+    }
 }
