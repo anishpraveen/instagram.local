@@ -226,3 +226,15 @@ body{
         width: 100%;
     }
 }
+
+#recommendedPeopleHeading{
+    font-family: Tahoma;
+    font-size: 18px;
+    color: #f02d88;
+    text-align: left;
+    line-height: 24px;
+}
+
+.a{
+
+}

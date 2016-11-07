@@ -90,7 +90,7 @@
                     </div>
                 </div>
                  <!-- Previous Posts -->
-                @foreach($posts as $post)
+                @foreach($posts as $post) 
                     <div class="col-md-6 ">
                         <div class="panel panel-group">
                             <div class="panel-heading">        
@@ -103,20 +103,30 @@
                                         <img src="{{ $user[0]['profilePic'] }}" alt=""  class="img-circle" height="45" width="45">                                
                                         {{ $user[0]['name'] }} 
                                     </div>
-                                    <div class="col-md-4 left">
-                                        {{  $dd->format('d, M Y') }}<br>
+                                    <div class="text-right" style="">
+                                        {{  $dd->format('d, M Y') }}
+                                        <img src="/icons/clock5.svg" alt="">
+                                        <br>
                                         Kakkanad
+                                        <a href="#" style="padding-right:5px;">
+                                            <img src="/icons/pin5.svg" alt="">
+                                        </a>
                                     </div>
                                 </div>   
                             </div>
 
-                            <div class="panel-body postImage ">                                
-                                <img src="{{ $post['imageName'] }}" id="{{ $post['id'] }}" onclick="modalPopup(this.id);"   alt="" class="img-responsive myImg"  >
+                            <div class="panel-body postImage">                                
+                                <img  src="{{ $post['imageName'] }}"  id="{{ $post['id'] }}" onclick="modalPopup(this.id);"   alt="" 
+                                class=" img-responsive myImg "  >
                                  
                             </div>
-                            <div class="panel-footer" style="background-color: white;">
+                            <div class="panel-footer" style="background-color: white; word-wrap: break-word;">   
                                 {{ $post['description'] }}
-                                
+                                <div style="float:right;">
+                                    <a href="#" >
+                                        <img src="/icons/liked.svg" alt="">
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
