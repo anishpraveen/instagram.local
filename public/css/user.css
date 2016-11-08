@@ -235,6 +235,10 @@ body{
     line-height: 24px;
 }
 
-.a{
-
+.postsUserName{
+    font-family: Tahoma;
+    font-size: 18px;
+    color: #ff8842;
+    text-align: left;
+    line-height: 24px;
 }

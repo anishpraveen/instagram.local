@@ -34,7 +34,8 @@ class HomeController extends Controller
         $posts = null;
         $count = 0;
         // Get all post of the followers
-        foreach ($followList as $follow) {
+        foreach ($followList as $follow) 
+        {
             $followUser = User::Find($follow['user_id']);
             $userPost = $followUser->posts->toArray();
             if($count==0)
@@ -50,7 +51,7 @@ class HomeController extends Controller
         //dd($posts);
         // Get suggestion list
         $userList = $this->getUserRecomendation();
-        
+
         if(is_null($posts)){
             return view('user.home', compact('posts'), compact('userList'));
         }
@@ -82,7 +83,10 @@ class HomeController extends Controller
      */
      public function favourites()
     {
-        return view('pages.favourites');
+        $user = User::Find(Auth::user()->id);
+        $posts = $user->posts->toArray(); $posts= array_reverse($posts);
+        //dd($posts);
+        return view('pages.favourites', compact('posts'));
     }
 
     /**
@@ -108,7 +112,8 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
      public function getUserRecomendation()
-    {   $count = 0;
+    {   
+        $count = 0;
         //$user = User::all()->toArray();
         $userList = User::select('*')->limit(15)->offset(0)->get()->toArray();
         
@@ -137,7 +142,7 @@ class HomeController extends Controller
         }
         $count = 0;
         //Follow status of first user in the follow list 
-        if(isset($idList))
+        if(isset($idList) && !empty($idList[0]))
         {
             foreach ($userList as $key ) {
                 if($userList[$count]['id']==$idList[0]){
