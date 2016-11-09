@@ -39,7 +39,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Follows
+     * User follows many 
      *
      * @return Belong relation
      */
@@ -49,12 +49,22 @@ class User extends Authenticatable
     }
 
     /**
-     * Followers
+     * User is followed by many
      *
      * @return Belong relation
      */
     public function followers()
     {
         return $this->hasMany('App\Follower','user_id');
+    }
+
+    /**
+     * User likes many posts
+     *
+     * @return Belong relation
+     */
+    public function like()
+    {
+        return $this->hasMany('App\Favourite','userId');
     }
 }

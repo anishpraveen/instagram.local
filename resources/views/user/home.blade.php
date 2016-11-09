@@ -57,26 +57,22 @@
                                         </div>
                                         <div class="col-md-3  col-xs-3 " id="{{ $user['id'] }}"  style="float:right;">                                                       
                                             @if($user['follow'])  
-                                                <a  href="#" 
-                                                onclick="unfollow({{ $user['id'] }});" class=" fff">                                       
-                                                    <img src="/icons/followers.svg" style="float:right;" alt="">
+                                                <a onclick="unfollow({{ $user['id'] }});" >                                       
+                                                    <img src="/icons/followers.svg" style="float:right;" alt="following">
                                                 </a>
                                             @else
-                                                <a href="#"  onclick="follow({{ $user['id'] }});" class="">  
-                                                    <img src="/icons/follow.svg" style="float:right;" alt="">
+                                                <a  onclick="follow({{ $user['id'] }});" >  
+                                                    <img src="/icons/follow.svg" style="float:right;" alt="follow">
                                                 </a>
                                             @endif                                                
                                         </div>
-                                            
                                     </div>
                                 </div>
-                            
                             </div>       
                             <br>
                             <div class="clearfix">
                             </div>                 
                         @endforeach  
-                        
                     @endif
                 </div>
             </div>
@@ -113,58 +109,46 @@
 </script>
 
 <script>
-    function follow($id){
-        //alert($id);    
+    function follow($id){        
         $.ajax({
-        type: "GET",
-        url: '/follow/'+$id,
-        data: "",
-        success: function(response) {
-            
-            $html = '<a  href="#" onclick="unfollow('+$id+')" class=" fff"><img src="/icons/followers.svg" style="float:right;" alt=""></a>'   
-            document.getElementById($id).innerHTML = $html;
-            //alert('some');  
-            $.ajax({
-                type: "GET",
-                url: '/posts',
-                data: "",
-                success: function(response) {
-                    //alert(response);
-                    
-                    document.getElementById('divPosts').innerHTML = response;
-                    //   
-                }
-            })
-        }
-    })
+            type: "GET",
+            url: '/follow/'+$id,
+            data: "",
+            success: function(response) {
+                
+                $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg" style="float:right;" alt=""></a>'   
+                document.getElementById($id).innerHTML = $html;                
+                $.ajax({
+                    type: "GET",
+                    url: '/posts',
+                    data: "",
+                    success: function(response) {                        
+                        document.getElementById('divPosts').innerHTML = response;                       
+                    }
+                })
+            }
+        })
     }
 
     function unfollow($id){
-        //alert($id);    
         $.ajax({
-        type: "GET",
-        url: '/follow/'+$id+'/unfollow',
-        data: "",
-        success: function(response) {
-            
-            $html = '<a  href="#" onclick="follow('+$id+');" class=" fff"><img src="/icons/follow.svg" style="float:right;" alt=""></a>'   
-            document.getElementById($id).innerHTML = $html;
-            //alert('some');   
-             $.ajax({
-                type: "GET",
-                url: '/posts',
-                data: "",
-                success: function(response) {
-                    //alert(response);
-                    
-                    document.getElementById('divPosts').innerHTML = response;
-                    //   
-                }
-            })
-        }
-    })
+            type: "GET",
+            url: '/follow/'+$id+'/unfollow',
+            data: "",
+            success: function(response) {
+                
+                $html = '<a  onclick="follow('+$id+');" ><img src="/icons/follow.svg" style="float:right;" alt=""></a>'   
+                document.getElementById($id).innerHTML = $html;
+                $.ajax({
+                    type: "GET",
+                    url: '/posts',
+                    data: "",
+                    success: function(response) {
+                        document.getElementById('divPosts').innerHTML = response;
+                    }
+                })
+            }
+        })
     }
 </script>
-
-
 @endsection

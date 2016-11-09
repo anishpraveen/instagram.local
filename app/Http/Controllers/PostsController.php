@@ -12,7 +12,7 @@ use Auth;
 class PostsController extends Controller
 {
     /**
-     * Show the user settings.
+     * Add new post of user.
      *
      * @return \Illuminate\Http\Response
      */
@@ -48,21 +48,23 @@ class PostsController extends Controller
     /**
     *
     *Get post
-    *
+    *@param $id
     *
     */
-    public function show($id){
+    public function show($id)
+    {
         $post=Posts::find($id);
         //dd($post);
     }
 
     /**
     *
-    *Get post
+    *Get posts of users being followed
     *
-    *
+    *@return view 
     */
-    public function get(){
+    public function get()
+    {
         $user = User::Find(Auth::user()->id);
         $followList=$user->follow->toArray();
         $posts = null;
@@ -76,7 +78,8 @@ class PostsController extends Controller
                 $posts=$userPost;
                 $count++;
             } 
-            else{
+            else
+            {
                 $posts = array_merge($posts,$userPost);
             }
             
@@ -84,13 +87,8 @@ class PostsController extends Controller
         $posts = array_values(array_sort($posts, function ($value) {
             return $value['publishedOn'];
         }));
-
-        
-        //dd($user);
         $posts= array_reverse($posts);
 
-        //dd($posts);
-       // return $posts;
         return view('pages._posts', compact('posts'));
     }
 
