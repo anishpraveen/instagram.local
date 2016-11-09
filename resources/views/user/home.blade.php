@@ -9,7 +9,7 @@
                 <!-- Previous Posts -->
                 @if(!is_null($posts))
                      @include('pages._posts')
-                 @else
+                @else
                      <div class="col-md-6 ">
                             <div class="panel panel-group">
                                 <div class="panel-heading postsUserName">                                         

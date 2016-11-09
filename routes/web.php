@@ -30,6 +30,10 @@ Route::get('/follow/{id}', 'FollowController@follow');
 Route::get('/follow', 'FollowController@index');
 Route::get('/follow/{id}/unfollow', 'FollowController@unfollow');
 
+Route::get('/like/{id}', 'FavouriteController@like');
+Route::get('/like', 'FavouriteController@index');
+Route::get('/like/{id}/unlike', 'FavouriteController@unlike');
+
 
 $s = 'social.';
 Route::get('/social/redirect/{provider}',   ['as' => $s . 'redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);
