@@ -28,7 +28,7 @@
                                 class=" img-responsive myImg "  >
                                  
                             </div>
-                            <div class="panel-footer" style="background-color: white; word-wrap: break-word;">   
+                            <div class="panel-footer postFooter" style="background-color: white; word-wrap: break-word;">   
                                 {{ $post['description'] }}
                                 <div style="float:right;">
                                     <a href="#" >

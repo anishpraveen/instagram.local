@@ -242,3 +242,10 @@ body{
     text-align: left;
     line-height: 24px;
 }
+
+.postFooter{
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #232323;
+    text-align: left;
+}

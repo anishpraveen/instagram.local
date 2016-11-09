@@ -22,7 +22,7 @@ $('.scroll').jscroll({
             
             debug: true,
             autoTrigger: true,
-            loadingHtml: '<h1>Loading...</h1>',
+            loadingHtml: '',
             nextSelector: '.pagination li.active + li a',
             contentSelector: 'div.scroll',
             callback: function() {
