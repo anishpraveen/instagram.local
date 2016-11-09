@@ -249,3 +249,27 @@ body{
     color: #232323;
     text-align: left;
 }
+
+.selectedSideBar{
+    background-color: #ff9f41;
+    border-radius:0;
+}
+.sideBar{
+    font-family: ProximaNova-Regular;
+font-size: 16px;
+color: #6f6f6f;
+text-align: left;
+line-height: 20px;
+
+}
+
+.boxShadow {  
+     box-shadow: 0 0 10px rgba(0,0,0,0.6); 
+     -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6); 
+     -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6); 
+     -o-box-shadow: 0 0 10px rgba(0,0,0,0.6); 
+}
+
+.pagination{
+    visibility: hidden;
+}

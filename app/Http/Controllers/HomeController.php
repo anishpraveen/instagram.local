@@ -66,6 +66,8 @@ class HomeController extends Controller
         
         //dd($user);
         $posts= array_reverse($posts);
+        $perPage = 6;
+        $posts =$this->paginateArray($posts,$perPage);
         return view('user.home', compact('posts'), compact('userList'));
     }
 
@@ -78,6 +80,8 @@ class HomeController extends Controller
         $user = User::Find(Auth::user()->id);
         $posts = $user->posts->toArray(); $posts= array_reverse($posts);
         //dd($posts);
+        $perPage = 6;
+        $posts =$this->paginateArray($posts,$perPage);
         return view('pages.profile', compact('posts'));
     }
 
@@ -91,31 +95,26 @@ class HomeController extends Controller
         $likeList = $user->like->toArray();
         $post =null;
         
-        foreach ($likeList as $key ) {
+        foreach ($likeList as $key ) 
+        {
             $postId = $key['postId'];
             $post[] = Posts::Find($postId)->toArray();
         }
         if( empty($post))
-        {   //dd(!is_null($post));
+        {  
             return view('pages.favourites',['posts' => null]);
         }
-        //dd($post);
-        //Get current page form url e.g. &page=6
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
-        //Create a new Laravel collection from the array data
-        $collection = new Collection($post);
+        $post = array_values(array_sort($post, function ($value) {
+            return $value['publishedOn'];
+        }));
 
-        //Define how many items we want to be visible in each page
-        $perPage = 4;
-
-        //Slice the collection to get the items to display in current page
-        $currentPageSearchResults = $collection->slice(($currentPage-1) * $perPage, $perPage)->all();
-
-        //Create our paginator and pass it to the view
-        $paginatedSearchResults= new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage);
-
-        return view('pages.favourites',['posts' => $paginatedSearchResults]);
+        
+        $post= array_reverse($post);
+        $perPage = 6;
+        $posts =$this->paginateArray($post,$perPage);
+        
+        return view('pages.favourites',['posts' => $posts]);
     }
 
     /**
@@ -199,4 +198,27 @@ class HomeController extends Controller
         return $mapList;
     }
 
+    /**
+     * Paginate Array   
+     * @return \Illuminate\Http\Response
+     */
+     public function paginateArray($post,$perPage)
+     {
+         //Get current page form url e.g. &page=6
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        //Create a new Laravel collection from the array data
+        $collection = new Collection($post);
+
+        //Define how many items we want to be visible in each page
+        //$perPage = 6;
+
+        //Slice the collection to get the items to display in current page
+        $currentPageSearchResults = $collection->slice(($currentPage-1) * $perPage, $perPage)->all();
+
+        //Create our paginator and pass it to the view
+        $paginatedSearchResults= new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage);
+
+        return $paginatedSearchResults;
+     }
 }

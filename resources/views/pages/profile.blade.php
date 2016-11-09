@@ -90,7 +90,29 @@
                     </div>
                 </div>
                  <!-- Previous Posts -->
-                 @include('pages._posts')
+                 <div class="scroll">
+                    @if(!is_null($posts) && !empty($posts) && isset($posts))
+                        
+                            @include('pages._posts') 
+                                   
+                        {{$posts->setPath('favourites')->links()}}
+                    @else
+                     <div class="col-md-6 ">
+                            <div class="panel panel-group">
+                                <div class="panel-heading postsUserName">                                         
+                                    Add some posts
+                                </div>
+
+                                <div class="panel-body postImage">                                
+                                    
+                                </div>
+                                <div class="panel-footer" style="background-color: white; word-wrap: break-word;">   
+                                   
+                                </div>
+                            </div>
+                        </div>
+                @endif
+                </div>
                 <!-- The Modal -->
                 <div id="myModal" class="modal">
                     <span class="close">×</span>
@@ -105,30 +127,9 @@
 @endsection
 
 @section('footer')
-
-<script>
-    // Get the modal
-    var modal = document.getElementById('myModal');
-
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
-
-    var modalImg = document.getElementById("img01");
-    var captionText = document.getElementById("caption");
-    function modalPopup(id) {
-
-        var img = document.getElementById(id);
-        modal.style.display = "block";
-        modalImg.src = img.src;
-        captionText.innerHTML = img.alt;
-
-    }
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-</script>
+    <script src="/js/modal.js"></script>
+    @if(!is_null($posts) && !empty($posts) && isset($posts))
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="/js/scroll.js"></script>
+    @endif
 @endsection

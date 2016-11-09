@@ -8,12 +8,18 @@
 
 <div class="container">
     <div class="row">
-        <!-- User Details -->
+        <!-- Side bar -->
         <div class="col-md-3 text-center">
-            <div class="panel panel-group">
-                <div class="panel-heading">General Settings</div>
-                <div class="panel-heading">Favorites</div>
-                <div class="panel-heading">Logout</div>
+            <div class="panel panel-group" style="border:0;">
+                <div class="panel-heading text-left sideBar">
+                    <img src="/icons/settings.svg" style="padding-right:10px;" alt="">General Settings
+                </div>
+                <div class="panel-heading selectedSideBar sideBar text-left">
+                    <img src="/icons/heart_select.svg" style="padding-right:10px;" alt=""> Favorites
+                </div>
+                <div class="panel-heading sideBar text-left">
+                    <img src="/icons/logout.svg" style="padding-right:10px;" alt="">Logout
+                </div>
             </div>
         </div>
          <!--    Posts    -->
@@ -22,9 +28,9 @@
                 
                 <div class="scroll">
                     @if(!is_null($posts) && !empty($posts) && isset($posts))
-                        @foreach($posts as $post)
+                        
                             @include('pages._posts') 
-                        @endforeach                    
+                                   
                         {{$posts->setPath('favourites')->links()}}
                     @else
                      <div class="col-md-6 ">
@@ -57,10 +63,9 @@
 @endsection
 
 @section('footer')
-
-<script src="/js/modal.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-@if(!is_null($posts) && !empty($posts) && isset($posts))
-<script src="/js/scroll.js"></script>
-@endif
+    <script src="/js/modal.js"></script>
+    @if(!is_null($posts) && !empty($posts) && isset($posts))
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="/js/scroll.js"></script>
+    @endif
 @endsection

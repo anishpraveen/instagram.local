@@ -7,8 +7,12 @@
          <div class="col-md-9 ">            
             <div class="row" id="divPosts">                 
                 <!-- Previous Posts -->
+               
                 @if(!is_null($posts))
-                     @include('pages._posts')
+                    <div class="scroll">
+                        @include('pages._posts')
+                        {{$posts->setPath('home')->links()}}
+                    </div>
                 @else
                      <div class="col-md-6 ">
                             <div class="panel panel-group">
@@ -25,6 +29,7 @@
                             </div>
                         </div>
                 @endif
+                
                 <!-- The Modal -->
                 <div id="myModal" class="modal">
                     <span class="close">×</span>
@@ -82,73 +87,54 @@
 @endsection
 
 @section('footer')
-<script>
-    // Get the modal
-    var modal = document.getElementById('myModal');
+    <script src="/js/modal.js"></script>
 
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    <script>
+        function follow($id){        
+            $.ajax({
+                type: "GET",
+                url: '/follow/'+$id,
+                data: "",
+                success: function(response) {
+                    
+                    $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg" style="float:right;" alt=""></a>'   
+                    document.getElementById($id).innerHTML = $html;                
+                    $.ajax({
+                        type: "GET",
+                        url: '/posts',
+                        data: "",
+                        success: function(response) {                        
+                            document.getElementById('divPosts').innerHTML = response;                       
+                        }
+                    })
+                }
+            })
+        }
 
-    var modalImg = document.getElementById("img01");
-    var captionText = document.getElementById("caption");
-    function modalPopup(id) {
+        function unfollow($id){
+            $.ajax({
+                type: "GET",
+                url: '/follow/'+$id+'/unfollow',
+                data: "",
+                success: function(response) {
+                    
+                    $html = '<a  onclick="follow('+$id+');" ><img src="/icons/follow.svg" style="float:right;" alt=""></a>'   
+                    document.getElementById($id).innerHTML = $html;
+                    $.ajax({
+                        type: "GET",
+                        url: '/posts',
+                        data: "",
+                        success: function(response) {
+                            document.getElementById('divPosts').innerHTML = response;
+                        }
+                    })
+                }
+            })
+        }
+    </script>
 
-        var img = document.getElementById(id);
-        modal.style.display = "block";
-        modalImg.src = img.src;
-        captionText.innerHTML = img.alt;
-
-    }
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-</script>
-
-<script>
-    function follow($id){        
-        $.ajax({
-            type: "GET",
-            url: '/follow/'+$id,
-            data: "",
-            success: function(response) {
-                
-                $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg" style="float:right;" alt=""></a>'   
-                document.getElementById($id).innerHTML = $html;                
-                $.ajax({
-                    type: "GET",
-                    url: '/posts',
-                    data: "",
-                    success: function(response) {                        
-                        document.getElementById('divPosts').innerHTML = response;                       
-                    }
-                })
-            }
-        })
-    }
-
-    function unfollow($id){
-        $.ajax({
-            type: "GET",
-            url: '/follow/'+$id+'/unfollow',
-            data: "",
-            success: function(response) {
-                
-                $html = '<a  onclick="follow('+$id+');" ><img src="/icons/follow.svg" style="float:right;" alt=""></a>'   
-                document.getElementById($id).innerHTML = $html;
-                $.ajax({
-                    type: "GET",
-                    url: '/posts',
-                    data: "",
-                    success: function(response) {
-                        document.getElementById('divPosts').innerHTML = response;
-                    }
-                })
-            }
-        })
-    }
-</script>
+    @if(!is_null($posts) && !empty($posts) && isset($posts))
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="/js/scroll.js"></script>
+    @endif
 @endsection
