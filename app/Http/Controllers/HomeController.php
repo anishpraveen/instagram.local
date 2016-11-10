@@ -83,7 +83,6 @@ class HomeController extends Controller
         $posts = $user->posts->toArray(); $posts= array_reverse($posts);
         //dd($posts);
         $userLikePosts = $user->like->toArray();
-
         $posts = $this->getLikePosts($posts,$userLikePosts);
         
         $perPage = 6;
@@ -138,9 +137,59 @@ class HomeController extends Controller
       * Show the user search.   
       * @return \Illuminate\Http\Response
       */
-     public function search()
-     {
-        return view('pages.search');
+     public function search($value)
+     {   
+         $name = explode(' ', $value);
+         if(empty($name[1]))
+         {
+             $name[1] = '';
+         }
+         $userList = User::select('*')->where('name','like','%'.$name[0].'%')
+                            ->where('lastname','like','%'.$name[1].'%')->get()->toArray();
+        //do not forget to optimise code 
+        //this one and the function getUserRecomendation
+
+                                            $user = User::Find(Auth::user()->id);
+                                            $userFollow = $user->follow->toArray();
+                                            $count = 0;
+                                            $idList = array();
+                                            foreach ($userFollow as $key) {
+                                                $idList[] =  $userFollow[$count]['user_id'];
+                                                $count++;
+                                            }
+                                            
+                                            $mapList = $this->getMap();
+                                            $count = 0;
+                                            //Follow status of each user in the suggestion list 
+                                            foreach ($userList as $key ) 
+                                            {
+                                                $userList[$count]['location'] = $mapList[$key['mapId']]; 
+                                            // dd($userList[$count]['id']);
+                                                if(array_search($userList[$count]['id'],$idList)){
+                                                    $userList[$count]['follow'] = true;
+                                                }
+                                                else{
+                                                    $userList[$count]['follow'] = false;
+                                                }
+                                                $count++;
+                                            }
+                                            $count = 0;
+                                            //Follow status of first user in the follow list 
+                                            if(isset($idList) && !empty($idList[0]))
+                                            {
+                                                foreach ($userList as $key ) {
+                                                    if($userList[$count]['id']==$idList[0]){
+                                                        $userList[$count]['follow'] = true;
+                                                    }
+                                                    $count++;
+                                                }
+                                            }
+
+
+
+         //dd($userList);
+         //return ('vv');
+        return view('pages.search', compact('userList'));
      }
 
      /**
@@ -238,6 +287,11 @@ class HomeController extends Controller
      {
          $arrayIndex = 0;
          $arrayIndex2 = 0;
+         if(empty($userLikePosts)){
+             $userLikePosts[] = array();
+             $userLikePosts[0]['postId'] = '-1';
+             //dd($userLikePosts);
+         }
          foreach ($posts as $key ) 
          {
              foreach ($userLikePosts as $key2) 

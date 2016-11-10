@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/profile', 'HomeController@profile');
 Route::get('/favourites', 'HomeController@favourites');
 Route::get('/settings', 'HomeController@settings');
-Route::post('/search', 'HomeController@search');
+Route::get('/search/{id}', 'HomeController@search');
 
 Route::resource('posts', 'PostsController');
 Route::get('/posts', 'PostsController@get');

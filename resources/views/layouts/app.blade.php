@@ -52,17 +52,21 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
+                    <ul class="nav navbar-nav ">
+                        @for($i=0;$i<10;$i++)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        @endfor
+                         <input id="inputSearch" class="input-group-addon" type="text" name="" value="">
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">                    
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
-                        @else                <a href="/profile" class="white" style="padding:0;">.</a>                  
+                        @else                
+                            <a href="/profile" class="white" style="padding:0;">.</a>                  
                             <li class="dropdown " >
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background: transparent; color:white;">                                    
                                     {{ Auth::user()->name }}
@@ -94,6 +98,7 @@
                                 </ul>                                
                             </li>                     
                         @endif
+                       
                     </ul>
                 </div>
             </div>
@@ -105,5 +110,16 @@
     @yield('footer')
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+ 
+
+    <script>
+        $( "input" ).keyup(function(e) {
+            var value = $( this ).val();
+            if(e.keyCode == 13){
+                window.location.replace("/search/"+value);
+            }
+        })
+        
+   </script>
 </body>
 </html>
