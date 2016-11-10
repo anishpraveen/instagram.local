@@ -128,6 +128,8 @@
 
 @section('footer')
     <script src="/js/modal.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/js/likePost.js">
     @if(!is_null($posts) && !empty($posts) && isset($posts))
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="/js/scroll.js"></script>

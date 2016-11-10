@@ -25,23 +25,24 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {   
+     /**
+      * Show the profile.     
+      * @return \Illuminate\Http\Response
+      */
+     public function index()
+     {   
         $mapList = array();
         $user = User::Find(Auth::user()->id);
         $followList=$user->follow->toArray();
         $posts = null;
         $count = 0;
+        $userLikePosts = $user->like->toArray();
+
         // Get all post of the followers
         foreach ($followList as $follow) 
         {
             $followUser = User::Find($follow['user_id']);
-            $userPost = $followUser->posts->toArray();
+            $userPost = $followUser->posts->toArray();           
             if($count==0)
             {
                 $posts=$userPost;
@@ -52,7 +53,7 @@ class HomeController extends Controller
             }
             
         }       
-        //dd($posts);
+        
         // Get suggestion list
         $userList = $this->getUserRecomendation();
 
@@ -63,34 +64,39 @@ class HomeController extends Controller
             return $value['publishedOn'];
         }));
 
+        $posts = $this->getLikePosts($posts,$userLikePosts);
         
-        //dd($user);
         $posts= array_reverse($posts);
-        $perPage = 6;
-        $posts =$this->paginateArray($posts,$perPage);
-        return view('user.home', compact('posts'), compact('userList'));
-    }
-
-    /**
-     * Show the profile.     
-     * @return \Illuminate\Http\Response
-     */
-     public function profile()
-    {   
-        $user = User::Find(Auth::user()->id);
-        $posts = $user->posts->toArray(); $posts= array_reverse($posts);
         //dd($posts);
         $perPage = 6;
         $posts =$this->paginateArray($posts,$perPage);
-        return view('pages.profile', compact('posts'));
-    }
+        return view('user.home', compact('posts'), compact('userList'));
+     }
 
-    /**
-     * Show the user favourites.
-     * @return \Illuminate\Http\Response
-     */
+     /**
+      * Show the profile.     
+      * @return \Illuminate\Http\Response
+      */
+     public function profile()
+     {   
+        $user = User::Find(Auth::user()->id);
+        $posts = $user->posts->toArray(); $posts= array_reverse($posts);
+        //dd($posts);
+        $userLikePosts = $user->like->toArray();
+
+        $posts = $this->getLikePosts($posts,$userLikePosts);
+        
+        $perPage = 6;
+        $posts =$this->paginateArray($posts,$perPage);
+        return view('pages.profile', compact('posts'));
+     }
+
+     /**
+      * Show the user favourites.
+      * @return \Illuminate\Http\Response
+      */
      public function favourites()
-    {
+     {
         $user = Auth::user();
         $likeList = $user->like->toArray();
         $post =null;
@@ -108,39 +114,41 @@ class HomeController extends Controller
         $post = array_values(array_sort($post, function ($value) {
             return $value['publishedOn'];
         }));
+        $userLikePosts = $user->like->toArray();
 
+        $post = $this->getLikePosts($post,$userLikePosts);
         
         $post= array_reverse($post);
         $perPage = 6;
         $posts =$this->paginateArray($post,$perPage);
         
         return view('pages.favourites',['posts' => $posts]);
-    }
+     }
 
-    /**
-     * Show the user settings.
-     * @return \Illuminate\Http\Response
-     */
+     /**
+      * Show the user settings.
+      * @return \Illuminate\Http\Response
+      */
      public function settings()
-    {
-        return view('pages.settings');
-    }
+     {
+         return view('pages.settings');
+     }
 
-    /**
-     * Show the user search.   
-     * @return \Illuminate\Http\Response
-     */
+     /**
+      * Show the user search.   
+      * @return \Illuminate\Http\Response
+      */
      public function search()
-    {
+     {
         return view('pages.search');
-    }
+     }
 
-    /**
-     * Get User Recomendation   
-     * @return \Illuminate\Http\Response
-     */
+     /**
+      * Get User Recomendation   
+      * @return \Illuminate\Http\Response
+      */
      public function getUserRecomendation()
-    {   
+     {   
         $count = 0;
         //$user = User::all()->toArray();
         $userList = User::select('*')->limit(15)->offset(0)->get()->toArray();
@@ -181,14 +189,14 @@ class HomeController extends Controller
         }
 
         return $userList;
-    }
+     }
 
-    /**
-     * Show the map.   
-     * @return \Illuminate\Http\Response
-     */
+     /**
+      * Get the map details.   
+      * @return \Illuminate\Http\Response
+      */
      public function getMap()
-    {   
+     {   
         $map = Map::all()->toArray();
         $mapList = array();
         foreach ($map as $m) {
@@ -196,12 +204,12 @@ class HomeController extends Controller
         }
         //dd($mapList);
         return $mapList;
-    }
+     }
 
-    /**
-     * Paginate Array   
-     * @return \Illuminate\Http\Response
-     */
+     /**
+      * Paginate Array   
+      * @return \Illuminate\Http\Response
+      */
      public function paginateArray($post,$perPage)
      {
          //Get current page form url e.g. &page=6
@@ -220,5 +228,33 @@ class HomeController extends Controller
         $paginatedSearchResults= new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage);
 
         return $paginatedSearchResults;
+     }
+
+     /**
+      * Get posts like status 
+      * @return array of items(posts)
+      */
+     public function getLikePosts($posts,$userLikePosts)
+     {
+         $arrayIndex = 0;
+         $arrayIndex2 = 0;
+         foreach ($posts as $key ) 
+         {
+             foreach ($userLikePosts as $key2) 
+             {
+                 if($key2['postId'] == $key['id'])
+                 {
+                     $posts[$arrayIndex]['like'] = true;
+                     break;
+                 }
+                 else
+                 {
+                     $posts[$arrayIndex]['like'] = false;
+                 }
+             }
+             $arrayIndex++;
+         }
+
+         return $posts;
      }
 }

@@ -87,9 +87,40 @@ class PostsController extends Controller
         $posts = array_values(array_sort($posts, function ($value) {
             return $value['publishedOn'];
         }));
+        $userLikePosts = $user->like->toArray();
+
+        $posts = $this->getLikePosts($posts,$userLikePosts);
+        
         $posts= array_reverse($posts);
 
         return view('pages._posts', compact('posts'));
     }
 
+    /**
+      * Get posts like status 
+      * @return array of items(posts)
+      */
+     public function getLikePosts($posts,$userLikePosts)
+     {
+         $arrayIndex = 0;
+         $arrayIndex2 = 0;
+         foreach ($posts as $key ) 
+         {
+             foreach ($userLikePosts as $key2) 
+             {
+                 if($key2['postId'] == $key['id'])
+                 {
+                     $posts[$arrayIndex]['like'] = true;
+                     break;
+                 }
+                 else
+                 {
+                     $posts[$arrayIndex]['like'] = false;
+                 }
+             }
+             $arrayIndex++;
+         }
+
+         return $posts;
+     }
 }

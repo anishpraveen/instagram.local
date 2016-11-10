@@ -96,14 +96,13 @@
                 url: '/follow/'+$id,
                 data: "",
                 success: function(response) {
-                    
                     $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg" style="float:right;" alt=""></a>'   
                     document.getElementById($id).innerHTML = $html;                
                     $.ajax({
                         type: "GET",
                         url: '/posts',
                         data: "",
-                        success: function(response) {                        
+                        success: function(response) {                
                             document.getElementById('divPosts').innerHTML = response;                       
                         }
                     })
@@ -133,8 +132,12 @@
         }
     </script>
 
-    @if(!is_null($posts) && !empty($posts) && isset($posts))
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/js/likePost.js">
+        
+    </script>
+
+    @if(!is_null($posts) && !empty($posts) && isset($posts))       
         <script src="/js/scroll.js"></script>
     @endif
 @endsection

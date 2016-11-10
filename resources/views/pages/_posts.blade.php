@@ -30,10 +30,17 @@
             </div>
             <div class="panel-footer postFooter" style="background-color: white; word-wrap: break-word;">   
                 {{ $post['description'] }}
-                <div style="float:right;">
-                    <a href="#" >
-                        <img src="/icons/liked.svg" alt="">
-                    </a>
+                <div id="divLikeStatus{{ $post['id'] }}" class="divLikeStatus"  style="float:right;">
+                    @if($post['like'])  
+                        <a id="{{ $post['id'] }}" class="liked">                                       
+                            <img src="/icons/liked.svg" alt="liked">
+                        </a>
+                    @else
+                        <a id="{{ $post['id'] }}" class="like">  
+                            <img src="/icons/like-heart.svg" alt="like">
+                        </a>
+                    @endif 
+                    
                 </div>
             </div>
         </div>

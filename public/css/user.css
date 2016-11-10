@@ -273,3 +273,7 @@ line-height: 20px;
 .pagination{
     visibility: hidden;
 }
+
+.liked, .like{
+    cursor: pointer;
+}
