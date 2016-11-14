@@ -304,8 +304,25 @@ float: right;
 
 
     #dialog{
-       border-width: 10px;
+       border-width: 5px;
        border-style: solid;
        border-color: #f32c86;
        padding: 0;  
     }
+
+    
+
+
+    .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+   
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}

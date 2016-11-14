@@ -67,14 +67,14 @@
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else                
                             <a href="/profile" class="white" style="padding:0;">.</a>                  
-                            <li class="dropdown " >
+                            <li class="dropdown" >
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background: transparent; color:white;">                                    
                                     {{ Auth::user()->name }}
                                     <img src="{{ Auth::user()->profilePic }}" width="25" height="25" class="img-circle" >                               
-                                    <span class="caret"></span>
+                                    <span class="caret "></span>
                                 </a>
                                 
-                                <ul class="dropdown-menu gradiantdown" role="menu" id="ulMenu"> 
+                                <ul class="dropdown-menu gradiantdown dropdown-content" role="menu" id="ulMenu"> 
                                     <div >
                                        
                                         <li class="lispace">
@@ -108,8 +108,12 @@
     </div>
 
     @yield('footer')
-    <!-- Scripts 
-    <script src="/js/app.js"></script>-->
+    <div id="dialog" style="display: none">
+        <div id="dvMap" style="height: 333px; width: 590px;">
+        </div>
+    </div>
+    <!-- Scripts
+    <script src="/js/app.js"></script> -->
  
 
     <script>

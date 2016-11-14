@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Home
+@endsection
 @section('content')
 <div class="container">
     <div class="row">        
@@ -90,51 +92,15 @@
 
 @section('footer')
  <!-- The Map Modal -->
-<div id="dialog" style="display: none">
-    <div id="dvMap" style="height: 315px; width: 580px;">
-    </div>
-</div>
+
  
 <script  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDl4z35oKtxgRRzT9S-Bc4hk8YZ6gBna-U&sensor=false&extension=.js&output=embed"></script>
     
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script type="text/javascript">
-$(function () {
-    $(".btnShow").click(function () {
-        var info = document.getElementById('lInfo');
+<script src="/js/map.js"></script>
 
-        //alert($( this ).attr('latitude'));
-        //alert($( this ).attr('longitude'));
-       var mapMarker = new google.maps.LatLng($( this ).attr('latitude'), $( this ).attr('longitude'));
-        $("#dialog").dialog({
-          
-            modal: true,
-            
-            width: 600,
-            height:  380,
-            
-            open: function () {
-                
-                var mapOptions = {
-                    center: mapMarker,
-                    zoom: 17,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    disableDefaultUI: true
-                }
-                var map = new google.maps.Map($("#dvMap")[0], mapOptions);
-                 var marker = new google.maps.Marker({
-                        position: mapMarker,
-                        icon: "/icons/mapPin.svg",
-                        //animation: google.maps.Animation.BOUNCE
-                    });
-                    marker.setMap(map);
-            }
-        });
-    });
-});
-</script>
 <!-- /.modal -->
     <script src="/js/modal.js"></script>
    

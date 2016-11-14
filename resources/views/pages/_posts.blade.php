@@ -12,7 +12,7 @@
                         <img src="{{ $user[0]['profilePic'] }}" alt=""  class="img-circle" height="45" width="45">                                
                         {{ $user[0]['name'] }} 
                     </div>
-                    <div class="text-right" style="">
+                    <div class="text-right" id="kkkk" style="">
                         {{  $dd->format('d, M Y') }}
                         <img src="/icons/clock5.svg" alt="">
                         <br>
