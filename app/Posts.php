@@ -21,6 +21,15 @@ class Posts extends Model
     protected $dates = ['publishedOn'];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at', 'updated_at',  
+    ];
+
+    /**
      * Posts are owned by a user
      *
      * @return Belong relation

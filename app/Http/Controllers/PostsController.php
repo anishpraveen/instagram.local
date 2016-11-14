@@ -6,6 +6,7 @@ use App\Http\Requests\PostRequest;
 use Carbon\Carbon;
 use App\Posts;
 use App\User;
+use App\Map;
 use Request;
 use Auth;
 
@@ -58,11 +59,11 @@ class PostsController extends Controller
     }
 
     /**
-    *
-    *Get posts of users being followed
-    *
-    *@return view 
-    */
+     *
+     *Get posts of users being followed
+     *
+     *@return view 
+     */
     public function get()
     {
         $user = User::Find(Auth::user()->id);
@@ -88,7 +89,7 @@ class PostsController extends Controller
             return $value['publishedOn'];
         }));
         $userLikePosts = $user->like->toArray();
-
+        $posts = $this->addLocation($posts);
         $posts = $this->getLikePosts($posts,$userLikePosts);
         
         $posts= array_reverse($posts);
@@ -96,7 +97,7 @@ class PostsController extends Controller
         return view('pages._posts', compact('posts'));
     }
 
-    /**
+     /**
       * Get posts like status 
       * @return array of items(posts)
       */
@@ -123,4 +124,36 @@ class PostsController extends Controller
 
          return $posts;
      }
+
+     /**
+      * Add location coordinates to given posts list
+      * @return array of items(posts)
+      */
+    public function addLocation($posts)
+    {
+        $arrayIndex = 0; 
+        foreach ($posts as $key) 
+        {
+            $coordinates =$this->getLocation($posts[$arrayIndex]['mapId']);
+            $posts[$arrayIndex]['latitude'] = $coordinates['latitude'];
+            $posts[$arrayIndex]['longitude'] = $coordinates['longitude'];
+            $posts[$arrayIndex]['locationName'] = $coordinates['name'];
+            $arrayIndex++;
+        }
+       return ($posts);
+    }
+
+    /**
+      * Get coordinates of given id
+      * @return array of coordinates
+      */
+    public function getLocation($id)
+    {
+        $location = Map::Find($id);
+        $coordinates['latitude'] = $location['latitude'];
+        $coordinates['longitude'] = $location['longitude'];
+        $coordinates['name'] = $location['name'];
+        //dd($coordinates);
+        return $coordinates;
+    }
 }

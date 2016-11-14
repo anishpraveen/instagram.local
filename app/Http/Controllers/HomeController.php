@@ -57,13 +57,15 @@ class HomeController extends Controller
         // Get suggestion list
         $userList = $this->getUserRecomendation();
 
-        if(is_null($posts)){
+        if(is_null($posts))
+        {
             return view('user.home', compact('posts'), compact('userList'));
         }
         $posts = array_values(array_sort($posts, function ($value) {
             return $value['publishedOn'];
         }));
 
+        $posts = $this->addLocation($posts);
         $posts = $this->getLikePosts($posts,$userLikePosts);
         
         $posts= array_reverse($posts);
@@ -83,6 +85,7 @@ class HomeController extends Controller
         $posts = $user->posts->toArray(); $posts= array_reverse($posts);
         //dd($posts);
         $userLikePosts = $user->like->toArray();
+        $posts = $this->addLocation($posts);
         $posts = $this->getLikePosts($posts,$userLikePosts);
         
         $perPage = 6;
@@ -114,7 +117,7 @@ class HomeController extends Controller
             return $value['publishedOn'];
         }));
         $userLikePosts = $user->like->toArray();
-
+        $post = $this->addLocation($post);
         $post = $this->getLikePosts($post,$userLikePosts);
         
         $post= array_reverse($post);
@@ -158,12 +161,13 @@ class HomeController extends Controller
                                                 $count++;
                                             }
                                             
-                                            $mapList = $this->getMap();
+                                            
                                             $count = 0;
                                             //Follow status of each user in the suggestion list 
                                             foreach ($userList as $key ) 
                                             {
-                                                $userList[$count]['location'] = $mapList[$key['mapId']]; 
+                                                $coordinates = $this->getLocation($key['mapId']);
+                                                $userList[$count]['location'] = $coordinates['name'];  
                                             // dd($userList[$count]['id']);
                                                 if(array_search($userList[$count]['id'],$idList)){
                                                     $userList[$count]['follow'] = true;
@@ -210,13 +214,14 @@ class HomeController extends Controller
             $count++;
         }
         
-        $mapList = $this->getMap();
+        
         $count = 0;
         //Follow status of each user in the suggestion list 
         foreach ($userList as $key ) 
-        {
-            $userList[$count]['location'] = $mapList[$key['mapId']]; 
-          // dd($userList[$count]['id']);
+        {   
+            $coordinates = $this->getLocation($key['mapId']);
+            $userList[$count]['location'] = $coordinates['name']; 
+           //dd($coordinates['name']);
             if(array_search($userList[$count]['id'],$idList)){
                 $userList[$count]['follow'] = true;
             }
@@ -240,21 +245,7 @@ class HomeController extends Controller
         return $userList;
      }
 
-     /**
-      * Get the map details.   
-      * @return \Illuminate\Http\Response
-      */
-     public function getMap()
-     {   
-        $map = Map::all()->toArray();
-        $mapList = array();
-        foreach ($map as $m) {
-            $mapList[$m['id']] =  $m['name'] ;
-        }
-        //dd($mapList);
-        return $mapList;
-     }
-
+     
      /**
       * Paginate Array   
       * @return \Illuminate\Http\Response
@@ -280,7 +271,7 @@ class HomeController extends Controller
      }
 
      /**
-      * Get posts like status 
+      * Get posts and check if its liked or not
       * @return array of items(posts)
       */
      public function getLikePosts($posts,$userLikePosts)
@@ -311,4 +302,36 @@ class HomeController extends Controller
 
          return $posts;
      }
+
+     /**
+      * Add location coordinates to given posts list
+      * @return array of items(posts)
+      */
+    public function addLocation($posts)
+    {
+        $arrayIndex = 0; 
+        foreach ($posts as $key) 
+        {
+            $coordinates =$this->getLocation($posts[$arrayIndex]['mapId']);
+            $posts[$arrayIndex]['latitude'] = $coordinates['latitude'];
+            $posts[$arrayIndex]['longitude'] = $coordinates['longitude'];
+            $posts[$arrayIndex]['locationName'] = $coordinates['name'];
+            $arrayIndex++;
+        }
+       return ($posts);
+    }
+
+    /**
+      * Get coordinates of given id
+      * @return array of coordinates
+      */
+    public function getLocation($id)
+    {
+        $location = Map::Find($id);
+        $coordinates['latitude'] = $location['latitude'];
+        $coordinates['longitude'] = $location['longitude'];
+        $coordinates['name'] = $location['name'];
+        //dd($coordinates);
+        return $coordinates;
+    }
 }

@@ -23,6 +23,10 @@ Route::get('/favourites', 'HomeController@favourites');
 Route::get('/settings', 'HomeController@settings');
 Route::get('/search/{id}', 'HomeController@search');
 
+Route::get('/map', function () {
+    return view('map');
+});
+
 Route::resource('posts', 'PostsController');
 Route::get('/posts', 'PostsController@get');
 

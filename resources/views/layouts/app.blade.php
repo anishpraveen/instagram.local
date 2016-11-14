@@ -108,8 +108,8 @@
     </div>
 
     @yield('footer')
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <!-- Scripts 
+    <script src="/js/app.js"></script>-->
  
 
     <script>

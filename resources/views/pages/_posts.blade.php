@@ -2,9 +2,10 @@
     <div class="col-md-6 ">
         <div class="panel panel-group" style="border-width:0;" >
             <div class="panel-heading">        
-                <div class="hidden">
+                <div class="hidden laravelInfo1" id="lInfo">
                     {{ $user=App\User::where('id', '=', $post['userId'])->select('name','profilePic')->get() }}
                     {{$dd=Carbon\Carbon::parse($post['publishedOn'])}} 
+                    <button type="" class="lat" ></button>
                 </div>    
                 <div class="row ">
                     <div class="col-md-8 postsUserName">
@@ -15,10 +16,14 @@
                         {{  $dd->format('d, M Y') }}
                         <img src="/icons/clock5.svg" alt="">
                         <br>
-                        Kakkanad
-                        <a href="#" style="padding-right:5px;">
+                        {{ $post['locationName'] }} 
+                        <a class="btnShow" id="4" style="cursor: pointer; padding-right:5px;" latitude="{{ $post['latitude'] }} " longitude="{{ $post['longitude'] }} ">
                             <img src="/icons/pin5.svg" alt="">
                         </a>
+                        <!--
+                        <a href="#myMapModal" class="launch-map" data-toggle="modal"  style="padding-right:5px;">
+                            <img src="/icons/pin5.svg" alt="">
+                        </a>-->
                     </div>
                 </div>   
             </div>
@@ -44,6 +49,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div>    
 @endforeach

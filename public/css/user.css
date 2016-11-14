@@ -295,3 +295,17 @@ text-align: left;
 float: right;
 }
 
+.laravelInfo{
+    visibility: hidden;
+}
+
+
+
+
+
+    #dialog{
+       border-width: 10px;
+       border-style: solid;
+       border-color: #f32c86;
+       padding: 0;  
+    }
