@@ -106,7 +106,7 @@ class PostsController extends Controller
          $arrayIndex = 0;
          $arrayIndex2 = 0;
          foreach ($posts as $key ) 
-         {
+         {  
              foreach ($userLikePosts as $key2) 
              {
                  if($key2['postId'] == $key['id'])
@@ -119,9 +119,13 @@ class PostsController extends Controller
                      $posts[$arrayIndex]['like'] = false;
                  }
              }
+             if(empty($userLikePosts))
+             {
+                 $posts[$arrayIndex]['like'] = false;
+             }
              $arrayIndex++;
          }
-
+          
          return $posts;
      }
 
