@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+<div class="hidden laravelInfo" >
+   {{ $mytime = Carbon\Carbon::now() }} 
+</div>
 
 <div class="container">
     <div class="row">
@@ -52,8 +55,8 @@
                                             </div>
                                             <div id="iconClock" class="col-md-1 col-sm-1 col-xs-1 col-md-offset-1 iii">
                                                 <label id="lClock" class="btn">
-                                                     <l class="iii">&nbsp Today, 3.20 AM </l>
-                                                    </label>     
+                                                     &nbsp Today, {{ $mytime->format('h.i A') }}
+                                                </label>     
                                                     
                                             </div>
                                            
