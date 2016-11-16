@@ -14,7 +14,7 @@
         <!-- User Details -->
         <div class="col-md-3 text-center">
             <div class="panel panel-group">
-                <div class="panel-heading">Profile</div>
+                <div class="panel-heading">{{ Auth::user()->name }}&nbsp{{ Auth::user()->lastName }}</div>
 
                 <div class="panel-body">
                      <img src="{{ Auth::user()->profilePic }}" class="img-circle" alt="" height="145" width="145"> 
@@ -114,9 +114,9 @@
                                 </div>
                             </div>
                         </div>
-                @endif
+                    @endif
                 </div>
-                <!-- The Modal -->
+                <!-- The Image Modal -->
                 <div id="myModal" class="modal">
                     <span class="close">×</span>
                     <img class="modal-content" id="img01">
@@ -138,9 +138,11 @@
     <script src="/js/map.js"></script>
 
     <script src="/js/modal.js"></script>
-    <script src="/js/likePost.js">
+    <script src="/js/likePost.js"></script>
     @if(!is_null($posts) && !empty($posts) && isset($posts))
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        
         <script src="/js/scroll.js"></script>
     @endif
+
+    <script src="/js/time.js"></script>
 @endsection
