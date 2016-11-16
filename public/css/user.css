@@ -330,3 +330,43 @@ float: right;
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+#spanProfileName{
+    font-family: ProximaNova-Regular;
+    font-size: 23px;
+    color: #5b5b5b;
+    text-align: center;
+}
+#spanProfileLocation{
+    font-family: ProximaNova-Regular;
+    font-size: 14px;
+    color: #7e7e7e;
+    text-align: left;
+    line-height: 24px;
+
+}
+
+#btnFollowMe{
+    height: 50px;   
+    background-color: #fe4261;
+    border-radius: 25px;
+    border-color: transparent;
+}
+
+#btnFollowMe span{
+    height: 48px;
+    width: 82px;
+    font-family: ProximaNova-Regular;
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 24px;
+}
+
+.spanFollow{
+    font-family: ProximaNova-Regular;
+    font-size: 16px;
+    color: #777777;
+    text-align: left;
+    line-height: 24px;
+}

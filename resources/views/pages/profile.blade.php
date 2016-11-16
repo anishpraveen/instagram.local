@@ -14,10 +14,29 @@
         <!-- User Details -->
         <div class="col-md-3 text-center">
             <div class="panel panel-group">
-                <div class="panel-heading">{{ $user->name }}&nbsp{{ $user->lastName }}</div>
+                <div class="panel-heading"></div>
 
                 <div class="panel-body">
                      <img src="{{ $user->profilePic }}" class="img-circle" alt="" height="145" width="145"> 
+                     <div class="centerDiv">
+                         <span id="spanProfileName">{{ $user->name }}&nbsp{{ $user->lastName }}</span>
+                         <br>
+                         <span id="spanProfileLocation">
+                             <a class="btnShow" style="cursor:pointer;" latitude="{{ $user['latitude'] }} " longitude="{{ $user['longitude'] }} ">
+                                 <img src="/icons/pin_profile.svg" alt="">
+                            </a>
+                             &nbsp{{ $user->locationName }}
+                        </span>
+                        <br><br>
+                        <button type="button" id="btnFollowMe" class="btn btn-large btn-block btn-default">
+                            <span>Follow Me</span>
+                        </button>
+                        <br>
+                        <span class="spanFollow" style="float:left;">{{ $user->followers }} Followers</span>
+                        <span class="spanFollow" style="float:right;">{{ $user->follow }}  Following</span>
+                        
+                        
+                     </div>
                 </div>
             </div>
         </div>
@@ -25,82 +44,82 @@
          <div class="col-md-9 ">            
             <div class="row">
                 @if($user->id == Auth::user()->id)
-                 <!-- Add New Post -->
-                <div class="col-md-12">
-                    <div class="panel panel-group" id="divAddPost" style="background-color:#ececec; ">
-                        
+                    <!-- Add New Post -->
+                    <div class="col-md-12">
+                        <div class="panel panel-group" id="divAddPost" style="background-color:#ececec; ">
+                            
 
-                        <div class="panel-body transparent" style="padding:0; ">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/posts') }}" enctype="multipart/form-data">
-                                {{ csrf_field() }}
+                            <div class="panel-body transparent" style="padding:0; ">
+                                <form class="form-horizontal" role="form" method="POST" action="{{ url('/posts') }}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
 
-                                  <div id="profileFormBar" class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div id="iconStatus" class="col-md-1 col-sm-1 col-xs-1 profileFormBarIcons">
-                                                 <label id="lStatus" class="btn">
-                                                    
-                                                    </label>                                                
+                                    <div id="profileFormBar" class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="iconStatus" class="col-md-1 col-sm-1 col-xs-1 profileFormBarIcons">
+                                                    <label id="lStatus" class="btn">
+                                                        
+                                                        </label>                                                
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-2 iii">
+                                                    &nbsp Status
+                                                </div>
+                                                <div id="iconImage" class="col-md-1 col-sm-1 col-xs-1 profileFormBarIcons">
+                                                    <label id="lImage" class="btn">
+                                                        <input name="image" type="file" id="main-input" onchange="previewFile(this);">
+                                                        
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-2 iii" id="">
+                                                    &nbsp Image
+                                                </div>
+                                                <div id="iconClock" class="col-md-1 col-sm-1 col-xs-1 col-md-offset-1 iii">
+                                                    <label id="lClock" class="btn">
+                                                        &nbsp Today, {{ $mytime->format('h.i A') }}
+                                                    </label>     
+                                                        
+                                                </div>
+                                            
                                             </div>
-                                            <div class="col-md-2 col-sm-2 col-xs-2 iii">
-                                                &nbsp Status
-                                            </div>
-                                            <div id="iconImage" class="col-md-1 col-sm-1 col-xs-1 profileFormBarIcons">
-                                                <label id="lImage" class="btn">
-                                                    <input name="image" type="file" id="main-input" onchange="previewFile(this);">
-                                                    
-                                                </label>
-                                            </div>
-                                            <div class="col-md-2 col-sm-2 col-xs-2 iii" id="">
-                                                &nbsp Image
-                                            </div>
-                                            <div id="iconClock" class="col-md-1 col-sm-1 col-xs-1 col-md-offset-1 iii">
-                                                <label id="lClock" class="btn">
-                                                     &nbsp Today, {{ $mytime->format('h.i A') }}
-                                                </label>     
-                                                    
-                                            </div>
-                                           
-                                        </div>
-                                    </div>                                    
-                                </div>
-
-                                <div class="clearfix" >
-                                </div>
-                                   
-                                <div class="{{ $errors->has('description') ? ' has-error' : '' }} {{ $errors->has('image') ? ' has-error' : '' }}">
-                                    <div class="postInput bgwhite">
-                                        <input id="description" type="textarea" class="form-control  " name="description" value="{{ old('description') }}" required placeholder="Type here">
-                                        <button type="submit" class="btn btn-primary" id="btnPost">
-                                            Post
-                                        </button>
-                                        @if ($errors->has('description'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('description') }}</strong>
-                                            </span>
-                                        @endif
-                                        @if ($errors->has('image'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('image') }}</strong>
-                                            </span>
-                                        @endif
+                                        </div>                                    
                                     </div>
-                                </div>
+
+                                    <div class="clearfix" >
+                                    </div>
+                                    
+                                    <div class="{{ $errors->has('description') ? ' has-error' : '' }} {{ $errors->has('image') ? ' has-error' : '' }}">
+                                        <div class="postInput bgwhite">
+                                            <input id="description" type="textarea" class="form-control  " name="description" value="{{ old('description') }}" required placeholder="Type here">
+                                            <button type="submit" class="btn btn-primary" id="btnPost">
+                                                Post
+                                            </button>
+                                            @if ($errors->has('description'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('description') }}</strong>
+                                                </span>
+                                            @endif
+                                            @if ($errors->has('image'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('image') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    
                                 
-                              
-                            </form>
+                                </form>
+                            </div>
+                            
                         </div>
-                        
                     </div>
-                </div>
                 @endif
-                 <!-- Previous Posts -->
-                 <div class="scroll">
+                <!-- Previous Posts -->
+                <div class="scroll">
                     @if(!is_null($posts) && !empty($posts) && isset($posts))
                         
                             @include('pages._posts') 
                                    
-                        {{$posts->setPath('favourites')->links()}}
+                        {{$posts->setPath('')->links()}}
                     @else
                      <div class="col-md-6 ">
                             <div class="panel panel-group">

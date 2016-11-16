@@ -81,35 +81,62 @@ class HomeController extends Controller
       */
      public function profile()
      {   
-        $user = User::Find(Auth::user()->id);
-        $posts = $user->posts->toArray(); $posts= array_reverse($posts);
-        //dd($posts);
-        $userLikePosts = $user->like->toArray();
-        $posts = $this->addLocation($posts);
-        $posts = $this->getLikePosts($posts,$userLikePosts);
-        
-        $perPage = 6;
-        $posts =$this->paginateArray($posts,$perPage);
+        $user = User::Find(Auth::user()->id); 
+        $user = $this->getUserDetails($user);
+        //dd($user);
+        $posts = $this->getPosts($user);
         return view('pages.profile', compact('posts'), compact('user'));
      }
 
      /**
-      * Show the profile.     
+      * Show the profile of other users.     
       * @return \Illuminate\Http\Response
       */
      public function viewProfile($id)
      {   
         $user = User::Find($id);
-        $posts = $user->posts->toArray(); $posts= array_reverse($posts);
-        //dd($posts);
+        $user = $this->getUserDetails($user);
+        $posts = $this->getPosts($user);
+        return view('pages.profile', compact('posts'), compact('user'));
+     }
+
+     /**
+      * Get the posts of user.     
+      * @return posts (paginated posts array)
+      */
+     public function getPosts($user)
+     {   
+        $posts = $user->posts->toArray(); 
+        $posts= array_reverse($posts);
+        
         $userLikePosts = $user->like->toArray();
         $posts = $this->addLocation($posts);
         $posts = $this->getLikePosts($posts,$userLikePosts);
         
         $perPage = 6;
         $posts =$this->paginateArray($posts,$perPage);
-        return view('pages.profile', compact('posts'), compact('user'));
+        return $posts;
      }
+
+     /**
+      * Get the details of user.  
+      * @param user   
+      * @return user (user array filled with location,follower,follow details)
+      */
+     public function getUserDetails($user)
+     {
+         $coordinates = $this->getLocation($user->mapId);
+         $user['latitude'] = $coordinates['latitude'];
+         $user['longitude'] = $coordinates['longitude'];
+         $user['locationName'] = $coordinates['name'];
+         $follow = $user->follow->toArray();
+         $followers = $user->followers->toArray();
+         $user['follow'] = count($follow);
+         $user['followers'] = count($followers);
+
+         return $user;
+     }
+
 
      /**
       * Show the user favourites.
@@ -266,7 +293,7 @@ class HomeController extends Controller
      
      /**
       * Paginate Array   
-      * @return \Illuminate\Http\Response
+      * @return paginated object
       */
      public function paginateArray($post,$perPage)
      {
