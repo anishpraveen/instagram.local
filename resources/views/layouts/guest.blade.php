@@ -22,13 +22,16 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/guest.css" rel="stylesheet">
-    
+     
+    <!-- Google Analytics -->
+    {!! Analytics::render() !!}
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+   
 </head>
 <body>
     <div id="app" >
