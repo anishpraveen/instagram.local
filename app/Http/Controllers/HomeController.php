@@ -90,7 +90,25 @@ class HomeController extends Controller
         
         $perPage = 6;
         $posts =$this->paginateArray($posts,$perPage);
-        return view('pages.profile', compact('posts'));
+        return view('pages.profile', compact('posts'), compact('user'));
+     }
+
+     /**
+      * Show the profile.     
+      * @return \Illuminate\Http\Response
+      */
+     public function viewProfile($id)
+     {   
+        $user = User::Find($id);
+        $posts = $user->posts->toArray(); $posts= array_reverse($posts);
+        //dd($posts);
+        $userLikePosts = $user->like->toArray();
+        $posts = $this->addLocation($posts);
+        $posts = $this->getLikePosts($posts,$userLikePosts);
+        
+        $perPage = 6;
+        $posts =$this->paginateArray($posts,$perPage);
+        return view('pages.profile', compact('posts'), compact('user'));
      }
 
      /**

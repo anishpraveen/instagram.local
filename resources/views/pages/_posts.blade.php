@@ -8,9 +8,9 @@
                     <button type="" class="lat" ></button>
                 </div>    
                 <div class="row ">
-                    <div class="col-md-8 postsUserName">
+                    <div class="col-md-8 ">
                         <img src="{{ $user[0]['profilePic'] }}" alt=""  class="img-circle" height="45" width="45">                                
-                        {{ $user[0]['name'] }} 
+                         <a href="/profile/{{ $post['userId'] }}" class="postsUserName " >{{ $user[0]['name'] }}</a>
                     </div>
                     <div class="text-right" id="kkkk" style="">
                         {{  $dd->format('d, M Y') }}
@@ -29,7 +29,7 @@
             </div>
 
             <div class="panel-body postImage">                                
-                <img  src="{{ $post['imageName'] }}"  id="{{ $post['id'] }}" onclick="modalPopup(this.id);"   alt="" 
+                <img  src="/{{ $post['imageName'] }}"  id="{{ $post['id'] }}" onclick="modalPopup(this.id);"   alt="" 
                 class=" img-responsive myImg "  >
                     
             </div>

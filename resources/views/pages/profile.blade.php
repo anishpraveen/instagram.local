@@ -14,16 +14,17 @@
         <!-- User Details -->
         <div class="col-md-3 text-center">
             <div class="panel panel-group">
-                <div class="panel-heading">{{ Auth::user()->name }}&nbsp{{ Auth::user()->lastName }}</div>
+                <div class="panel-heading">{{ $user->name }}&nbsp{{ $user->lastName }}</div>
 
                 <div class="panel-body">
-                     <img src="{{ Auth::user()->profilePic }}" class="img-circle" alt="" height="145" width="145"> 
+                     <img src="{{ $user->profilePic }}" class="img-circle" alt="" height="145" width="145"> 
                 </div>
             </div>
         </div>
          <!--    Posts    -->
          <div class="col-md-9 ">            
             <div class="row">
+                @if($user->id == Auth::user()->id)
                  <!-- Add New Post -->
                 <div class="col-md-12">
                     <div class="panel panel-group" id="divAddPost" style="background-color:#ececec; ">
@@ -92,6 +93,7 @@
                         
                     </div>
                 </div>
+                @endif
                  <!-- Previous Posts -->
                  <div class="scroll">
                     @if(!is_null($posts) && !empty($posts) && isset($posts))

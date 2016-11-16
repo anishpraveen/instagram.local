@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/profile', 'HomeController@profile');
+Route::get('/profile/{id}', 'HomeController@viewProfile');
 Route::get('/favourites', 'HomeController@favourites');
 Route::get('/settings', 'HomeController@settings');
 Route::get('/search/{id}', 'HomeController@search');

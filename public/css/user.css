@@ -242,11 +242,15 @@ body{
     text-align: left;
     line-height: 24px;
 }
-
+.postsUserName:hover{
+    color: #ed5a04;    
+    text-decoration: none;
+    cursor: pointer;
+}
 .postFooter{
     font-family: Tahoma;
     font-size: 14px;
-    color: #232323;
+    color: rgba(35, 35, 35, 1);
     text-align: left;
 }
 
