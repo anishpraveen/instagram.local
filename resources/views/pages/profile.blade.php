@@ -136,7 +136,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/js/map.js"></script>
-
+    <script src="/js/time.js"></script>
     <script src="/js/modal.js"></script>
     <script src="/js/likePost.js"></script>
     @if(!is_null($posts) && !empty($posts) && isset($posts))
@@ -144,5 +144,5 @@
         <script src="/js/scroll.js"></script>
     @endif
 
-    <script src="/js/time.js"></script>
+    
 @endsection
