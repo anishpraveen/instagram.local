@@ -376,3 +376,39 @@ float: right;
     text-align: left;
     line-height: 24px;
 }
+
+.pinkHeading{
+    font-family: ProximaNova-Regular;
+    font-size: 18px;
+    color: #f02d88;
+    text-align: left;
+    line-height: 24px;
+}
+
+.pointer{
+    cursor: pointer;
+}
+.noMargin{
+    margin: 0;
+}
+.inputFieldsSettings{
+    border: 0;
+    background: white;
+    font-family: ProximaNova-Regular;
+    font-weight: 100;
+    font-size: 16px;
+    color: #232323;
+    text-align: left;
+    line-height: 60px;
+
+}
+
+.labelSettings{
+    font-family: ProximaNova-Regular;
+    font-weight: 100;
+    font-size: 16px;
+    color: #232323;
+    text-align: left;
+    line-height: 60px;
+
+}
