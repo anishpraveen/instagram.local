@@ -12,7 +12,10 @@
         <div class="col-md-3 text-center">
             <div class="panel panel-group" style="border:0;">
                 <div class="panel-heading text-left sideBar">
-                    <img src="/icons/settings.svg" style="padding-right:10px;" alt="">General Settings
+                    <a href="/settings">
+                        <img src="/icons/settings.svg" style="padding-right:10px;" alt="">
+                        <span>General Settings</span>
+                    </a>
                 </div>
                 <div class="panel-heading selectedSideBar sideBar text-left">
                     <img src="/icons/heart_select.svg" style="padding-right:10px;" alt=""> Favorites

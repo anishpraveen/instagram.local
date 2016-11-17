@@ -35,7 +35,7 @@ class HomeController extends Controller
         $user = User::Find(Auth::user()->id);
         $followList=$user->follow->toArray();
         $posts = null;
-        $count = 0;
+        $arrayIndex = 0;
         $userLikePosts = $user->like->toArray();
 
         // Get all post of the followers
@@ -43,10 +43,10 @@ class HomeController extends Controller
         {
             $followUser = User::Find($follow['user_id']);
             $userPost = $followUser->posts->toArray();           
-            if($count==0)
+            if($arrayIndex==0)
             {
                 $posts=$userPost;
-                $count++;
+                $arrayIndex++;
             } 
             else{
                 $posts = array_merge($posts,$userPost);
@@ -193,46 +193,11 @@ class HomeController extends Controller
              $name[1] = '';
          }
          $userList = User::select('*')->where('name','like','%'.$name[0].'%')
-                            ->where('lastname','like','%'.$name[1].'%')->get()->toArray();
+                            ->where('lastname','like','%'.$name[1].'%')->orWhere('lastname','like','%'.$name[0].'%')->get()->toArray();
         //do not forget to optimise code 
         //this one and the function getUserRecomendation
 
-                                            $user = User::Find(Auth::user()->id);
-                                            $userFollow = $user->follow->toArray();
-                                            $count = 0;
-                                            $idList = array();
-                                            foreach ($userFollow as $key) {
-                                                $idList[] =  $userFollow[$count]['user_id'];
-                                                $count++;
-                                            }
-                                            
-                                            
-                                            $count = 0;
-                                            //Follow status of each user in the suggestion list 
-                                            foreach ($userList as $key ) 
-                                            {
-                                                $coordinates = $this->getLocation($key['mapId']);
-                                                $userList[$count]['location'] = $coordinates['name'];  
-                                            // dd($userList[$count]['id']);
-                                                if(array_search($userList[$count]['id'],$idList)){
-                                                    $userList[$count]['follow'] = true;
-                                                }
-                                                else{
-                                                    $userList[$count]['follow'] = false;
-                                                }
-                                                $count++;
-                                            }
-                                            $count = 0;
-                                            //Follow status of first user in the follow list 
-                                            if(isset($idList) && !empty($idList[0]))
-                                            {
-                                                foreach ($userList as $key ) {
-                                                    if($userList[$count]['id']==$idList[0]){
-                                                        $userList[$count]['follow'] = true;
-                                                    }
-                                                    $count++;
-                                                }
-                                            }
+         $userList = $this->getFollowStatus($userList);                               
 
 
 
@@ -242,51 +207,64 @@ class HomeController extends Controller
      }
 
      /**
+      * Get the user follow status 
+      * @param  $userList (array of users)
+      * @return $userList ()
+      */
+     public function getFollowStatus($userList)
+     {
+        $user = User::Find(Auth::user()->id);
+        $userFollow = $user->follow->toArray();
+        $arrayIndex = 0;
+        $idList = array();
+        foreach ($userFollow as $key) {
+            $idList[] =  $userFollow[$arrayIndex]['user_id'];
+            $arrayIndex++;
+        }
+        
+        
+        $arrayIndex = 0;
+        //Follow status of each user in the suggestion list 
+        foreach ($userList as $key ) 
+        {   
+            $coordinates = $this->getLocation($key['mapId']);
+            $userList[$arrayIndex]['location'] = $coordinates['name']; 
+            if(array_search($userList[$arrayIndex]['id'],$idList))
+            {
+                $userList[$arrayIndex]['follow'] = true;
+            }
+            else
+            {
+                 $userList[$arrayIndex]['follow'] = false;
+            }
+             $arrayIndex++;
+        }
+        $arrayIndex = 0;
+        //Follow status of first user in the follow list 
+        if(isset($idList) && !empty($idList[0]))
+        {
+            foreach ($userList as $key ) {
+                if($userList[$arrayIndex]['id']==$idList[0]){
+                    $userList[$arrayIndex]['follow'] = true;
+                }
+                $arrayIndex++;
+            }
+        }
+
+        return $userList;
+     }
+
+     /**
       * Get User Recomendation   
       * @return \Illuminate\Http\Response
       */
      public function getUserRecomendation()
      {   
-        $count = 0;
+        
         //$user = User::all()->toArray();
         $userList = User::select('*')->limit(15)->offset(0)->get()->toArray();
+        $userList = $this->getFollowStatus($userList);
         
-        $user = User::Find(Auth::user()->id);
-        $userFollow = $user->follow->toArray();
-        $idList = array();
-        foreach ($userFollow as $key) {
-            $idList[] =  $userFollow[$count]['user_id'];
-            $count++;
-        }
-        
-        
-        $count = 0;
-        //Follow status of each user in the suggestion list 
-        foreach ($userList as $key ) 
-        {   
-            $coordinates = $this->getLocation($key['mapId']);
-            $userList[$count]['location'] = $coordinates['name']; 
-           //dd($coordinates['name']);
-            if(array_search($userList[$count]['id'],$idList)){
-                $userList[$count]['follow'] = true;
-            }
-            else{
-                 $userList[$count]['follow'] = false;
-            }
-             $count++;
-        }
-        $count = 0;
-        //Follow status of first user in the follow list 
-        if(isset($idList) && !empty($idList[0]))
-        {
-            foreach ($userList as $key ) {
-                if($userList[$count]['id']==$idList[0]){
-                    $userList[$count]['follow'] = true;
-                }
-                $count++;
-            }
-        }
-
         return $userList;
      }
 

@@ -257,14 +257,20 @@ body{
 .selectedSideBar{
     background-color: #ff9f41;
     border-radius:0;
+    color: #ffffff;
 }
-.sideBar{
+.sideBar a{
     font-family: ProximaNova-Regular;
-font-size: 16px;
-color: #6f6f6f;
-text-align: left;
-line-height: 20px;
+    font-size: 16px;
+    color: #6f6f6f;
+    text-align: left;
+    line-height: 20px;
+    text-decoration: none;
+}
 
+.sideBar a :hover{
+    font-size: 17px;
+    color: #ff9f41;
 }
 
 .boxShadow {  

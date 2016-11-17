@@ -32,8 +32,8 @@
                             <span>Follow Me</span>
                         </button>
                         <br>
-                        <span class="spanFollow" style="float:left;">{{ $user->followers }} Followers</span>
-                        <span class="spanFollow" style="float:right;">{{ $user->follow }}  Following</span>
+                        <span class="spanFollow" style="float:left; padding-left:8px;">{{ $user->followers }} Followers</span>
+                        <span class="spanFollow" style="float:right; padding-right:8px;">{{ $user->follow }}  Following</span>
                         
                         
                      </div>
