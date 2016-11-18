@@ -137,7 +137,6 @@ class HomeController extends Controller
          return $user;
      }
 
-
      /**
       * Show the user favourites.
       * @return \Illuminate\Http\Response
@@ -193,23 +192,18 @@ class HomeController extends Controller
              $name[1] = '';
          }
          $userList = User::select('*')->where('name','like','%'.$name[0].'%')
-                            ->where('lastname','like','%'.$name[1].'%')->orWhere('lastname','like','%'.$name[0].'%')->get()->toArray();
-        //do not forget to optimise code 
-        //this one and the function getUserRecomendation
-
-         $userList = $this->getFollowStatus($userList);                               
-
-
-
-         //dd($userList);
-         //return ('vv');
-        return view('pages.search', compact('userList'));
+                            ->where('lastname','like','%'.$name[1].'%')
+                            ->orWhere('lastname','like','%'.$name[0].'%')
+                            ->get()->toArray();
+        
+         $userList = $this->getFollowStatus($userList);    
+         return view('pages.search', compact('userList'));
      }
 
      /**
       * Get the user follow status 
       * @param  $userList (array of users)
-      * @return $userList ()
+      * @return $userList (follow field added)
       */
      public function getFollowStatus($userList)
      {
@@ -217,11 +211,11 @@ class HomeController extends Controller
         $userFollow = $user->follow->toArray();
         $arrayIndex = 0;
         $idList = array();
-        foreach ($userFollow as $key) {
+        foreach ($userFollow as $key) 
+        {
             $idList[] =  $userFollow[$arrayIndex]['user_id'];
             $arrayIndex++;
         }
-        
         
         $arrayIndex = 0;
         //Follow status of each user in the suggestion list 
@@ -243,8 +237,10 @@ class HomeController extends Controller
         //Follow status of first user in the follow list 
         if(isset($idList) && !empty($idList[0]))
         {
-            foreach ($userList as $key ) {
-                if($userList[$arrayIndex]['id']==$idList[0]){
+            foreach ($userList as $key ) 
+            {
+                if($userList[$arrayIndex]['id']==$idList[0])
+                {
                     $userList[$arrayIndex]['follow'] = true;
                 }
                 $arrayIndex++;

@@ -39,6 +39,7 @@ Route::get('/like/{id}', 'FavouriteController@like');
 Route::get('/like', 'FavouriteController@index');
 Route::get('/like/{id}/unlike', 'FavouriteController@unlike');
 
+Route::post('/user/save', 'UserController@save');
 
 $s = 'social.';
 Route::get('/social/redirect/{provider}',   ['as' => $s . 'redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);

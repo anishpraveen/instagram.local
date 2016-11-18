@@ -391,7 +391,7 @@ float: right;
 .noMargin{
     margin: 0;
 }
-.inputFieldsSettings{
+.inputFieldsSettings {
     border: 0;
     background: white;
     font-family: ProximaNova-Regular;
@@ -400,9 +400,21 @@ float: right;
     color: #232323;
     text-align: left;
     line-height: 60px;
+    margin-top: 15px;
+    height: 30px;
 
 }
 
+.inputFieldsSettings:focus{
+    background: white;
+}
+.inputFieldsSettings:enabled{
+    background: lightgrey;
+}
+#lblUsername{
+    margin: 0;
+    background: white;
+}
 .labelSettings{
     font-family: ProximaNova-Regular;
     font-weight: 100;
