@@ -22,9 +22,9 @@
                          <span id="spanProfileName">{{ $user->name }}&nbsp{{ $user->lastName }}</span>
                          <br>
                          <span id="spanProfileLocation">
-                             <a class="btnShow" style="cursor:pointer;" latitude="{{ $user['latitude'] }} " longitude="{{ $user['longitude'] }} ">
+                             <a class="btnShowProfile {{ $user->id == Auth::user()->id ? ' btnShowProfile' : 'btnShow' }}" style="cursor:pointer;" latitude="{{ $user['latitude'] }} " longitude="{{ $user['longitude'] }} ">
                                  <img src="/icons/pin_profile.svg" alt="">
-                            </a>
+                             </a>
                              &nbsp{{ $user->locationName }}
                         </span>
                         <br><br>

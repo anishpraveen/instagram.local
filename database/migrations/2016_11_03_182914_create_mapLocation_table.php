@@ -18,6 +18,7 @@ class CreateMapLocationTable extends Migration
             $table->string('name');
             $table->float('latitude');
             $table->float('longitude');
+            $table->string('place_id');
             $table->timestamps();
         });
     }

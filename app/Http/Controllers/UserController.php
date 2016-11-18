@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 //use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\User;
+use App\Map;
 use Request;
 use Auth;
 use Hash;
@@ -56,5 +57,56 @@ class UserController extends Controller
         //dd($user);
         $user->save();
         return redirect('/settings');
+    }
+
+    /**
+     * Save User location
+     *
+     * @return void
+     */
+    public function storeLocation()
+    {
+        Request::json();
+        $json_url = Request::get('url');
+        $json = file_get_contents($json_url);
+        $data = json_decode($json, TRUE);
+        $place = null;
+        $locationId = null;
+        $selectPlaceIndex =2;
+        $selectResultPlace = 0;
+        $user = User::Find(Auth::user()->id);
+        foreach ($data as $key) {
+            $place = $key;
+            break;
+        }
+
+        $mapLocation = new Map;
+        $mapLocation->latitude = Request::get('latitude');
+        $mapLocation->longitude = Request::get('longitude');
+        $mapLocation->name = $place[$selectPlaceIndex]['formatted_address'];
+        $mapLocation->place_id = $place[$selectPlaceIndex]['place_id'];
+
+        $lat = round($mapLocation->latitude, 4);
+        $lng = round($mapLocation->longitude, 4);
+
+        $mapId = Map::select('*')->where('place_id','like',$place[$selectPlaceIndex]['place_id'])
+                            //->where('longitude','like',$lng.'%')
+                            ->get()->toArray();
+        
+        if(empty($mapId))
+        {
+            $mapLocation->save();
+            $locationId = $mapLocation->id;
+        }
+        else
+        {
+            $locationId = $mapId[$selectResultPlace]['id'];
+        }
+        $user->mapId = $locationId;
+        $user->save();
+
+        return $locationId;
+        //return $place[2]['place_id'];
+        
     }
 }

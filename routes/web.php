@@ -40,6 +40,7 @@ Route::get('/like', 'FavouriteController@index');
 Route::get('/like/{id}/unlike', 'FavouriteController@unlike');
 
 Route::post('/user/save', 'UserController@save');
+Route::post('/user/location', 'UserController@storeLocation');
 
 $s = 'social.';
 Route::get('/social/redirect/{provider}',   ['as' => $s . 'redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);
