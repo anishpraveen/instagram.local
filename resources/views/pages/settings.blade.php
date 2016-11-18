@@ -23,7 +23,11 @@
                 </div>
                 <hr class="noMargin">
                 <div class="panel-heading sideBar text-left">
-                    <img src="/icons/logout.svg" style="padding-right:10px;" alt="">Logout
+                    <a href="{{ url('/logout') }}"
+                        onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();" >
+                    <img src="/icons/logout.svg" alt=" Logout "> Logout
+                    </a>                    
                 </div>
             </div>
         </div>
