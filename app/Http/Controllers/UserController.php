@@ -38,7 +38,7 @@ class UserController extends Controller
         $user->name = $name[0];
         $user->lastName = $name[1];
         $user->email = $request['email'];
-        $user->password = $request['password'];
+        $user->password = bcrypt($request['password']);
 
         $input =$request->all();
         //Uploading file
@@ -53,8 +53,6 @@ class UserController extends Controller
             $user->profilePic='/uploads/profilePic/'.$fileName;
             //dd('added');
         }
-        else dd('no image');
-        //dd($user);
         $user->save();
         return redirect('/settings');
     }
