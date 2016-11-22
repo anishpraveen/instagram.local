@@ -30,10 +30,20 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <link href="/css/pusher-chat-widget.css" rel="stylesheet" />
     
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
 </head>
 <body>
 
+    <div class="span5" id="pusher_chat_widget">
+             
+          </div>
+          
     <div id="app" >
         <nav class="navbar navbar-default navbar-static-top gradiantleft" >
             <div class="container">
@@ -129,5 +139,52 @@
         })
         
    </script>
+
+    <script>
+        $( "input" ).keyup(function(e) {
+            var value = $( this ).val();
+            if(e.keyCode == 13){
+                window.location.replace("/search/"+value);
+            }
+        })
+        
+        var name = {!! json_encode(Auth::user()->name) !!};
+        var profilePic = {!! json_encode(Auth::user()->profilePic) !!};
+        var userInfo = {
+            name: {!! json_encode(Auth::user()->name) !!},
+            profilePic : {!! json_encode(Auth::user()->profilePic) !!}
+        }
+        //console.log(name);
+        //console.log(profilePic);
+        $(document).ready(function(){            
+            $('body').on('click', '.pusher-chat-widget-header', function(){
+                //alert('close');
+                $('.pusher-chat-widget-header').toggleClass( "hidden" );
+                $('.pusher-chat-widget-messages').toggleClass( "hidden" );
+                $('.pusher-chat-widget-input').toggleClass( "hidden" );
+                $('#openChat').toggleClass( "hidden" );
+            });
+            $('body').on('click', '#openChat', function(){
+                //alert('close');
+                $('.pusher-chat-widget-header').toggleClass( "hidden" );
+                $('.pusher-chat-widget-messages').toggleClass( "hidden" );
+                $('.pusher-chat-widget-input').toggleClass( "hidden" );
+                $('#openChat').toggleClass( "hidden" );
+            });
+        });
+   </script>
+
+    
+    <script src="http://js.pusher.com/3.0/pusher.min.js"></script>
+    <script src="/js/PusherChatWidget.js"></script>    
+    <script>
+      $(function() {     
+        var pusher = new Pusher("7f9c175e9c4a7b2c2710")
+        var chatWidget = new PusherChatWidget(pusher, {
+          appendTo: "#pusher_chat_widget"
+        });
+      });
+    </script>
+
 </body>
 </html>
