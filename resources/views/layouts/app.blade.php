@@ -40,9 +40,8 @@
 </head>
 <body>
 
-    <div class="span5" id="pusher_chat_widget">
-             
-          </div>
+    <div class="span5 " id="pusher_chat_widget">            
+    </div>
           
     <div id="app" >
         <nav class="navbar navbar-default navbar-static-top gradiantleft" >
@@ -50,7 +49,7 @@
                 <div class="navbar-header" >
 
                     <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                    <button type="button" class="navbar-toggle collapsed " data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -130,15 +129,7 @@
     <script src="/js/app.js"></script> -->
  
 
-    <script>
-        $( "input" ).keyup(function(e) {
-            var value = $( this ).val();
-            if(e.keyCode == 13){
-                window.location.replace("/search/"+value);
-            }
-        })
-        
-   </script>
+    
 
     <script>
         $( "input" ).keyup(function(e) {
@@ -158,14 +149,17 @@
         //console.log(profilePic);
         $(document).ready(function(){            
             $('body').on('click', '.pusher-chat-widget-header', function(){
-                //alert('close');
+                $(".pusher-chat-widget").css("background-color", "transparent");
                 $('.pusher-chat-widget-header').toggleClass( "hidden" );
                 $('.pusher-chat-widget-messages').toggleClass( "hidden" );
                 $('.pusher-chat-widget-input').toggleClass( "hidden" );
                 $('#openChat').toggleClass( "hidden" );
             });
             $('body').on('click', '#openChat', function(){
-                //alert('close');
+                $(".pusher-chat-widget").css("background-color", "whitesmoke");
+                $('.pusher-chat-widget-header').fadeToggle("slow");
+                $('.pusher-chat-widget-messages').fadeToggle("slow");
+                $('.pusher-chat-widget-input').fadeToggle("slow");
                 $('.pusher-chat-widget-header').toggleClass( "hidden" );
                 $('.pusher-chat-widget-messages').toggleClass( "hidden" );
                 $('.pusher-chat-widget-input').toggleClass( "hidden" );
@@ -184,6 +178,13 @@
           appendTo: "#pusher_chat_widget"
         });
       });
+      $(document).ready(function () {
+			  $(".navbar-toggle").on("click", function () {                 
+				    $('.navbar-toggle').toggleClass("active");
+                    $("#app-navbar-collapse").fadeToggle("slow");
+                    //$('#app-navbar-collapse').fadeToggle("collapse");
+			  });
+		});
     </script>
 
 </body>

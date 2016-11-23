@@ -53,11 +53,11 @@
                         @foreach($userList as $user) 
                             <div class="left" style="float:left; padding-bottom:20px;">
                                 <div class="container-fluid">
-                                    <div class="row" style="width:200px;">
-                                        <div class="col-md-4 col-xs-4" >
+                                    <div class="row" style="width:250px;">
+                                        <div class="col-md-3 col-xs-4" style="padding-right:5px;">
                                             <img src="{{ $user['profilePic'] }}" class="img-circle" alt="" height="50" width="50">                            
                                         </div>                                        
-                                        <div class="col-md-5 col-xs-5" style="padding-left:5px; word-wrap: break-word;">
+                                        <div class="col-md-6 col-xs-5" style="padding-left:15px; word-wrap: break-word;">
                                             {{ $user['name'] }}
                                             <br>
                                             {{ $user['location'] }}
@@ -91,23 +91,13 @@
 @endsection
 
 @section('footer')
- <!-- The Map Modal -->
-
-    
-    <script  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDl4z35oKtxgRRzT9S-Bc4hk8YZ6gBna-U&sensor=false&extension=.js&output=embed"></script>
-        
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script src="/js/map.js"></script>
-
-<!-- /.modal -->
-
+    <!-- The Map Modal -->
+        <script  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDl4z35oKtxgRRzT9S-Bc4hk8YZ6gBna-U&sensor=false&extension=.js&output=embed"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="/js/map.js"></script>
+    <!-- /.modal -->
     <script src="/js/modal.js"></script>
-   
-
-
- 
 
     <script>
         function follow($id){        
