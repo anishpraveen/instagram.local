@@ -251,14 +251,17 @@ class HomeController extends Controller
      }
 
      /**
-      * Get User Recomendation   
-      * @return \Illuminate\Http\Response
+      * Get User Recomendation List
+      * @return userList array
       */
      public function getUserRecomendation()
      {   
+        $userDisplayCount = 5;
+        // get fixed list 
+        //$userList = User::select('*')->where('id','<>',Auth::user()->id)->limit($userDisplayCount)->offset(0)->get()->toArray(); 
         
-        //$user = User::all()->toArray();
-        $userList = User::select('*')->limit(15)->offset(0)->get()->toArray();
+        //get random users
+        $userList = User::orderByRaw('RAND()')->take($userDisplayCount)->where('id','<>',Auth::user()->id)->get()->toArray(); 
         $userList = $this->getFollowStatus($userList);
         
         return $userList;
