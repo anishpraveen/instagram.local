@@ -352,14 +352,13 @@ float: right;
 
 }
 
-#btnFollowMe{
-    height: 50px;   
-    background-color: #fe4261;
+.btnFollow{
+    height: 50px;       
     border-radius: 25px;
     border-color: transparent;
 }
 
-#btnFollowMe span{
+.btnFollow span{
     height: 48px;
     width: 82px;
     font-family: ProximaNova-Regular;
@@ -367,6 +366,21 @@ float: right;
     color: #ffffff;
     text-align: center;
     line-height: 24px;
+}
+#btnFollowMe{
+    background-color: #fe4261;
+}
+
+#btnFollowMe:hover{
+    background-color: #a02b3e;
+}
+
+#btnFollowing{
+    background-color: green;
+}
+
+#btnFollowing:hover{
+    background-color: darkgreen;
 }
 
 .spanFollow{

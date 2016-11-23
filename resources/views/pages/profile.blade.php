@@ -7,6 +7,7 @@
 @section('content')
 <div class="hidden laravelInfo" >
    {{ $mytime = Carbon\Carbon::now() }} 
+   
 </div>
 
 <div class="container">
@@ -28,11 +29,21 @@
                              &nbsp{{ $user->locationName }}
                         </span>
                         <br><br>
-                        <button type="button" id="btnFollowMe" class="btn btn-large btn-block btn-default">
-                            <span>Follow Me</span>
-                        </button>
+                        @if(Auth::user()->id != $user->id)
+                            <div id="divFollow">
+                                @if(!App\Follower::where('follower_id','=',Auth::user()->id)->where('user_id','=',$user->id)->count())
+                                    <button type="button" id="btnFollowMe" class="btn btn-large btn-block btn-default btnFollow">
+                                        <span id="{{ $user->id }}">Follow Me</span>
+                                    </button>
+                                @else
+                                    <button type="button" id="btnFollowing" class="btn btn-large btn-block btn-default btnFollow">
+                                        <span id="{{ $user->id }}">Following</span>
+                                    </button>
+                                @endif
+                            </div>
+                        @endif
                         <br>
-                        <span class="spanFollow" style="float:left; padding-left:8px;">{{ $user->followers }} Followers</span>
+                        <span class="spanFollow" id="spanFollowerCount" style="float:left; padding-left:8px;">{{ $user->followers }} Followers</span>
                         <span class="spanFollow" style="float:right; padding-right:8px;">{{ $user->follow }}  Following</span>
                         
                         
@@ -157,9 +168,12 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/js/map.js"></script>
-    <script src="/js/time.js"></script>
+    @if(Auth::user()->id == $user->id)
+        <script src="/js/time.js"></script>
+    @endif
     <script src="/js/modal.js"></script>
     <script src="/js/likePost.js"></script>
+    <script src="/js/follow.js"></script>
     @if(!is_null($posts) && !empty($posts) && isset($posts))
         
         <script src="/js/scroll.js"></script>

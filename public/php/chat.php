@@ -37,8 +37,9 @@ echo(json_encode($result));
 
 function get_channel_name($http_referer) {
   // not allowed :, / % #
-  $pattern = "/(\W)+/";
-  $channel_name = preg_replace($pattern, '-', $http_referer);
+  //$pattern = "/(\W)+/";
+  //$channel_name = preg_replace($pattern, '-', $http_referer);
+  $channel_name = 'insta-global';
   return $channel_name;
 }
 

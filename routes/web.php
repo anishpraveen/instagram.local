@@ -45,3 +45,12 @@ Route::post('/user/location', 'UserController@storeLocation');
 $s = 'social.';
 Route::get('/social/redirect/{provider}',   ['as' => $s . 'redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);
 Route::get('/social/handle/{provider}',     ['as' => $s . 'handle',     'uses' => 'Auth\SocialController@getSocialHandle']);
+
+// route for testing purpose only
+Route::get('/test', function(){
+    //
+    if(App\Follower::where('follower_id','=',Auth::user()->id)->where('user_id','=','5')->count())
+        dd('folol');
+    else
+        dd('no fol');
+});
