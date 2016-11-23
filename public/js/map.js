@@ -84,6 +84,8 @@ $(document).ready(function () {
                             return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
                         },
                         success: function(response){
+                            infoWindow.setContent('Location updated');
+                            infoWindow.open(map, marker);
                             console.log(response);
                         }
                     })

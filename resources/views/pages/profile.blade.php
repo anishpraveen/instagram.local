@@ -68,7 +68,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div id="iconStatus" class="col-md-1 col-sm-1 col-xs-1 profileFormBarIcons">
-                                                    <label id="lStatus" class="btn">
+                                                    <label id="lStatus" class="btn" style="cursor:default;">
                                                         
                                                         </label>                                                
                                                 </div>
@@ -84,8 +84,8 @@
                                                 <div class="col-md-2 col-sm-2 col-xs-2 iii" id="">
                                                     &nbsp Image
                                                 </div>
-                                                <div id="iconClock" class="col-md-1 col-sm-1 col-xs-1 col-md-offset-1 iii">
-                                                    <label id="lClock" class="btn">
+                                                <div id="iconClock" class="col-md-1 col-sm-1 col-xs-1 col-md-offset-1 iii" >
+                                                    <label id="lClock" class="btn" style="cursor:default;">
                                                         &nbsp Today, {{ $mytime->format('h.i A') }}
                                                     </label>     
                                                         

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Follower;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -107,6 +108,12 @@ class RegisterController extends Controller
         
         $user->profilePic='/uploads/profilePic/'.$fileName;
         $user->save();
+
+        $follow = new Follower;
+        $follow->user_id = $user->id;
+        $follow->follower_id = $user->id;
+        
+        $follow->save();
 
         return  $user;
     }

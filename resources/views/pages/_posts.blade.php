@@ -13,13 +13,17 @@
                          <a href="/profile/{{ $post['userId'] }}" class="postsUserName " >{{ $user[0]['name'] }}</a>
                     </div>
                     <div class="text-right" id="kkkk" style="">
-                        {{  $dd->format('d, M Y') }}
-                        <img src="/icons/clock5.svg" alt="">
+                        <span id="spanPostTime" style="-moz-padding-top: 10px;padding-right:5px; ">
+                            {{  $dd->format('d, M Y') }}&nbsp&nbsp
+                            <img src="/icons/clock5.svg"  alt="">
+                        </span>
                         <br>
-                        {{ $post['locationName'] }} 
-                        <a class="btnShow" id="4" style="cursor: pointer; padding-right:5px;" latitude="{{ $post['latitude'] }} " longitude="{{ $post['longitude'] }} ">
-                            <img src="/icons/pin5.svg" alt="">
-                        </a>
+                        <span style="padding-right:4px;">
+                            {{ $post['locationName'] }}&nbsp&nbsp 
+                            <a class="btnShow" id="4" style="cursor: pointer; padding-right:5px;" latitude="{{ $post['latitude'] }} " longitude="{{ $post['longitude'] }} ">
+                                <img src="/icons/pin5.svg" alt="">
+                            </a>
+                        </span>
                         <!--
                         <a href="#myMapModal" class="launch-map" data-toggle="modal"  style="padding-right:5px;">
                             <img src="/icons/pin5.svg" alt="">

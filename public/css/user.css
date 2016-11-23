@@ -333,8 +333,13 @@ float: right;
    
 }
 
-.dropdown:hover .dropdown-content {
+/*.dropdown:hover */.dropdown-content {
     display: block;
+}
+.caret{
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid ;
 }
 
 #spanProfileName{
@@ -437,4 +442,7 @@ float: right;
     text-align: left;
     line-height: 60px;
 
+}
+@-moz-document url-prefix() {
+    #spanPostTime {margin-right:3px; }
 }

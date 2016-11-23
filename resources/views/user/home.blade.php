@@ -55,12 +55,18 @@
                                 <div class="container-fluid">
                                     <div class="row" style="width:250px;">
                                         <div class="col-md-3 col-xs-4" style="padding-right:5px;">
-                                            <img src="{{ $user['profilePic'] }}" class="img-circle" alt="" height="50" width="50">                            
+                                            <a href="/profile/{{ $user['id'] }}">
+                                                <img src="{{ $user['profilePic'] }}" class="img-circle" alt="" height="50" width="50">      
+                                            </a>                      
                                         </div>                                        
                                         <div class="col-md-6 col-xs-5" style="padding-left:15px; word-wrap: break-word;">
-                                            {{ $user['name'] }}
+                                            <a href="/profile/{{ $user['id'] }}" style="text-decoration:none; line-height: 20px; font-family: Tahoma;font-size: 14px; color:#5e5e5e;">
+                                                {{ $user['name'] }}
+                                            </a>
                                             <br>
-                                            {{ $user['location'] }}
+                                            <a style="font-family: Tahoma;font-size: 12px;color: #999999; line-height: 20px; text-decoration:none;">
+                                                {{ $user['location'] }}
+                                            </a>
                                         </div>
                                         <div class="col-md-1">                                                    
                                         </div>

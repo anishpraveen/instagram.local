@@ -38,7 +38,11 @@ class UserController extends Controller
         $user->name = $name[0];
         $user->lastName = $name[1];
         $user->email = $request['email'];
-        $user->password = bcrypt($request['password']);
+        if(!empty($request['password']))
+        {
+            $user->password = bcrypt($request['password']);
+        }
+        
 
         $input =$request->all();
         //Uploading file

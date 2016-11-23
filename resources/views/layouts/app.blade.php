@@ -73,21 +73,22 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">                    
+                    <ul class="nav navbar-nav navbar-right" >                    
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
-                        @else                
-                            <a href="/profile" class="white" style="padding:0;">.</a>                  
+                        @else                                                         
                             <li class="dropdown" >
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background: transparent; color:white;">                                    
-                                    {{ Auth::user()->name }}
-                                    <img src="{{ Auth::user()->profilePic }}" width="25" height="25" class="img-circle" >                               
-                                    <span class="caret "></span>
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background: transparent; color:white; cursor:default;">                                    
+                                    <span id="spanUserIcon" style="cursor:pointer; ">
+                                        {{ Auth::user()->name }}&nbsp&nbsp
+                                        <img src="{{ Auth::user()->profilePic }}" width="25" height="25" class="img-circle" > 
+                                    </span>
+                                    <span id="spanCaret" style="cursor:pointer;" class="caret "></span>
                                 </a>
                                 
-                                <ul class="dropdown-menu gradiantdown dropdown-content" role="menu" id="ulMenu"> 
+                                <ul class="dropdown-menu gradiantdown dropdown-content hidden" role="menu" id="ulMenu"> 
                                     <div >
                                        
                                         <li class="lispace">
@@ -127,9 +128,6 @@
     </div>
     <!-- Scripts
     <script src="/js/app.js"></script> -->
- 
-
-    
 
     <script>
         $( "input" ).keyup(function(e) {
@@ -165,10 +163,25 @@
                 $('.pusher-chat-widget-input').toggleClass( "hidden" );
                 $('#openChat').toggleClass( "hidden" );
             });
-        });
-   </script>
+            $('body').on('click', '.caret', function(){
+                //$(".dropdown-content").css("display", "block");
+                $('.dropdown-content').toggleClass( "hidden" );
+            });
+            $('body').on('click', '#spanUserIcon', function(){
+                window.location.href = "/profile";
+            });
 
-    
+            // $('body').on('click',(function() {
+
+            //     if( this.id != 'spanCaret') {
+            //         alert(this.id);
+            //         $('.dropdown-content').addClass( "hidden" );
+            //         //$("#spanCaret").hide();
+            //     }
+
+            // });
+        });
+    </script>
     <script src="http://js.pusher.com/3.0/pusher.min.js"></script>
     <script src="/js/PusherChatWidget.js"></script>    
     <script>
