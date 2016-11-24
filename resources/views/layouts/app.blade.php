@@ -27,7 +27,7 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    
+
     <!-- Google Analytics -->
     {!! Analytics::render() !!}
     <!-- Scripts -->
@@ -122,7 +122,7 @@
 
     @yield('footer')
     <div id="dialog" style="display: none">
-        <div id="dvMap" style="height: 333px; width: 590px;">
+        <div id="dvMap" style=" ">
         </div>
     </div>
     <!-- Scripts
