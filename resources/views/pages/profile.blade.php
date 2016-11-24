@@ -56,72 +56,72 @@
             <div class="row">
                 @if($user->id == Auth::user()->id)
                     <!-- Add New Post -->
-                    <div class="col-md-12">
-                        <div class="panel panel-group" id="divAddPost" style="background-color:#ececec; ">
-                            
-
-                            <div class="panel-body transparent" style="padding:0; ">
-                                <form class="form-horizontal" role="form" method="POST" action="{{ url('/posts') }}" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-
-                                    <div id="profileFormBar" class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div id="iconStatus" class="col-md-1 col-sm-1 col-xs-1 profileFormBarIcons">
-                                                    <label id="lStatus" class="btn" style="cursor:default;">
-                                                        
-                                                        </label>                                                
-                                                </div>
-                                                <div class="col-md-2 col-sm-2 col-xs-2 iii">
-                                                    &nbsp Status
-                                                </div>
-                                                <div id="iconImage" class="col-md-1 col-sm-1 col-xs-1 profileFormBarIcons">
-                                                    <label id="lImage" class="btn">
-                                                        <input name="image" type="file" id="main-input" onchange="previewFile(this);">
-                                                        
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-sm-2 col-xs-2 iii" id="">
-                                                    &nbsp Image
-                                                </div>
-                                                <div id="iconClock" class="col-md-1 col-sm-1 col-xs-1 col-md-offset-1 iii" >
-                                                    <label id="lClock" class="btn" style="cursor:default;">
-                                                        &nbsp Today, {{ $mytime->format('h.i A') }}
-                                                    </label>     
-                                                        
-                                                </div>
-                                            
-                                            </div>
-                                        </div>                                    
-                                    </div>
-
-                                    <div class="clearfix" >
-                                    </div>
-                                    
-                                    <div class="{{ $errors->has('description') ? ' has-error' : '' }} {{ $errors->has('image') ? ' has-error' : '' }}">
-                                        <div class="postInput bgwhite">
-                                            <input id="description" type="textarea" class="form-control  " name="description" value="{{ old('description') }}" required placeholder="Type here">
-                                            <button type="submit" class="btn btn-primary" id="btnPost">
-                                                Post
-                                            </button>
-                                            @if ($errors->has('description'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('description') }}</strong>
-                                                </span>
-                                            @endif
-                                            @if ($errors->has('image'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('image') }}</strong>
-                                                </span>
-                                            @endif
+                    <div class="col-md-12" style="padding-bottom:30px;">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/posts') }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="col-md-6" id="profileBar" >
+                                <div class="col-md-4 col-sm-4 col-xs-4" style="padding-right:0;">
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-5 col-xs-5 divImgProfileBar" >
+                                            <img src="/icons/status.svg" alt="">
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-3 spanDeleteElement" style="padding-top:15px;">
+                                            <span>Status</span>
                                         </div>
                                     </div>
                                     
-                                
-                                </form>
+                                    
+                                </div>                                
+                                <div class="col-md-3 col-sm-3 col-xs-3">
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-5 col-xs-5 divImgProfileBar" >
+                                            <label id="">
+                                                <input name="image" type="file" id="main-input" accept="image/*">
+                                                <img src="/icons/camera.svg" alt="" class="pointer">
+                                            </label> 
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-3 spanDeleteElement" style="padding-top:15px;">
+                                            <span id="spanImage">Image</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div id="divNewClock" class="col-md-5 col-sm-5 col-xs-5 " style="padding-top:15px;padding-right:0;">
+                                    <div style="float:right; padding-right:10px;">
+                                        <img  src="/icons/clock_post.svg" alt="">
+                                        <span style="font-size: 12px;"> 
+                                            <span class="spanDeleteElement" id="spanTodayText" style="text-decoration: none;"> Today, </span>
+                                            <span id="lClock" >{{ $mytime->format('h.i A') }}</span>
+                                        </span>                                
+                                    </div>
+                                </div>
                             </div>
-                            
-                        </div>
+                            <div class="col-md-12 " style="background-color:white; height:70px;padding-left:0;">
+                                <div class="col-md-10 col-sm-10 col-xs-7" style="padding-left:0;" >
+                                    <input id="description" type="textarea" class="form-control  " name="description" value="{{ old('description') }}" required placeholder="Type here"
+                                     style="background-color:white; border:0;height:70px"
+                                    >                                
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-5" style="padding-top:15px; ">
+                                    <button type="submit" class="btn btn-primary" id="btnPost" style="">
+                                        Post
+                                    </button>
+                                </div>                                
+                            </div>
+                            <div class="col-md-12 {{ $errors->has('description') ? ' has-error' : '' }} {{ $errors->has('image') ? ' has-error' : '' }}">
+                                @if ($errors->has('description'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </form>
+                        
                     </div>
                 @endif
                 <!-- Previous Posts -->
@@ -179,5 +179,13 @@
         <script src="/js/scroll.js"></script>
     @endif
 
+    <script>
+        $(document).ready(function(){
+            $("#main-input").on('change',function(){
+                $('#spanImage').text('Uploaded');
+                $('#spanImage').css('color','green');
+            });
+        });
+    </script>
     
 @endsection

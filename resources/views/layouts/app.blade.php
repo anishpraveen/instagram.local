@@ -21,6 +21,12 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/user.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proxima+Nova" type="text/css" />
+     <link href="/css/pusher-chat-widget.css" rel="stylesheet" />
+    
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     
     <!-- Google Analytics -->
     {!! Analytics::render() !!}
@@ -30,13 +36,6 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
-    <link href="/css/pusher-chat-widget.css" rel="stylesheet" />
-    
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-
 </head>
 <body>
 

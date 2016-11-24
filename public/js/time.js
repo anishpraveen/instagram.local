@@ -2,7 +2,7 @@
 
 setInterval(function() {
     var time = formatAMPM();
-    document.getElementById('lClock').innerHTML= ' &nbsp Today, ' + time;
+    document.getElementById('lClock').innerHTML=time;
 }, 1000 * 60 * 1); // millisec * sec * min
 
 /**

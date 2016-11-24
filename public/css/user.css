@@ -20,15 +20,7 @@
 
 }
 
-#btnPost{
-	position: absolute;
-	right: 21px;
-	top: 20px;
-	height: 35px;
-	width: 99px;
-	background-color: #ff6262;
-	border-radius: 18px;
-}
+
 /**************************************/
 /* Upload Type file                   */
 /**************************************/
@@ -51,46 +43,40 @@ img.addButton{
   background-color: white;
 }
 
-#profileFormBar{
-	height: 50px;
-	//width: 396px;
-	background-color: #34495e;
-	border-radius: 3px 10px 0px 0px;
-	padding: 0;
-	position: relative;
+#profileBar{
+    background-color:#34495e; 
+    height:50px;
+    padding-left:0;
+    padding-right:0;
+    color: #ffffff;   
+    font-family: proxima-nova, sans-serif; 
+    font-size: 14px;
+    border-radius: 3px 10px 0px 0px;
 }
 
-.profileFormBarIcons{
-	//text-align: center;
-	//align-items: center;
-	//align-content: center;
-	//position: absolute;
-	height: 50px;
-	width: 53px;
-	background-color: #253648;
+.divImgProfileBar{
+    background-color:#253648; 
+    height:50px; 
+    padding-right:0; 
+    padding-top:15px; 
+    width:50px;
 }
 
-#iconImage img{
-	padding-top: 10px;
-	right: 10px;
-}
+#description.form-control{
+    
+    font-family: proxima-nova, sans-serif;
+    font-size: 16px;
+    color: #6b6b6b;
+    text-align: left;
+    line-height: 24px;
 
-#lImage{
-	background-image: url('/icons/camera.svg');
-	background-repeat: no-repeat;
-	margin-top: 15px;
 }
-#lStatus{
-	background-image: url('/icons/status.svg');
-	background-repeat: no-repeat;
-	margin-top: 15px;
+#btnPost{
+	width: 99px;
+    float:left;
+    background-color: #ff6262;
+    border-radius: 18px;
 }
-#lClock{
-	background-image: url('/icons/clock_post.svg');
-	background-repeat: no-repeat;
-	margin-top: 15px;
-}
-
 
 @media (max-width: 40em) {
 .iii {
@@ -445,4 +431,19 @@ float: right;
 }
 @-moz-document url-prefix() {
     #spanPostTime {margin-right:3px; }
+}
+
+@media screen and (max-width: 442px) {
+    .spanDeleteElement {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 994px) and (max-width: 1199px) {
+    #spanTodayText {
+        display: none !important;
+    }
+    #divNewClock{
+        padding-left: 25px;
+    }
 }
