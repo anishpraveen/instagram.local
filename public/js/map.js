@@ -27,9 +27,14 @@ $(document).ready(function () {
             closeText: 'X',
             classes: {
                 "ui-dialog": "mapDialog"
+            },
+            close: function( event, ui ) {
+                    var modal = document.getElementById('mapModal');
+                    modal.style.display = "none";
             }
         });
-         
+         var modal = document.getElementById('mapModal');
+         modal.style.display = "block";
          
     });
 

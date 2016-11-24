@@ -12,13 +12,13 @@
                         <img src="{{ $user[0]['profilePic'] }}" alt=""  class="img-circle" height="45" width="45">                                
                          <a href="/profile/{{ $post['userId'] }}" class="postsUserName " >{{ $user[0]['name'] }}</a>
                     </div>
-                    <div class="text-right" id="kkkk" style="">
+                    <div class="text-right divPostDetails" id="kkkk" style="">
                         <span id="spanPostTime" style="-moz-padding-top: 10px;padding-right:5px; ">
                             {{  $dd->format('d, M Y') }}&nbsp&nbsp
                             <img src="/icons/clock5.svg"  alt="">
                         </span>
                         <br>
-                        <span style="padding-right:4px;">
+                        <span style="padding-right:4px; color: #9a9a9a;">
                             {{ $post['locationName'] }}&nbsp&nbsp 
                             <a class="btnShow" id="4" style="cursor: pointer; padding-right:5px;" latitude="{{ $post['latitude'] }} " longitude="{{ $post['longitude'] }} ">
                                 <img src="/icons/pin5.svg" alt="">

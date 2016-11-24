@@ -18,7 +18,7 @@
                     </a>
                 </div>
                 <div class="panel-heading selectedSideBar sideBar text-left">
-                    <img src="/icons/heart_select.svg" style="padding-right:10px;" alt=""> Favorites
+                    <img src="/icons/fav.svg" style="padding-right:10px;" alt=""> Favorites
                 </div>
                 <div class="panel-heading sideBar text-left">
                     <a href="{{ url('/logout') }}"

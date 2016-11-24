@@ -13,11 +13,10 @@
     /*background: -moz-linear-gradient(360deg, #ffb140 0%, #ff5445 26%, #fc2b82 60%); /* For Firefox 3.6 to 15 */
     /*background: linear-gradient( 360deg, #ffb140 0%, #ff5445 26%, #fc2b82 60%); /* Standard syntax (must be last) */
     position: absolute;
-top: 62px;
-
-width: 70px;
-border-radius: 3px;
-background-image: linear-gradient(#ed2e8a 0%, #ff8b42 100%);
+    top: 62px;
+    width: 70px;
+    border-radius: 3px;
+    background-image: linear-gradient(#ed2e8a 0%, #ff8b42 100%);
 }
 #ulMenu{
 	padding-left: 18px;
@@ -37,35 +36,31 @@ background-image: linear-gradient(#ed2e8a 0%, #ff8b42 100%);
   width: 0; 
   height: 0; 
   border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  
+  border-right: 5px solid transparent;  
   border-bottom: 5px solid green;
-
 }
 
 #ulMenu:before {
    content:"";
    position: relative;
-   display: block;
-   
+   display: block;   
    width: 0;
    height: 0;
    right: 10px;
    top: -15px;
    border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  
-  border-bottom: 15px solid #ed2e8a;
+   border-right: 15px solid transparent;  
+   border-bottom: 15px solid #ed2e8a;
 
 }
 
 .btn-primary{
     background-color: #d23396;
     font-family: Tahoma;
-font-size: 16px;
-color: #ffffff;
-text-align: center;
-border-width: 0px;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    border-width: 0px;
 }
 
 .btn-primary:hover{

@@ -21,8 +21,9 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/user.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proxima+Nova" type="text/css" />
-     <link href="/css/pusher-chat-widget.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proxima+Nova" type="text/css" />-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tahoma" type="text/css" />
+    <link href="/css/pusher-chat-widget.css" rel="stylesheet" />
     
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -94,7 +95,7 @@
                                             <a href="/settings"><img src="/icons/settings_select.svg" alt="Settings"></a>
                                         </li>
                                         <li class="lispace">
-                                            <a href="/favourites"><img src="/icons/heart_select.svg" alt="Heart"></a>
+                                            <a href="/favourites"><img src="/icons/fav.svg" alt="Heart"></a>
                                         </li>
                                         <li class="lispace">
                                             <a href="{{ url('/logout') }}"
@@ -121,8 +122,10 @@
     </div>
 
     @yield('footer')
-    <div id="dialog" style="display: none">
-        <div id="dvMap" style=" ">
+    <div class="modal" id="mapModal">
+        <div id="dialog" style="display: none">
+            <div id="dvMap" style=" ">
+            </div>
         </div>
     </div>
     <!-- Scripts
@@ -197,6 +200,15 @@
                     //$('#app-navbar-collapse').fadeToggle("collapse");
 			  });
 		});
+        document.addEventListener('keyup', function(e) {
+            if (e.keyCode == 27) {
+                modalClose();
+            }
+        });
+        function modalClose() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
     </script>
 
 </body>

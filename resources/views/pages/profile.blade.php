@@ -183,7 +183,7 @@
         $(document).ready(function(){
             $("#main-input").on('change',function(){
                 $('#spanImage').text('Uploaded');
-                $('#spanImage').css('color','green');
+                $('#spanImage').css('color','#ff5445');
             });
         });
     </script>
