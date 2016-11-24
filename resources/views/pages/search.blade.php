@@ -63,7 +63,7 @@
                 url: '/follow/'+$id,
                 data: "",
                 success: function(response) {
-                    $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg" style="float:right;" alt=""></a>'   
+                    $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg"  alt=""></a>'   
                     document.getElementById($id).innerHTML = $html;       
                 }
             });
@@ -75,7 +75,7 @@
                 url: '/follow/'+$id+'/unfollow',
                 data: "",
                 success: function(response) {                    
-                    $html = '<a  onclick="follow('+$id+');" ><img src="/icons/follow.svg" style="float:right;" alt=""></a>'   
+                    $html = '<a  onclick="follow('+$id+');" ><img src="/icons/follow.svg" alt=""></a>'   
                     document.getElementById($id).innerHTML = $html;                    
                 }
             })

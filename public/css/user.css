@@ -211,7 +211,39 @@ body{
     .modal-content {
         width: 100%;
     }
+   
+    
 }
+
+#dialog{
+    border-width: 5px;
+    border-style: solid;
+    border-color: #f32c86;
+    padding: 0;  
+}
+.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close{
+    background-color: #f32c86;
+    
+    border: 0 none;
+    position: absolute;
+    z-index: 9999;
+    color: white;
+    font-weight: 900;
+    left: 578px;
+    top: 25px;
+    float:right;
+}
+
+
+/*.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close:after{
+      background-image: url('/icons/close_button.svg');
+       background: no-repeat;
+}
+.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {display: none }
+.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
+     background-image: url('/icons/close_button.svg');
+     z-index: 99999;
+     }*/
 
 #recommendedPeopleHeading{
     font-family: Tahoma;
@@ -276,19 +308,19 @@ body{
 
 #inputSearch{
     margin-top: 10px;
-height: 32px;
-width: 240px;
-background-color: #ffffff;
-border-radius: 16px;
-background: url(/icons/search.svg) no-repeat scroll 7px 7px;
-background-color: #ffffff;
-padding-left:30px;
+    height: 32px;
+    width: 240px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    background: url(/icons/search.svg) no-repeat scroll 7px 7px;
+    background-color: #ffffff;
+    padding-left:30px;
 
-   font-family: Tahoma;
-font-size: 14px;
-color: #f02d88;
-text-align: left;
-float: right;
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #f02d88;
+    text-align: left;
+    float: right;
 }
 
 .laravelInfo{
@@ -299,13 +331,7 @@ float: right;
 
 
 
-    #dialog{
-       border-width: 5px;
-       border-style: solid;
-       border-color: #f32c86;
-       padding: 0;  
-    }
-
+   
     
 
 
@@ -436,6 +462,9 @@ float: right;
 @media screen and (max-width: 442px) {
     .spanDeleteElement {
         display: none !important;
+    }
+    #dialog{
+       width: 50%;
     }
 }
 
