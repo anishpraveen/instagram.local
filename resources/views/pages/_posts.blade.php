@@ -1,5 +1,5 @@
  @foreach($posts as $post) 
-    <div class="col-md-6 ">
+    <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="panel panel-group" style="border-width:0;" >
             <div class="panel-heading">        
                 <div class="hidden laravelInfo1" id="lInfo">
@@ -8,7 +8,7 @@
                     <button type="" class="lat" ></button>
                 </div>    
                 <div class="row ">
-                    <div class="col-md-8 ">
+                    <div class="col-md-8 col-sm-8">
                         <img src="{{ $user[0]['profilePic'] }}" alt=""  class="img-circle" height="45" width="45">                                
                          <a href="/profile/{{ $post['userId'] }}" class="postsUserName " >{{ $user[0]['name'] }}</a>
                     </div>
