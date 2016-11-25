@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Notifications\Messages\MailMessage;
 //use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\User;
 use App\Map;
 use Request;
+use Mail;
 use Auth;
 use Hash;
 
@@ -41,6 +43,12 @@ class UserController extends Controller
         if(!empty($request['password']))
         {
             $user->password = bcrypt($request['password']);
+             Mail::send('emails.passwordReset', ['title' => 'Password Changed', 'content' => 'Your password has been been successfully reset'], function ($message)
+            {
+                $message->to(Auth::user()->email);
+                $message->subject('Password Changed');
+                $message->priority('High');
+            });
         }
         
 
