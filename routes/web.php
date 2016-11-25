@@ -24,27 +24,25 @@ Route::get('/favourites', 'HomeController@favourites');
 Route::get('/settings', 'HomeController@settings');
 Route::get('/search/{id}', 'HomeController@search');
 
-Route::get('/map', function () {
-    return view('map');
+Route::get('/crop', function () {
+    return view('crop');
 });
 
 Route::resource('posts', 'PostsController');
 Route::get('/posts', 'PostsController@get');
 
 Route::get('/follow/{id}', 'FollowController@follow');
-Route::get('/follow', 'FollowController@index');
 Route::get('/follow/{id}/unfollow', 'FollowController@unfollow');
 
 Route::get('/like/{id}', 'FavouriteController@like');
-Route::get('/like', 'FavouriteController@index');
 Route::get('/like/{id}/unlike', 'FavouriteController@unlike');
 
 Route::post('/user/save', 'UserController@save');
 Route::post('/user/location', 'UserController@storeLocation');
 
-$s = 'social.';
-Route::get('/social/redirect/{provider}',   ['as' => $s . 'redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);
-Route::get('/social/handle/{provider}',     ['as' => $s . 'handle',     'uses' => 'Auth\SocialController@getSocialHandle']);
+$social = 'social.';
+Route::get('/social/redirect/{provider}',   ['as' => 'social.redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);
+Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses' => 'Auth\SocialController@getSocialHandle']);
 
 // route for testing purpose only
 Route::get('/test', function(){

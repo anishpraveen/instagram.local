@@ -136,7 +136,8 @@ PusherChatWidget.prototype._sendChatMessage = function(data) {
     success: function(result) { //console.log(result);
       var activity = result.activity;
       var imageInfo = activity.actor.image;
-      var image = $('<div class="pusher-chat-widget-current-user-image">' +
+      var image = $('<div id="closeChat" class="pointer btn">X</div>'+'<div class="pusher-chat-widget-current-user-image">' +
+                      
                       '<img class="img-circle" src="' + imageInfo.url + '" width="32" height="32" />' +
                     '</div>');
       var name = $('<div class="pusher-chat-widget-current-user-name">' + activity.actor.displayName.replace(/\\'/g, "'") + '</div>');
@@ -164,15 +165,16 @@ PusherChatWidget.prototype._startTimeMonitor = function() {
 PusherChatWidget._createHTML = function(appendTo) {
   
   var html = ' ' +
-  '<div class="pusher-chat-widget" width="25px">' +
+  '<div class="pusher-chat-widget" width="25px">' +    
     '<div id="openChat" style="text-align:center;" class="pointer"><img src="/icons/chat.svg" height="25px" /></div>'+
     '<div class="pusher-chat-widget-header pointer hidden">' +
       //'<label for="nickname">Name</label>' +
+        '<div id="closeChat" class="pointer btn">X</div>'+
         '<div class="pusher-chat-widget-current-user-image">' +
             '<img class="img-circle" src="' + userInfo.profilePic + '" width="32" height="32" />' +
         '</div>'+
         '<div class="pusher-chat-widget-current-user-name">' + userInfo.name.replace(/\\'/g, "'") + '</div>'+
-        '<input type="text" class="hidden" readonly name="nickname" value='+userInfo.name+' />' +
+        '<input type="text" class="hidden" style="display:none;" readonly name="nickname" value='+userInfo.name+' />' +
     '</div>' +
     '<div class="pusher-chat-widget-messages hidden">' +
       '<ul class="activity-stream">' +

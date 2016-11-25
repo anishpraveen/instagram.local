@@ -54,7 +54,7 @@ class UserController extends Controller
 
         $input =$request->all();
         //Uploading file
-        $uploadFolder='/uploads/profilePic/';
+        $uploadFolder='/'.config('constants.profilePicPath');
         if (!empty(Request::file('image')) && Request::file('image')->isValid()) 
         {
             $destinationPath = public_path($uploadFolder);
@@ -62,7 +62,7 @@ class UserController extends Controller
             $fileName = uniqid().'.'.$extension;
 
             Request::file('image')->move($destinationPath, $fileName);
-            $user->profilePic='/uploads/profilePic/'.$fileName;
+            $user->profilePic='/'.config('constants.profilePicPath').''.$fileName;
             //dd('added');
         }
         $user->save();

@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'DOBYear' => 'required|not_in:Year',
             'DOBMonth' => 'required|not_in:Month',
             'DOBDay' => 'required|min:1|max:31|not_in:Day',
-            'image' => 'required|mimes:jpeg,bmp,png',
+            'image' => 'mimes:jpeg,bmp,png',
         ]);
     }
 
@@ -71,12 +71,10 @@ class RegisterController extends Controller
      * @return User
      */
     protected function create(array $data)
-    {date_default_timezone_set("Asia/Kolkata"); 
-   
+    {
         $DOB=$data['DOBYear'].'-';
         $DOB.=$data['DOBMonth'].'-';
         $DOB.=$data['DOBDay'];
-        // dd($data);
         $DOB=Carbon::createFromFormat('Y-m-d', $DOB);
         if ($DOB !== false) {
             
@@ -84,12 +82,10 @@ class RegisterController extends Controller
         else{
             return false;
         }
-        //dd(Request::file('image'));
-
         //Uploading file
         if (Request::file('image')->isValid()) 
         {
-            $destinationPath = public_path('uploads/profilePic');
+            $destinationPath = public_path(config('constants.profilePicPath'));
             $extension = Request::file('image')->getClientOriginalExtension();
             $fileName = uniqid().'.'.$extension;
 
@@ -106,7 +102,7 @@ class RegisterController extends Controller
         $user->birthday = $DOB;
         $user->gender = $data['gender'];
         
-        $user->profilePic='/uploads/profilePic/'.$fileName;
+        $user->profilePic='/'.config('constants.profilePicPath').''.$fileName;
         $user->save();
 
         $follow = new Follower;

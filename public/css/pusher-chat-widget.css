@@ -4,17 +4,25 @@
   right: 30px;
   z-index: 10000;
   
-  font-size: 13px;
-  
-  //width: 300px;
-  
+  font-size: 13px;  
+  /*width: 300px;*/  
   background-color: transparent;
-  //border: 1px solid #EEE;
+  
   margin-bottom: 1%;
-  //-webkit-border-radius: 6px 6px 6px 6px;
-  //-moz-border-radius: 6px 6px 6px 6px;
-  //border-radius: 6px 6px 6px 6px;
+  -webkit-border-radius: 6px 6px 6px 6px;
+  -moz-border-radius: 6px 6px 6px 6px;
+  border-radius: 6px 6px 6px 6px;
   padding-left: 10px;
+}
+
+.chatBorder{
+  border: 1px solid blue;
+}
+#closeChat{
+  float:right; 
+  padding-right:3px;
+  font-size: large;
+  font-weight: 900;
 }
 
 .pusher-chat-widget input {

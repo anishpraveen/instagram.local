@@ -23,22 +23,10 @@ class FollowController extends Controller
         $follow->follower_id = Auth::user()->id;
         
         $follow->save();
-        dd($follow);
+        return ($follow);
         
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $user = Auth::user();
-        $followList = $user->follow->toArray();
-        var_dump($followList);
-    }
-
+    
     /**
      * Unfollow a user with id = @param.
      *
@@ -55,7 +43,7 @@ class FollowController extends Controller
         $follow = Follower::where('user_id', $userExist->id)
                             ->where('follower_id', Auth::user()->id)
                             ->delete(); 
-       dd($follow);
+       return ($follow);
 
     }
 

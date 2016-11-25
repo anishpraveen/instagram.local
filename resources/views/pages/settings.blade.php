@@ -12,12 +12,12 @@
         <div class="col-md-3 text-center">
             <div class="panel panel-group" style="border:0;">
                 <div class="panel-heading  selectedSideBar text-left sideBar">
-                    <img src="/icons/settings_select.svg" style="padding-right:10px;" alt="">General Settings
+                    <img src="/icons/settings_select.svg" class="sideBarIcons" alt="">General Settings
                 </div>
                 <hr class="noMargin">
                 <div class="panel-heading  sideBar text-left" style="">
                     <a href="/favourites">
-                        <img src="/icons/heart_select.svg" style="padding-right:10px;" alt=""> 
+                        <img src="/icons/heart_select.svg" class="sideBarIcons" alt=""> 
                         <span >Favorites</span>
                     </a>
                 </div>
@@ -26,7 +26,7 @@
                     <a href="{{ url('/logout') }}"
                         onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();" >
-                    <img src="/icons/logout.svg" alt=" Logout "> Logout
+                    <img src="/icons/logout.svg" class="sideBarIcons" alt=" Logout "> Logout
                     </a>                    
                 </div>
             </div>

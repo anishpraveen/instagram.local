@@ -69,7 +69,7 @@
                         @for($i=0;$i<9;$i++)
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         @endfor
-                         <input id="inputSearch" class="input-group-addon" type="text" name="" value="">
+                         <input id="inputSearch" class="input-group-addon" type="text" placeholder="Search User" name="" value="">
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -154,6 +154,7 @@
                 $('.pusher-chat-widget-messages').toggleClass( "hidden" );
                 $('.pusher-chat-widget-input').toggleClass( "hidden" );
                 $('#openChat').toggleClass( "hidden" );
+                $(".pusher-chat-widget").toggleClass("chatBorder");
             });
             $('body').on('click', '#openChat', function(){
                 $(".pusher-chat-widget").css("background-color", "whitesmoke");
@@ -164,6 +165,7 @@
                 $('.pusher-chat-widget-messages').toggleClass( "hidden" );
                 $('.pusher-chat-widget-input').toggleClass( "hidden" );
                 $('#openChat').toggleClass( "hidden" );
+                $(".pusher-chat-widget").toggleClass("chatBorder");
             });
             $('body').on('click', '.caret', function(){
                 //$(".dropdown-content").css("display", "block");

@@ -1,5 +1,5 @@
  @foreach($posts as $post) 
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12" id="Post{{ $post['id'] }}">
         <div class="panel panel-group" style="border-width:0;" >
             <div class="panel-heading">        
                 <div class="hidden laravelInfo1" id="lInfo">

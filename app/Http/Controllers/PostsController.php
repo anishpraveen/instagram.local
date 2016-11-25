@@ -20,29 +20,23 @@ class PostsController extends Controller
      public function store(PostRequest $request)
     {   
         $input =$request->all();
-        //dd($input);
         $post = new Posts;
-        $post->description=$input['description'];
-        
+        $post->description=$input['description'];        
         $post->userId=Auth::user()->id;
 
         //Uploading file
-        $uploadFolder='uploads/posts/';
+        $uploadFolder=config('constants.postsPath');
         if (Request::file('image')->isValid()) 
         {
             $destinationPath = public_path($uploadFolder);
             $extension = Request::file('image')->getClientOriginalExtension();
             $fileName = uniqid().'.'.$extension;
-
             Request::file('image')->move($destinationPath, $fileName);
         }
         
         $post->imageName=$uploadFolder.$fileName;
         $post->mapId=Auth::user()->mapId;
-        //dd($post);
         $post->save();
-        $str = '<script type="text/javascript">alert("stored");</script>';
-        echo $str;
         return redirect('/profile'); 
     }
 
@@ -55,7 +49,6 @@ class PostsController extends Controller
     public function show($id)
     {
         $post=Posts::find($id);
-        //dd($post);
     }
 
     /**
@@ -157,7 +150,6 @@ class PostsController extends Controller
         $coordinates['latitude'] = $location['latitude'];
         $coordinates['longitude'] = $location['longitude'];
         $coordinates['name'] = $location['name'];
-        //dd($coordinates);
         return $coordinates;
     }
 }

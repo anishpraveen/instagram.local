@@ -69,8 +69,7 @@ class HomeController extends Controller
         $posts = $this->getLikePosts($posts,$userLikePosts);
         
         $posts= array_reverse($posts);
-        //dd($posts);
-        $perPage = 6;
+        $perPage = config('constants.PaginationPageSize');
         $posts =$this->paginateArray($posts,$perPage);
         return view('user.home', compact('posts'), compact('userList'));
      }
@@ -83,7 +82,6 @@ class HomeController extends Controller
      {   
         $user = User::Find(Auth::user()->id); 
         $user = $this->getUserDetails($user);
-        //dd($user);
         $posts = $this->getPosts($user);
         return view('pages.profile', compact('posts'), compact('user'));
      }
@@ -114,7 +112,7 @@ class HomeController extends Controller
         $posts = $this->addLocation($posts);
         $posts = $this->getLikePosts($posts,$userLikePosts);
         
-        $perPage = 6;
+        $perPage = config('constants.PaginationPageSize');
         $posts =$this->paginateArray($posts,$perPage);
         return $posts;
      }
@@ -166,7 +164,7 @@ class HomeController extends Controller
         $post = $this->getLikePosts($post,$userLikePosts);
         
         $post= array_reverse($post);
-        $perPage = 6;
+        $perPage = config('constants.PaginationPageSize');
         $posts =$this->paginateArray($post,$perPage);
         
         return view('pages.favourites',['posts' => $posts]);
@@ -302,10 +300,10 @@ class HomeController extends Controller
      {
          $arrayIndex = 0;
          $arrayIndex2 = 0;
-         if(empty($userLikePosts)){
+         if(empty($userLikePosts))
+         {
              $userLikePosts[] = array();
-             $userLikePosts[0]['postId'] = '-1';
-             //dd($userLikePosts);
+             $userLikePosts[0]['postId'] = config('constants.NoPostsExist');  
          }
          foreach ($posts as $key ) 
          {
@@ -355,7 +353,6 @@ class HomeController extends Controller
         $coordinates['latitude'] = $location['latitude'];
         $coordinates['longitude'] = $location['longitude'];
         $coordinates['name'] = $location['name'];
-        //dd($coordinates);
         return $coordinates;
     }
 }

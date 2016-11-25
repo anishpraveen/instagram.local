@@ -18,6 +18,7 @@ $(document).ready(function(){
 
         else if(anchor.attr("class")=='liked'){
             var id = anchor.attr("id");
+            var title = $(document).attr('title');
             $.ajax({
                 type: "GET",
                 url: '/like/'+id+'/unlike',
@@ -26,6 +27,14 @@ $(document).ready(function(){
                     anchor.removeClass( "liked" );
                     anchor.addClass( "like" );
                     $("#divLikeStatus"+id+">a").html('<img src="/icons/like-heart.svg" alt="like">');
+                    
+                    
+                    if(title.indexOf('Favorites')){
+                        var div = $('#Post'+id);
+                        div.fadeOut(500, function(){ 
+                            div.remove();
+                        });
+                    }
                 }.bind(this, id)
             })
         }

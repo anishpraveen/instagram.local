@@ -13,18 +13,18 @@
             <div class="panel panel-group" style="border:0;">
                 <div class="panel-heading text-left sideBar">
                     <a href="/settings">
-                        <img src="/icons/settings.svg" style="padding-right:10px;" alt="">
+                        <img src="/icons/settings.svg" class="sideBarIcons" alt="">
                         <span>General Settings</span>
                     </a>
                 </div>
                 <div class="panel-heading selectedSideBar sideBar text-left">
-                    <img src="/icons/fav.svg" style="padding-right:10px;" alt=""> Favorites
+                    <img src="/icons/fav.svg" class="sideBarIcons" alt=""> Favorites
                 </div>
                 <div class="panel-heading sideBar text-left">
                     <a href="{{ url('/logout') }}"
                         onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();" >
-                    <img src="/icons/logout.svg" alt=" Logout "> Logout
+                    <img src="/icons/logout.svg" class="sideBarIcons" alt=" Logout "> Logout
                     </a>                    
                 </div>
             </div>
@@ -79,8 +79,9 @@
 
     <script src="/js/modal.js"></script>
     <script src="/js/likePost.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     @if(!is_null($posts) && !empty($posts) && isset($posts))
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        
         <script src="/js/scroll.js"></script>
     @endif
 @endsection
