@@ -270,7 +270,14 @@ body{
         height: auto;
     }
 }
-
+#divRecomendedRow{
+    width:250px;
+}
+@media only screen and (max-width: 1200px) and (min-width: 992px){
+    #divRecomendedRow {
+        width: 200px;
+    }
+}
 
 
 /*.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close:after{

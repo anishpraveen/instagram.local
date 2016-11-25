@@ -26,7 +26,7 @@ class HomeController extends Controller
     }
 
      /**
-      * Show the profile.     
+      * Show the home page of user.     
       * @return \Illuminate\Http\Response
       */
      public function index()
@@ -76,7 +76,7 @@ class HomeController extends Controller
      }
 
      /**
-      * Show the profile.     
+      * Show the profile of current user.     
       * @return \Illuminate\Http\Response
       */
      public function profile()
@@ -89,7 +89,8 @@ class HomeController extends Controller
      }
 
      /**
-      * Show the profile of other users.     
+      * Show the profile of requested user. 
+      * @param id    
       * @return \Illuminate\Http\Response
       */
      public function viewProfile($id)
@@ -181,7 +182,8 @@ class HomeController extends Controller
      }
 
      /**
-      * Show the user search.   
+      * Show the user search.  
+      * @param value (string) 
       * @return \Illuminate\Http\Response
       */
      public function search($value)

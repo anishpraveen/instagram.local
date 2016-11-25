@@ -53,7 +53,7 @@
                         @foreach($userList as $user) 
                             <div class="left" style="float:left; padding-bottom:20px;">
                                 <div class="container-fluid">
-                                    <div class="row" style="width:250px;">
+                                    <div class="row" id="divRecomendedRow" style="">
                                         <div class="col-md-3 col-xs-4" style="padding-right:5px;">
                                             <a href="/profile/{{ $user['id'] }}">
                                                 <img src="{{ $user['profilePic'] }}" class="img-circle" alt="" height="50" width="50">      

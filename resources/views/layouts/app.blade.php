@@ -66,7 +66,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav ">
-                        @for($i=0;$i<10;$i++)
+                        @for($i=0;$i<9;$i++)
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         @endfor
                          <input id="inputSearch" class="input-group-addon" type="text" name="" value="">
