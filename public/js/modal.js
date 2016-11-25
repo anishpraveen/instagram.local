@@ -9,8 +9,8 @@
 
         var img = document.getElementById(id);
         modal.style.display = "block";
-        modalImg.src = img.src;
-        captionText.innerHTML = img.alt;
+        modalImg.src = img.alt;
+        //captionText.innerHTML = img.alt;
 
     }
 

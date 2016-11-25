@@ -33,8 +33,18 @@
             </div>
 
             <div class="panel-body postImage">                                
-                <img  src="/{{ $post['imageName'] }}"  id="{{ $post['id'] }}" onclick="modalPopup(this.id);"   alt="" 
-                class=" img-responsive myImg "  >
+                @if(substr($post['imageName'],-3)== 'png'||substr($post['imageName'],-3)=='jpg'||substr($post['imageName'],-3)=='jpeg')
+                    {{$img = Image::make($post['imageName'])}}
+                    {{$img->resize(400, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })}}
+                    {{$img->save('uploads/posts/resize/'.substr($post['imageName'],14)) }}  
+                    <img  src="/{{ 'uploads/posts/resize/'.substr($post['imageName'],14) }}"  id="{{ $post['id'] }}" onclick="modalPopup(this.id);"    
+                        class=" img-responsive myImg " alt="/{{$post['imageName']}}" >
+                @else
+                    <img  src="/{{ $post['imageName'] }}"  id="{{ $post['id'] }}" onclick="modalPopup(this.id);"   
+                        class=" img-responsive myImg " alt="/{{$post['imageName']}}" >
+                @endif
                     
             </div>
             <div class="panel-footer postFooter" style="background-color: white; word-wrap: break-word;">   
