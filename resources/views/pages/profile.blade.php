@@ -9,7 +9,7 @@
    {{ $mytime = Carbon\Carbon::now() }} 
    
 </div>
-
+    
 <div class="container">
     <div class="row">
         <!-- User Details -->
@@ -154,11 +154,13 @@
                     <img class="modal-content" id="img01">
                     <div id="caption"></div>
                 </div>
+                  
             </div>            
         </div>
         
     </div>
 </div>
+
 @endsection
 
 @section('footer')
@@ -178,44 +180,15 @@
         
         <script src="/js/scroll.js"></script>
     @endif
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.0/croppie.js"></script>
     <script>
         $(document).ready(function(){
             $("#main-input").on('change',function(){
                 $('#spanImage').text('Uploaded');
                 $('#spanImage').css('color','#ff5445');
-                var iframe = $('<iframe src="crop.html" width="600px" height="375px" ></iframe>');
-                // var dialog = $("<div></div>").append(iframe).appendTo("#dialog").dialog({
-                //     autoOpen: true,
-                //     modal: true,
-                //     resizable: false,
-                //     width: "auto",
-                //     height: "auto",
-                //     close: function () {
-                //         iframe.attr("src", "crop.html");
-                //     }
-                // });
-                dialog.style.display = "block";
-                $("#dialog").dialog({
-                    modal: true,
-                    width: 600,
-                    height:  375,
-                    open: function () { 
-                        $("#dvMap").append(iframe);
-                    },
-                    closeText: 'X',
-                    classes: {
-                        "ui-dialog": "mapDialog"
-                    },
-                    close: function( event, ui ) {
-                            var modal = document.getElementById('mapModal');
-                            modal.style.display = "none";
-                            $("#dvMap").html('');
-                            iframe.attr("src", "");
-                    }
-                });
             });
         });
     </script>
-    
+
+ 
 @endsection

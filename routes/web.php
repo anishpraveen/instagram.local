@@ -24,12 +24,13 @@ Route::get('/favourites', 'HomeController@favourites');
 Route::get('/settings', 'HomeController@settings');
 Route::get('/search/{id}', 'HomeController@search');
 
-Route::get('/crop', function () {
-    return view('crop');
-});
+
 
 Route::resource('posts', 'PostsController');
 Route::get('/posts', 'PostsController@get');
+Route::post('/posts/savePost', 'PostsController@savePostEdits');
+
+Route::get('/edit/{id}', 'PostsController@viewEditPost');
 
 Route::get('/follow/{id}', 'FollowController@follow');
 Route::get('/follow/{id}/unfollow', 'FollowController@unfollow');
@@ -46,9 +47,6 @@ Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses'
 
 // route for testing purpose only
 Route::get('/test', function(){
-    //
-    if(App\Follower::where('follower_id','=',Auth::user()->id)->where('user_id','=','5')->count())
-        dd('folol');
-    else
-        dd('no fol');
+    $post = Posts::FindorFail(68);
+    return view('crop', compact('post'));
 });

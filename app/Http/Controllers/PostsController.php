@@ -37,7 +37,7 @@ class PostsController extends Controller
         $post->imageName=$uploadFolder.$fileName;
         $post->mapId=Auth::user()->mapId;
         $post->save();
-        return redirect('/profile'); 
+        return redirect('/edit/'.$post->id);
     }
 
     /**
@@ -151,5 +151,45 @@ class PostsController extends Controller
         $coordinates['longitude'] = $location['longitude'];
         $coordinates['name'] = $location['name'];
         return $coordinates;
+    }
+
+    /**
+      * View edit post page
+      * @return \Illuminate\Http\Response
+      */
+    public function viewEditPost($id)
+    {
+        $post = Posts::FindorFail($id);
+        $user = User::Find(Auth::user()->id); 
+        if($user->id!=$post->userId)
+        {
+            return redirect('/profile');
+        }
+        return view('pages.crop', compact('post'));
+    }
+
+    /**
+      * Save edit post 
+      * @return int
+      */
+    public function savePostEdits()
+    {   
+        Request::json();
+        $user = User::Find(Auth::user()->id); 
+        $post = Post::Find(Request::get('postId'));dd($posts);
+        if($user->id!=$post->userId)
+        {
+            dd($posts);
+        }
+        $data = Request::get('base64');
+        
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+        $data = base64_decode($data);
+        //$file = 'uploads/'. uniqid() . '.png';
+        $file = Request::get('location');
+        $success = file_put_contents($file, $data);
+
+        return($success);        
     }
 }

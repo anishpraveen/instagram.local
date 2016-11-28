@@ -14,8 +14,14 @@
                     </div>
                     <div class="text-right divPostDetails" id="kkkk" style="">
                         <span id="spanPostTime" style="-moz-padding-top: 10px;padding-right:5px; ">
-                            {{  $dd->format('d, M Y') }}&nbsp&nbsp
-                            <img src="/icons/clock5.svg"  alt="">
+                            {{  $dd->format('d, M Y') }}
+                            @if($post['userId'] == Auth::user()->id)
+                                <a href="/edit/{{ $post['id'] }}" style="text-decoration: none;padding-right:5px;padding-left:5px;">
+                                    <img src="/icons/clock5.svg"  alt="">
+                                </a>
+                            @else
+                                <img src="/icons/clock5.svg"  alt="">
+                            @endif
                         </span>
                         <br>
                         <span style="padding-right:4px; color: #9a9a9a;">
@@ -23,28 +29,16 @@
                             <a class="btnShow" id="4" style="cursor: pointer; padding-right:5px;" latitude="{{ $post['latitude'] }} " longitude="{{ $post['longitude'] }} ">
                                 <img src="/icons/pin5.svg" alt="">
                             </a>
-                        </span>
-                        <!--
-                        <a href="#myMapModal" class="launch-map" data-toggle="modal"  style="padding-right:5px;">
-                            <img src="/icons/pin5.svg" alt="">
-                        </a>-->
+                        </span>                       
                     </div>
                 </div>   
             </div>
 
             <div class="panel-body postImage">                                
-                @if(substr($post['imageName'],-3)== 'png'||substr($post['imageName'],-3)=='jpg'||substr($post['imageName'],-3)=='jpeg')
-                    {{$img = Image::make($post['imageName'])}}
-                    {{$img->resize(400, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })}}
-                    {{$img->save('uploads/posts/resize/'.substr($post['imageName'],14)) }}  
-                    <img  src="/{{ 'uploads/posts/resize/'.substr($post['imageName'],14) }}"  id="{{ $post['id'] }}" onclick="modalPopup(this.id);"    
-                        class=" img-responsive myImg " alt="/{{$post['imageName']}}" >
-                @else
+                
                     <img  src="/{{ $post['imageName'] }}"  id="{{ $post['id'] }}" onclick="modalPopup(this.id);"   
                         class=" img-responsive myImg " alt="/{{$post['imageName']}}" >
-                @endif
+                
                     
             </div>
             <div class="panel-footer postFooter" style="background-color: white; word-wrap: break-word;">   
