@@ -59,7 +59,11 @@
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/home') }}">
                         <img src="/icons/instagram_logo_inner.svg" alt="" height="25px">
+                        
                        <!-- {{ config('app.name', 'Laravel') }}-->
+                    </a>
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                    <img src="/Instagram_Logo_Text.png" alt="" style="float:left;">
                     </a>
                 </div>
 
@@ -201,6 +205,14 @@
                     $("#app-navbar-collapse").fadeToggle("slow");
                     //$('#app-navbar-collapse').fadeToggle("collapse");
 			  });
+              $("#myModal").on("click",function(event){
+                  if (event.target !== this)
+                    return;
+                  modalClose();
+              });
+            //   $(".modal-content").on("click",function(event){
+            //       event.stopPropagation();
+            //   });
 		});
         document.addEventListener('keyup', function(e) {
             if (e.keyCode == 27) {

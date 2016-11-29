@@ -15,13 +15,7 @@
                     <div class="text-right divPostDetails" id="kkkk" style="">
                         <span id="spanPostTime" style="-moz-padding-top: 10px;padding-right:5px; ">
                             {{  $dd->format('d, M Y') }}
-                            @if($post['userId'] == Auth::user()->id)
-                                <a href="/edit/{{ $post['id'] }}" style="text-decoration: none;padding-right:5px;padding-left:5px;">
-                                    <img src="/icons/clock5.svg"  alt="">
-                                </a>
-                            @else
-                                <img src="/icons/clock5.svg"  alt="">
-                            @endif
+                            <img src="/icons/clock5.svg"  alt="">
                         </span>
                         <br>
                         <span style="padding-right:4px; color: #9a9a9a;">
@@ -35,11 +29,11 @@
             </div>
 
             <div class="panel-body postImage">                                
-                
-                    <img  src="/{{ $post['imageName'] }}"  id="{{ $post['id'] }}" onclick="modalPopup(this.id);"   
+                <img  src="/{{ $post['imageName'] }}"  id="{{ $post['id'] }}" onclick="modalPopup(this.id);"   
                         class=" img-responsive myImg " alt="/{{$post['imageName']}}" >
-                
-                    
+                @if($post['userId'] == Auth::user()->id)
+                    <a href="/edit/{{ $post['id'] }}"><img src="/icons/edit.svg" alt="Edit" title="Edit Post"></a>
+                @endif
             </div>
             <div class="panel-footer postFooter" style="background-color: white; word-wrap: break-word;">   
                 {{ $post['description'] }}

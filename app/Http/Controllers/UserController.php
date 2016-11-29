@@ -115,7 +115,7 @@ class UserController extends Controller
         $user->mapId = $locationId;
         $user->save();
 
-        return $locationId;
+        return $mapLocation->name;
         //return $place[2]['place_id'];
         
     }

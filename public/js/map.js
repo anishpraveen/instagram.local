@@ -85,6 +85,7 @@ $(document).ready(function () {
                             infoWindow.setContent('Location updated');
                             infoWindow.open(map, marker);
                             console.log(response);
+                            $('#spanProfileLocation').get(0).lastChild.nodeValue =(response);
                         }
                     })
                     console.log('updated');

@@ -173,16 +173,17 @@ class PostsController extends Controller
       * @return int
       */
     public function savePostEdits()
-    {   
+    {  
         Request::json();
         $user = User::Find(Auth::user()->id); 
-        $post = Post::Find(Request::get('postId'));dd($posts);
+        $post = Posts::Find(Request::get('id'));
+        $post->description = Request::get('text'); 
         if($user->id!=$post->userId)
         {
-            dd($posts);
+            return 'invalid user';
         }
         $data = Request::get('base64');
-        
+        $post->save();
         list($type, $data) = explode(';', $data);
         list(, $data)      = explode(',', $data);
         $data = base64_decode($data);

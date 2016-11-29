@@ -528,3 +528,13 @@ body{
 .sideBarIcons{
    padding-right:10px;
 }
+
+.postImage a{
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 22px;
+}
+.postImage:hover a{
+    display: inline;
+}
