@@ -46,7 +46,7 @@ Route::get('/social/redirect/{provider}',   ['as' => 'social.redirect',   'uses'
 Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses' => 'Auth\SocialController@getSocialHandle']);
 
 // route for testing purpose only
-Route::get('/test', function(){
-    $post = Posts::FindorFail(68);
+Route::get('/crop', function(){
+    //$post = Posts::FindorFail(68);
     return view('crop', compact('post'));
 });

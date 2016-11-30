@@ -5,171 +5,135 @@
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-    
+
     <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="//code.jquery.com/jquery.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.0/croppie.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.0/croppie.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css">
+    
+    <style>
+            /* Limit image width to avoid overflow the container */
+        img {
+        max-width: 100%; /* This rule is very important, please do not ignore this! */
+        }
+    </style>
 </head>
 
 <body>
     
-<div class="container">
-  <h2>Activate Modal with JavaScript</h2>
-  <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-info btn-lg" id="myBtn">Open Modal</button>
-
-  <!-- Modal -->
-  <div class="modal" id="myPostModal" role="dialog">
-    <div class="modal-dialog">
     
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-            <div id="cropArea"></div>
+    
+    <a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Trigger modal</a>
+    <div class="col-md-5" >
+        <div id="croppedResult">
             
         </div>
-        <div class="modal-footer">
-            <div class="actions col-md-6 col-md-offset-3">
-                <button class="vanilla-rotate btn btn-info col-md-5" data-deg="-90">Rotate Left</button>
-                <div class="col-md-2"></div>
-                <button class="vanilla-rotate btn btn-info col-md-5" data-deg="90">Rotate Right</button><br><br>
-                <button ng-href="#result" class="vanilla-result btn btn-primary col-md-12">Save</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+    </div>
+    <div class="modal fade" id="modal-id">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Wrap the image or canvas element with a block element (container) -->
+                            <div style="height:300px; " class="col-md-5">
+                                <img id="image" src="uploads/583bd6a6ad2ff.png">
+                            </div>
+                            
+                        </div>
+                        <br><br>
+                        
+                        <span class="input-group-btn">
+                            <button id="result" type="button" class="btn btn-default">Go!</button>
+                        </span>
+                        
+                        <a id="btnCroped">Crop</a>
+                        <div class="row avatar-btns">
+                            <div class="col-md-9">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary rotate" data-method="rotate" data-option="-90" title="Rotate -90 degrees">Rotate Left</button>
+                                <button type="button" class="btn btn-primary rotate" data-method="rotate" data-option="-15">-15deg</button>
+                                <button type="button" class="btn btn-primary rotate" data-method="rotate" data-option="-30">-30deg</button>
+                                <button type="button" class="btn btn-primary rotate" data-method="rotate" data-option="-45">-45deg</button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary rotate" data-method="rotate" data-option="90" title="Rotate 90 degrees">Rotate Right</button>
+                                <button type="button" class="btn btn-primary rotate" data-method="rotate" data-option="15">15deg</button>
+                                <button type="button" class="btn btn-primary rotate" data-method="rotate" data-option="30">30deg</button>
+                                <button type="button" class="btn btn-primary rotate" data-method="rotate" data-option="45">45deg</button>
+                            </div>
+                            </div>
+                            <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary btn-block avatar-save">Done</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
             </div>
         </div>
-      </div>
-      
     </div>
-  </div>
-  
-</div>
-<img src="" id="result" style="display:true;" height="216" alt="">
-<div id="divOut">
     
-</div>
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  <script src="http://lazer.am/logobar/js/croppie.js"></script>
-  
-  <div id="croppie" class="modal">
-	<div class="modal-content">
-  	<div id="croppieHolder"></div>
-    <div id="crtest">test</div>
-    <button ng-href="#result" class="basic-result btn btn-primary col-md-6">Save</button>
-  </div>
-</div>
-  <button id="open">open</button>
-  <script>
-     function demoVanilla() {
-		var vEl = document.getElementById('croppieHolder'),
-			vanilla = new Croppie(vEl, {
-			viewport: { width: 100, height: 100 },
-			boundary: { width: 300, height: 300 },
-			showZoomer: false,
-            enableOrientation: true
-		});
-        
-		vanilla.bind({
-            url: 'uploads/posts/582ac4516e8a7.png',
-            orientation: 4,
-            zoom: 0
-        });
-        vanilla.result({
-				type: 'base64'
-			}).then(function (base64) {
-                console.log('out');
-				console.log(base64);
-                var image = document.getElementById("result");
-                // /image.src = blob;
-                $('#divOut').html(base64);
-			});
-        vEl.addEventListener('update', function (ev) {
-        	console.log('vanilla update', ev);
-        });
-        
-		document.querySelector('.basic-result').addEventListener('click', function (ev) {
-			vanilla.result({
-				type: 'base64'
-			}).then(function (blob) {
-                console.log('out');
-				console.log(blob);
-                var image = document.getElementById("result");
-                // /image.src = blob;
-                $('#divOut').html(blob);
-			});
-		});
 
-		$('.vanilla-rotate').on('click', function(ev) {
-			vanilla.rotate(parseInt($(this).data('deg')));
-		});
-	}
-    $(document).ready(function(){
-        $('#open').on('click', function(){
-            $('#croppie').openModal();
-            demoVanilla();
-            console.log('demo');
-        });
-    });
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js"></script>
     
-  </script>
-<!--<script>
-    $(document).ready(function(){
-        $("#myBtn").click(function(){
-            $("#myPostModal").modal();
-            
-            cropImage();
-        });
-        
-    });
-    function cropImage() {
-        var imageLocation = 'uploads/posts/582ac4516e8a7.png';
-        var vEl = document.getElementById('cropArea');
-        console.log('new inst');
-            vanilla = new Croppie(vEl, {
-            viewport: { width: 400, height: 216 },
-            boundary: { width: 600, height: 400 },
-            showZoomer: true,
-            enableOrientation: true,
-            mouseWheelZoom: true
-        });
-        vanilla.bind({
-            url: 'uploads/posts/582ac4516e8a7.png'
-        });
-        vEl.addEventListener('update', function (ev) {
-            //console.log('vanilla update', ev);
-        });
-        document.querySelector('.vanilla-result').addEventListener('click', function (ev) {
-            vanilla.result({
-                type: 'base64'
-            }).then(function (blob) {
-                var image = document.getElementById("result");
-                image.src = blob;
+    <script>
+        $('#image').cropper({
+            aspectRatio: 16 / 9,
+            modal: true,
+            crop: function(e) {
+                // Output the result data for cropping image.
+                // console.log(e.x);
+                // console.log(e.y);
+                // console.log(e.width);
+                // console.log(e.height);
+                // console.log(e.rotate);
+                // console.log(e.scaleX);
+                // console.log(e.scaleY);
                 
+            }
+        });
+        $(document).ready(function () {
+            $('body').on('click', '#result', function () {
+                console.log('output');
+                var croppedCanvas;
+                var $image = $('#image');
+                //console.log($image);
+                var canvasSize = { width: 200, height: 200 };
+                var imageData = $image.cropper("getCroppedCanvas", canvasSize).toDataURL();
+                croppedCanvas = $image.cropper('getCroppedCanvas');
+                var $avatarPreview = $('.preview-new ');
+                $('#croppedResult').html('<img src="' + croppedCanvas.toDataURL() + '">');
+            });
+            $('body').on('click', '.rotate', function (event) {
+                var option = $(event.target).data('option');
+                $('#image').cropper('rotate', option);
             });
         });
+        $('#btnCroped').click(function () {
 
-        $('.vanilla-rotate').on('click', function(ev) {
-            vanilla.rotate(parseInt($(this).data('deg')));
+
+            var croppedCanvas;
+            var $image = $('#image');
+            //console.log($image);
+            var canvasSize = { width: 200, height: 200 };
+            var imageData = $image.cropper("getCroppedCanvas", canvasSize).toDataURL();
+            croppedCanvas = $image.cropper('getCroppedCanvas');
+            var $avatarPreview = $('.preview-new ');
+            $('#croppedResult').html('<img src="' + croppedCanvas.toDataURL() + '">');
         });
-        $('#myPostModal').on('hidden.bs.modal', function (e) {
-            console.log('close');
-            vanilla.destroy();
-        });
-    }
         
-</script>-->
-
-
+    </script>
 </body>
 
 </html>
