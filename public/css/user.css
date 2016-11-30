@@ -316,6 +316,13 @@ body{
     color: rgba(35, 35, 35, 1);
     text-align: left;
 }
+.postFooter{
+    background-color: white; 
+    overflow:hidden;
+    text-overflow:ellipsis; 
+    /*height:60px;*/
+    word-break: break-all;
+}
 
 .selectedSideBar{
     background-color: #ff9f41;

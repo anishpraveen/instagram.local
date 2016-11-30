@@ -13,6 +13,16 @@ use Auth;
 class PostsController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Add new post of user.
      *
      * @return \Illuminate\Http\Response
