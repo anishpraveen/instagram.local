@@ -264,19 +264,9 @@ body{
     
 }
 
-@media only screen and (max-width: 766px){
-    .img-responsive {
-        width: auto;
-        height: auto;
-    }
-}
+
 #divRecomendedRow{
     width:250px;
-}
-@media only screen and (max-width: 1200px) and (min-width: 992px){
-    #divRecomendedRow {
-        width: 200px;
-    }
 }
 
 
@@ -308,7 +298,7 @@ body{
 .postsUserName:hover{
     color: #ed5a04;    
     text-decoration: none;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 .postFooter{
     font-family: Tahoma;
@@ -320,8 +310,24 @@ body{
     background-color: white; 
     overflow:hidden;
     text-overflow:ellipsis; 
-    /*height:60px;*/
+    min-height:65px;
     word-break: break-all;
+}
+.panel{
+    border-width:0;
+}
+.posts-group{
+    box-shadow: none;
+    transition: box-shadow 1s ease;    
+}
+.posts-group:hover{
+    /*border-width:100px;
+    border-color: red;
+    border-style: solid;*/
+    /*border: 1px solid black;*/
+   box-shadow: 1px 1px 10px #888888;
+   /*transition: border-color 10s ease;    */
+   transition: box-shadow 1s ease;    
 }
 
 .selectedSideBar{
@@ -544,4 +550,47 @@ body{
 }
 .postImage:hover a{
     display: inline;
+}
+
+.userNameSearch{
+    text-decoration:none; line-height: 20px; font-family: Tahoma;font-size: 14px; color:#5e5e5e;
+}
+.userLocationSearch{
+    font-family: Tahoma;font-size: 12px;color: #999999; line-height: 20px; text-decoration:none;
+}
+
+.arrow {
+  
+  position: relative;
+  top: -6px;
+  right: -250px;
+  margin-left:-20px;
+  width: 40px;
+  height: 40px;
+  background-image: url('/icons/left-arrow-angle.svg');
+  background-size: contain;
+  /*transform:rotate(180deg);*/
+  animation: bounce 2s infinite;
+}
+
+
+@keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
+ 40% {transform: translateX(30px);}
+ 60% {transform: translateX(15px);}
+}
+
+@media only screen and (max-width: 766px){
+    .img-responsive {
+        width: auto;
+        height: auto;
+    }
+}
+@media only screen and (max-width: 1200px) and (min-width: 992px){
+    #divRecomendedRow {
+        width: 200px;
+    }
+    .arrow {
+        right: -200px;
+    }
 }

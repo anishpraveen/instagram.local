@@ -75,6 +75,10 @@ class SocialController extends Controller
                 $newSocialUser->profilePic=$user->avatar;
                 $newSocialUser->password = bcrypt(str_random(16));
                 $newSocialUser->remember_token = str_random(64);
+                if(empty($user['gender']))
+                {
+                    $user['gender'] = 'male';
+                }
                 $newSocialUser->gender=$user['gender'];
                 $newSocialUser->save();               
                 $socialUser = $newSocialUser;

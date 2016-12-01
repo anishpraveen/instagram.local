@@ -83,15 +83,18 @@ class RegisterController extends Controller
             return false;
         }
         //Uploading file
-        if (Request::file('image')->isValid()) 
+        if(!empty(Request::file('image')))
         {
-            $destinationPath = public_path(config('constants.profilePicPath'));
-            $extension = Request::file('image')->getClientOriginalExtension();
-            $fileName = uniqid().'.'.$extension;
+            if (Request::file('image')->isValid()) 
+            {
+                $destinationPath = public_path(config('constants.profilePicPath'));
+                $extension = Request::file('image')->getClientOriginalExtension();
+                $fileName = uniqid().'.'.$extension;
 
-            Request::file('image')->move($destinationPath, $fileName);
+                Request::file('image')->move($destinationPath, $fileName);
+            }
+            $user->profilePic='/'.config('constants.profilePicPath').''.$fileName;
         }
-        
         $user=User::create([
             'name' => $data['name'],
             'lastname' => $data['lastname'],
@@ -102,7 +105,7 @@ class RegisterController extends Controller
         $user->birthday = $DOB;
         $user->gender = $data['gender'];
         
-        $user->profilePic='/'.config('constants.profilePicPath').''.$fileName;
+        
         $user->save();
 
         $follow = new Follower;

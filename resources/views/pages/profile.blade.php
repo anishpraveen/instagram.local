@@ -76,7 +76,7 @@
                                     <div class="row">
                                         <div class="col-md-5 col-sm-5 col-xs-5 divImgProfileBar" >
                                             <label id="">
-                                                <input name="image" type="file" id="main-input" accept="image/*">
+                                                <input name="image" type="file" id="main-input" accept="image/x-png,image/gif,image/jpeg">
                                                 <img src="/icons/camera.svg" alt="" class="pointer">
                                             </label> 
                                         </div>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-md-12 " style="background-color:white; height:70px;padding-left:0;">
                                 <div class="col-md-10 col-sm-10 col-xs-7" style="padding-left:0;" >
-                                    <input id="description" type="textarea" class="form-control  " name="description" value="{{ old('description') }}" required placeholder="Type here"
+                                    <input id="description" type="textarea" class="form-control  " name="description" value="{{ old('description') }}" maxlength="80"  required placeholder="Type here"
                                      style="background-color:white; border:0;height:70px"
                                     >                                
                                 </div>
@@ -174,6 +174,9 @@
         <script src="/js/time.js"></script>
     @endif
     <script src="/js/modal.js"></script>
+    <script>
+        
+    </script>
     <script src="/js/likePost.js"></script>
     <script src="/js/follow.js"></script>
     @if(!is_null($posts) && !empty($posts) && isset($posts))

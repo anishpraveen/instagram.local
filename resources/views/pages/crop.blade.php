@@ -50,7 +50,7 @@
                     </a>
                 </label>
                 <div class="col-md-8">
-                    <input type="text" id="inputDescription" name="description" class="form-control" disabled value="{{$post->description }}"> 
+                    <input type="text" id="inputDescription" name="description" class="form-control" disabled value="{{$post->description }}" maxlength="80"> 
                 </div>
                 
             </div>

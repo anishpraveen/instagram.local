@@ -78,6 +78,9 @@
     <script src="/js/map.js"></script>
 
     <script src="/js/modal.js"></script>
+    <script>
+        fav = true;
+    </script>
     <script src="/js/likePost.js">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     @if(!is_null($posts) && !empty($posts) && isset($posts))

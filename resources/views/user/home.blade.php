@@ -10,7 +10,7 @@
             <div class="row" id="divPosts">                 
                 <!-- Previous Posts -->
                
-                @if(!is_null($posts))
+                @if(!empty($posts[0]))
                     <div class="scroll">
                         @include('pages._posts')
                         {{$posts->setPath('home')->links()}}
@@ -18,17 +18,18 @@
                 @else
                      <div class="col-md-6 ">
                             <div class="panel panel-group">
-                                <div class="panel-heading postsUserName">                                         
-                                    Follow some one 
+                                <div class="panel-heading postsUserName emptyPost">                                         
+                                    Its bit lonely here.
                                 </div>
 
-                                <div class="panel-body postImage">                                
-                                    
+                                <div class="panel-body postImage" style="padding-left:10px;">                                
+                                    Follow some one with posts.
                                 </div>
                                 <div class="panel-footer" style="background-color: white; word-wrap: break-word;">   
                                    
                                 </div>
                             </div>
+                            
                         </div>
                 @endif
                 
@@ -42,7 +43,7 @@
                 
             </div>            
         </div>
-
+        <div class="laravelInfo hidden">{{$arrowTrue = true}}</div>
          <!-- Recommended List -->
         <div class="col-md-3 ">
             <div class="panel panel-group">
@@ -60,27 +61,33 @@
                                             </a>                      
                                         </div>                                        
                                         <div class="col-md-6 col-xs-5" style="padding-left:15px; word-wrap: break-word;">
-                                            <a href="/profile/{{ $user['id'] }}" style="text-decoration:none; line-height: 20px; font-family: Tahoma;font-size: 14px; color:#5e5e5e;">
+                                            <a href="/profile/{{ $user['id'] }}" class="userNameSearch">
                                                 {{ $user['name'] }}
                                             </a>
                                             <br>
-                                            <a style="font-family: Tahoma;font-size: 12px;color: #999999; line-height: 20px; text-decoration:none;">
-                                                {{ $user['location'] }}
+                                            
+                                            <a class="userLocationSearch">
+                                                {{ strtok($user['location'], ',') }}
                                             </a>
                                         </div>
                                         <div class="col-md-1">                                                    
                                         </div>
-                                        <div class="col-md-3  col-xs-3 " id="{{ $user['id'] }}"  style="float:right;">                                                       
+                                        <div class="col-md-3  col-xs-3" id="{{ $user['id'] }}"  style="float:right;">                                                       
                                             @if($user['follow'])  
-                                                <a onclick="unfollow({{ $user['id'] }});" >                                       
-                                                    <img src="/icons/followers.svg" style="float:right;" alt="following">
+                                                <a onclick="unfollow({{ $user['id'] }});" title="Stop following">                                       
+                                                    <img src="/icons/followers.svg" class="pointer" style="float:right;" alt="following">
                                                 </a>
                                             @else
-                                                <a  onclick="follow({{ $user['id'] }});" >  
-                                                    <img src="/icons/follow.svg" style="float:right;" alt="follow">
+                                                <a  onclick="follow({{ $user['id'] }});" title="Follow me">  
+                                                    <img src="/icons/follow.svg" class="pointer" style="float:right;" alt="follow">
                                                 </a>
                                             @endif                                                
                                         </div>
+                                        
+                                        @if(empty($posts[0]) && $arrowTrue && !$user['follow'])
+                                            <div class="arrow bounce" title="Follow user"></div>  
+                                            <div class="laravelInfo hidden">{{$arrowTrue = false}}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>       
@@ -112,7 +119,7 @@
                 url: '/follow/'+$id,
                 data: "",
                 success: function(response) {
-                    $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg" style="float:right;" alt=""></a>'   
+                    $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg" class="pointer" style="float:right;" alt=""></a>'   
                     document.getElementById($id).innerHTML = $html;                
                     $.ajax({
                         type: "GET",
@@ -134,7 +141,7 @@
                 data: "",
                 success: function(response) {
                     
-                    $html = '<a  onclick="follow('+$id+');" ><img src="/icons/follow.svg" style="float:right;" alt=""></a>'   
+                    $html = '<a  onclick="follow('+$id+');" ><img src="/icons/follow.svg" class="pointer" style="float:right;" alt=""></a>'   
                     document.getElementById($id).innerHTML = $html;
                     $.ajax({
                         type: "GET",

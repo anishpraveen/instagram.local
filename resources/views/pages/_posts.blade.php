@@ -1,6 +1,6 @@
  @foreach($posts as $post) 
     <div class="col-md-6 col-sm-6 col-xs-12" id="Post{{ $post['id'] }}">
-        <div class="panel panel-group" style="border-width:0;" >
+        <div class="panel panel-group posts-group" style="" >
             <div class="panel-heading">        
                 <div class="hidden laravelInfo1" id="lInfo">
                     {{ $user=App\User::where('id', '=', $post['userId'])->select('name','profilePic')->get() }}
@@ -10,7 +10,7 @@
                 <div class="row ">
                     <div class="col-md-8 col-sm-8">
                         <img src="{{ $user[0]['profilePic'] }}" alt=""  class="img-circle" height="45" width="45">                                
-                         <a href="/profile/{{ $post['userId'] }}" class="postsUserName " >{{ $user[0]['name'] }}</a>
+                         <a href="/profile/{{ $post['userId'] }}" class="postsUserName pointer" >{{ $user[0]['name'] }}</a>
                     </div>
                     <div class="text-right divPostDetails" id="kkkk" style="">
                         <span id="spanPostTime" style="-moz-padding-top: 10px;padding-right:5px; ">
@@ -35,20 +35,25 @@
                     <a href="/edit/{{ $post['id'] }}"><img src="/icons/edit.svg" alt="Edit" title="Edit Post"></a>
                 @endif
             </div>
-            <div class="panel-footer postFooter" style="background-color: white; word-wrap: break-word;">   
-                {{ $post['description'] }}
-                <div id="divLikeStatus{{ $post['id'] }}" class="divLikeStatus"  style="float:right;">
-                    @if($post['like'])  
-                        <a id="{{ $post['id'] }}" class="liked">                                       
-                            <img src="/icons/liked.svg" alt="liked">
-                        </a>
-                    @else
-                        <a id="{{ $post['id'] }}" class="like">  
-                            <img src="/icons/like-heart.svg" alt="like">
-                        </a>
-                    @endif 
-                    
-                </div>
+            <div class="panel-footer postFooter container-fluid" style="background-color: white; ">   
+                <span class="col-md-10" style="background-color: white;  ">
+                    {{ $post['description'] }}
+                    </span>
+                    <span id="divLikeStatus{{ $post['id'] }}" class="divLikeStatus col-md-1"  style="float:right; padding-right:1vw;">
+                        @if($post['like'])  
+                            <a id="{{ $post['id'] }}" class="liked">                                       
+                                <img src="/icons/liked.svg" alt="liked">
+                            </a>
+                        @else
+                            <a id="{{ $post['id'] }}" class="like">  
+                                <img src="/icons/like-heart.svg" alt="like">
+                            </a>
+                        @endif 
+                        
+                    </span>
+                
+                
+                
             </div>
         </div>
     </div>    

@@ -22,7 +22,7 @@
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/user.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proxima+Nova" type="text/css" />-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tahoma" type="text/css" />
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tahoma" type="text/css" />-->
     <link href="/css/pusher-chat-widget.css" rel="stylesheet" />
     
     <!--[if lt IE 9]>
@@ -223,6 +223,7 @@
             var modal = document.getElementById('myModal');
             modal.style.display = "none";
         }
+        var fav = false;
     </script>
 
 </body>

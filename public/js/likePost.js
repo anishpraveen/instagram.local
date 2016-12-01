@@ -1,5 +1,5 @@
 $(document).ready(function(){            
-   $('body').on('click', 'div.divLikeStatus', function(){                
+   $('body').on('click', 'span.divLikeStatus', function(){                
         var id = this.id;
         var anchor = $( this ).find( "a" );
         if(anchor.attr("class")=='like'){
@@ -27,9 +27,12 @@ $(document).ready(function(){
                     anchor.removeClass( "liked" );
                     anchor.addClass( "like" );
                     $("#divLikeStatus"+id+">a").html('<img src="/icons/like-heart.svg" alt="like">');
-                    
-                    
-                    if(title.indexOf('Favorites')){
+                   var url = [ location.pathname].join('');
+                    console.log(url);
+                    if(url == '/favourites')
+                    //     console.log('false');
+                    // if(title.indexOf('Favorites'))
+                    {
                         var div = $('#Post'+id);
                         div.fadeOut(500, function(){ 
                             div.remove();
