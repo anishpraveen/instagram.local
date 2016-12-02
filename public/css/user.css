@@ -417,6 +417,7 @@ body{
     font-size: 23px;
     color: #5b5b5b;
     text-align: center;
+    text-transform: capitalize;
 }
 #spanProfileLocation{
     font-family: ProximaNova-Regular;
@@ -553,11 +554,46 @@ body{
 }
 
 .userNameSearch{
-    text-decoration:none; line-height: 20px; font-family: Tahoma;font-size: 14px; color:#5e5e5e;
+    text-decoration:none; 
+    line-height: 20px; 
+    font-family: Tahoma;
+    text-transform: capitalize;
+    font-size: 14px; 
+    color:#5e5e5e;
+}
+.userNameSearch:hover{
+    text-decoration:none;
+    color: #5e5e5e; 
 }
 .userLocationSearch{
-    font-family: Tahoma;font-size: 12px;color: #999999; line-height: 20px; text-decoration:none;
+    
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #999999; 
+    line-height: 20px; 
+    text-decoration:none;
 }
+.userLocationSearch:hover{
+    text-decoration:none;
+    color: #999999; 
+}
+
+#profileAvatar a{
+    position: relative;
+    top: -30px;
+    right: 105px;
+    opacity: .5;
+    /*z-index: 99;*/
+    display: none;
+}
+#profileAvatar:hover a{
+    display: inline;
+}
+/*#avatar:hover{
+   
+    opacity: .9;
+}*/
+
 
 .arrow {
   

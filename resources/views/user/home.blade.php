@@ -9,8 +9,8 @@
          <div class="col-md-9 ">            
             <div class="row" id="divPosts">                 
                 <!-- Previous Posts -->
-               
-                @if(!empty($posts[0]))
+              
+                @if(!$posts->isEmpty())
                     <div class="scroll">
                         @include('pages._posts')
                         {{$posts->setPath('home')->links()}}

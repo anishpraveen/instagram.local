@@ -19,3 +19,30 @@ function previewFile(input) {
 
 //previewFile();  //calls the function named previewFile()
 
+function editProfilePic(input){
+    previewFile(input);
+    //$('#imgAddAvatar').addClass("hidden");
+    // $("#dialog").dialog({          
+    //         modal: true,            
+    //         width: 600,
+    //         height:  380,            
+    //         open: function () {
+    //             $('#avatar').cropper({
+    //                 aspectRatio: 16 / 9,
+    //                 modal: true,
+    //                 crop: function(e) {
+    //                     // Output the result data for cropping image.
+    //                     console.log(e.x);
+    //                     console.log(e.y);
+    //                     // console.log(e.width);
+    //                     // console.log(e.height);
+    //                     // console.log(e.rotate);
+    //                     // console.log(e.scaleX);
+    //                     // console.log(e.scaleY);
+                        
+    //                 }
+    //             });
+    //          }
+    //     });
+    
+}

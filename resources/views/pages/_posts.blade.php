@@ -14,7 +14,7 @@
                     </div>
                     <div class="text-right divPostDetails" id="kkkk" style="">
                         <span id="spanPostTime" style="-moz-padding-top: 10px;padding-right:5px; ">
-                            {{  $dd->format('d, M Y') }}
+                            {{  $dd->format('d, M Y') }}&nbsp&nbsp 
                             <img src="/icons/clock5.svg"  alt="">
                         </span>
                         <br>

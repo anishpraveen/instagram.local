@@ -43,10 +43,17 @@
                         
                         <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">                           
                             <div class="col-md-6 col-md-offset-1">
-                                <div style="postion: relative; ">
-                                    <label class="btn ">
-                                    <input name="image" type="file" accept="image/*" id="main-input" onchange="previewFile(this);"><img src="/icons/add_button.svg" class="addButton"></label>
-                                    <img src="{{ Auth::user()->profilePic }} " class="imgCircle" width="95" height="95" style=" border-radius: 50%;" id="avatar" alt="Profile picture">
+                                <div  style="postion: relative; ">
+                                    <div id="profileAvatar" >
+                                        <label class="btn ">
+                                    <input name="image" type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg" id="main-input" onchange="editProfilePic(this);"><img id="imgAddAvatar" src="/icons/add_button.svg" class="addButton hidden"></label>
+                                    
+                                        <img src="{{ Auth::user()->profilePic }} " class="imgCircle" width="95" height="95" 
+                                            style=" border-radius: 50%;" id="avatar" alt="Profile picture">
+                                        <!--<a class="editAvatar hidden" style=""> 
+                                            <img src="/icons/edit.svg" alt="Edit" title="Edit Avatar" height="25" style=" transform: scaleX(-1);">
+                                        </a>-->
+                                    </div>
                                 </div>
                                 @if ($errors->has('image'))
                                     <span class="help-block">
@@ -155,8 +162,11 @@
         $("#enableEdit").click(function(event){
             event.preventDefault();
             $('.inputFieldsSettings').prop("disabled", false); // Element(s) are now enabled.
+            $('#imgAddAvatar').removeClass("hidden");
             $('.edit').removeClass("hidden");
+            $('.editAvatar').removeClass("hidden");
             $("#password").val("");
-        });         
+        });   
+        
     </script>
 @endsection
