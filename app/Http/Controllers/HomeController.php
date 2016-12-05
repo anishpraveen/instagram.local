@@ -55,18 +55,18 @@ class HomeController extends Controller
         }       
         
         // Get suggestion list
-        $userList = $this->getUserRecomendation();
+        $userList = $user->getUserRecomendation();
 
         if(is_null($posts))
         {
             return view('user.home', compact('posts'), compact('userList'));
         }
         $posts = array_values(array_sort($posts, function ($value) {
-            return $value['publishedOn'];
-        }));
+                return $value['publishedOn'];
+            }));
 
-        $posts = $this->addLocation($posts);
-        $posts = $this->getLikePosts($posts,$userLikePosts);
+        $posts = Posts::addLocation($posts);
+        $posts = Posts::getLikePosts($posts,$userLikePosts);
         
         $posts= array_reverse($posts);
         $perPage = config('constants.PaginationPageSize');
@@ -81,7 +81,7 @@ class HomeController extends Controller
      public function profile()
      {   
         $user = User::Find(Auth::user()->id); 
-        $user = $this->getUserDetails($user);
+        $user = $user->getUserDetails($user);
         $posts = $this->getPosts($user);
         return view('pages.profile', compact('posts'), compact('user'));
      }
@@ -94,46 +94,10 @@ class HomeController extends Controller
      public function viewProfile($id)
      {   
         $user = User::Find($id);
-        $user = $this->getUserDetails($user);
+        $user = $user->getUserDetails($user);
+        $currentUser = User::Find(Auth::user()->id); 
         $posts = $this->getPosts($user);
         return view('pages.profile', compact('posts'), compact('user'));
-     }
-
-     /**
-      * Get the posts of user.     
-      * @return posts (paginated posts array)
-      */
-     public function getPosts($user)
-     {   
-        $posts = $user->posts->toArray(); 
-        $posts= array_reverse($posts);
-        
-        $userLikePosts = $user->like->toArray();
-        $posts = $this->addLocation($posts);
-        $posts = $this->getLikePosts($posts,$userLikePosts);
-        
-        $perPage = config('constants.PaginationPageSize');
-        $posts =$this->paginateArray($posts,$perPage);
-        return $posts;
-     }
-
-     /**
-      * Get the details of user.  
-      * @param user   
-      * @return user (user array filled with location,follower,follow details)
-      */
-     public function getUserDetails($user)
-     {
-         $coordinates = $this->getLocation($user->mapId);
-         $user['latitude'] = $coordinates['latitude'];
-         $user['longitude'] = $coordinates['longitude'];
-         $user['locationName'] = $coordinates['name'];
-         $follow = $user->follow->toArray();
-         $followers = $user->followers->toArray();
-         $user['follow'] = count($follow);
-         $user['followers'] = count($followers);
-
-         return $user;
      }
 
      /**
@@ -158,10 +122,10 @@ class HomeController extends Controller
 
         $post = array_values(array_sort($post, function ($value) {
             return $value['publishedOn'];
-        }));
+            }));
         $userLikePosts = $user->like->toArray();
-        $post = $this->addLocation($post);
-        $post = $this->getLikePosts($post,$userLikePosts);
+        $post = Posts::addLocation($post);
+        $post = Posts::getLikePosts($post,$userLikePosts);
         
         $post= array_reverse($post);
         $perPage = config('constants.PaginationPageSize');
@@ -195,79 +159,11 @@ class HomeController extends Controller
                             ->where('lastname','like','%'.$name[1].'%')
                             ->orWhere('lastname','like','%'.$name[0].'%')
                             ->get()->toArray();
-        
-         $userList = $this->getFollowStatus($userList);    
+         $user = User::Find(Auth::user()->id);
+         $userList = User::getFollowStatus($userList);    
          return view('pages.search', compact('userList'));
      }
 
-     /**
-      * Get the user follow status 
-      * @param  $userList (array of users)
-      * @return $userList (follow field added)
-      */
-     public function getFollowStatus($userList)
-     {
-        $user = User::Find(Auth::user()->id);
-        $userFollow = $user->follow->toArray();
-        $arrayIndex = 0;
-        $idList = array();
-        foreach ($userFollow as $key) 
-        {
-            $idList[] =  $userFollow[$arrayIndex]['user_id'];
-            $arrayIndex++;
-        }
-        
-        $arrayIndex = 0;
-        //Follow status of each user in the suggestion list 
-        foreach ($userList as $key ) 
-        {   
-            $coordinates = $this->getLocation($key['mapId']);
-            $userList[$arrayIndex]['location'] = $coordinates['name']; 
-            if(array_search($userList[$arrayIndex]['id'],$idList))
-            {
-                $userList[$arrayIndex]['follow'] = true;
-            }
-            else
-            {
-                 $userList[$arrayIndex]['follow'] = false;
-            }
-             $arrayIndex++;
-        }
-        $arrayIndex = 0;
-        //Follow status of first user in the follow list 
-        if(isset($idList) && !empty($idList[0]))
-        {
-            foreach ($userList as $key ) 
-            {
-                if($userList[$arrayIndex]['id']==$idList[0])
-                {
-                    $userList[$arrayIndex]['follow'] = true;
-                }
-                $arrayIndex++;
-            }
-        }
-
-        return $userList;
-     }
-
-     /**
-      * Get User Recomendation List
-      * @return userList array
-      */
-     public function getUserRecomendation()
-     {   
-        $userDisplayCount = 5;
-        // get fixed list 
-        //$userList = User::select('*')->where('id','<>',Auth::user()->id)->limit($userDisplayCount)->offset(0)->get()->toArray(); 
-        
-        //get random users
-        $userList = User::orderByRaw('RAND()')->take($userDisplayCount)->where('id','<>',Auth::user()->id)->get()->toArray(); 
-        $userList = $this->getFollowStatus($userList);
-        
-        return $userList;
-     }
-
-     
      /**
       * Paginate Array   
       * @return paginated object
@@ -293,66 +189,23 @@ class HomeController extends Controller
      }
 
      /**
-      * Get posts and check if its liked or not
-      * @return array of items(posts)
+      * Get the posts of user.     
+      * @return posts (paginated posts array)
       */
-     public function getLikePosts($posts,$userLikePosts)
-     {
-         $arrayIndex = 0;
-         $arrayIndex2 = 0;
-         if(empty($userLikePosts))
-         {
-             $userLikePosts[] = array();
-             $userLikePosts[0]['postId'] = config('constants.NoPostsExist');  
-         }
-         foreach ($posts as $key ) 
-         {
-             foreach ($userLikePosts as $key2) 
-             {
-                 if($key2['postId'] == $key['id'])
-                 {
-                     $posts[$arrayIndex]['like'] = true;
-                     break;
-                 }
-                 else
-                 {
-                     $posts[$arrayIndex]['like'] = false;
-                 }
-             }
-             $arrayIndex++;
-         }
-
-         return $posts;
+     public function getPosts($user)
+     {   
+        $posts = $user->posts->toArray(); 
+        $posts= array_reverse($posts);
+        $currentUser = User::Find(Auth::user()->id);
+        $userLikePosts = $currentUser->like->toArray();
+        $posts = Posts::addLocation($posts);
+        $posts = Posts::getLikePosts($posts,$userLikePosts);
+        
+        $perPage = config('constants.PaginationPageSize');
+        $posts =$this->paginateArray($posts,$perPage);
+        return $posts;
      }
 
-     /**
-      * Add location coordinates to given posts list
-      * @return array of items(posts)
-      */
-    public function addLocation($posts)
-    {
-        $arrayIndex = 0; 
-        foreach ($posts as $key) 
-        {
-            $coordinates =$this->getLocation($posts[$arrayIndex]['mapId']);
-            $posts[$arrayIndex]['latitude'] = $coordinates['latitude'];
-            $posts[$arrayIndex]['longitude'] = $coordinates['longitude'];
-            $posts[$arrayIndex]['locationName'] = $coordinates['name'];
-            $arrayIndex++;
-        }
-       return ($posts);
-    }
-
-    /**
-      * Get coordinates of given id
-      * @return array of coordinates
-      */
-    public function getLocation($id)
-    {
-        $location = Map::Find($id);
-        $coordinates['latitude'] = $location['latitude'];
-        $coordinates['longitude'] = $location['longitude'];
-        $coordinates['name'] = $location['name'];
-        return $coordinates;
-    }
+     
+     
 }

@@ -31,7 +31,6 @@ class SocialController extends Controller
 
     /**
      * Get social details 
-     * 
      *
      * @return 
      */

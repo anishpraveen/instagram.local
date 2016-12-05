@@ -12,4 +12,17 @@ class Map extends Model
         'longitude'
     ];
     protected $table = 'mapLocation';
+
+    /**
+      * Get coordinates of given id
+      * @return array of coordinates
+      */
+    public static function getLocation($id)
+    {
+        $location = Map::Find($id);
+        $coordinates['latitude'] = $location['latitude'];
+        $coordinates['longitude'] = $location['longitude'];
+        $coordinates['name'] = $location['name'];
+        return $coordinates;
+    }
 }
