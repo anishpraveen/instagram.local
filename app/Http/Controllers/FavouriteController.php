@@ -17,7 +17,7 @@ use Response;
 class FavouriteController extends Controller
 {
     /**
-     * like a user with id = @param.
+     * like a post with id = @param.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -35,7 +35,7 @@ class FavouriteController extends Controller
     }
     
     /**
-     * Unlike a user with id = @param.
+     * Unlike a post with id = @param.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

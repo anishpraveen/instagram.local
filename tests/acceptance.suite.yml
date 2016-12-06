@@ -1,0 +1,26 @@
+# Codeception Test Suite Configuration
+#
+# Suite for acceptance tests.
+# Perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - PhpBrowser:
+            url: http://anish.com
+        - \Helper\Acceptance
+
+env:
+    browser:
+        modules:
+            disabled:
+              - PhpBrowser
+            enabled:
+                - WebDriver:
+                    url: http://anish.com
+                    browser: phantom
+                    window_size: 1024x768
+                    diskCache: true
+                    maxDiskCacheSize: 10000
+                - \Helper\Acceptance
