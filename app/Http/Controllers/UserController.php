@@ -82,8 +82,8 @@ class UserController extends Controller
         $data = json_decode($json, TRUE);
         $place = null;
         $locationId = null;
-        $selectPlaceIndex =2;
-        $selectResultPlace = 0;
+        $selectPlaceIndex =config('constants.placeIndex');
+        $selectResultPlace = config('constants.firstIndex');
         $user = User::Find(Auth::user()->id);
         foreach ($data as $key) {
             $place = $key;

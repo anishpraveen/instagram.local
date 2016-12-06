@@ -41,8 +41,8 @@ class FollowController extends Controller
         $follow->follower_id = Auth::user()->id;
         
         $follow = Follower::where('user_id', $userExist->id)
-                            ->where('follower_id', Auth::user()->id)
-                            ->delete(); 
+                          ->where('follower_id', Auth::user()->id)
+                          ->delete(); 
        return ($follow);
 
     }

@@ -48,8 +48,8 @@ class FavouriteController extends Controller
         $like->userId = Auth::user()->id;
         
         $like = Favourite::where('postId', $postExist->id)
-                            ->where('userId', Auth::user()->id)
-                            ->delete(); 
+                         ->where('userId', Auth::user()->id)
+                         ->delete(); 
        return ($like);
 
     }
