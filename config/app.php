@@ -181,6 +181,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
     ],
 
     /*

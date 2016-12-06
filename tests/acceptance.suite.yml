@@ -8,7 +8,7 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://anish.com
+            url: http://anish.com:8889
         - \Helper\Acceptance
 
 env:
@@ -18,7 +18,7 @@ env:
               - PhpBrowser
             enabled:
                 - WebDriver:
-                    url: http://anish.com
+                    url: http://anish.com:8889
                     browser: phantom
                     window_size: 1024x768
                     diskCache: true

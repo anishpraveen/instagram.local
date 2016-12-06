@@ -36,11 +36,12 @@ class SocialController extends Controller
      */
     public function getSocialHandle( $provider )
     {
-        if (Input::get('denied') != '') 
+        if (Input::get('error')=='access_denied') 
         {
-            return redirect()->route('login');
-                //->with('status', 'danger')
-                //->with('message', 'You did not share your profile data with our social app.');
+            flash('You did not share your profile data with our app. Allow permission to login to our app again.', 'danger');
+            return redirect()->route('login')
+                ->with('status', 'danger')
+                ->with('message', 'You did not share your profile data with our social app.');
         }
         $user = Socialite::driver( $provider )->user();
         $socialUser = null;

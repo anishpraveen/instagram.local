@@ -5,7 +5,12 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2 ">
             <div class="panel panel-default transbox">
-                <div class="panel-heading transbox"><div class="col-md-offset-5 clearfix"><img src="/icons/Instagram_Signup_Logo.svg" alt=""> </div></div>
+                <div class="panel-heading transbox">
+                    @include('flash::message')
+                    <div class="col-md-offset-5 clearfix">
+                        <img src="/icons/Instagram_Signup_Logo.svg" alt=""> 
+                    </div>
+                </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
