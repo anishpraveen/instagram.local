@@ -1,12 +1,14 @@
 @extends('layouts.guest')
 
 @section('content')
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+
 <div class="container " id="mydiv">
     <div class="row">
         <div class="col-md-8 col-md-offset-2 ">
             <div class="panel panel-default transbox">
                 <div class="panel-heading transbox">
-                    @include('flash::message')
+                    <!--include('flash::message')-->
                     <div class="col-md-offset-5 clearfix">
                         <img src="/icons/Instagram_Signup_Logo.svg" alt=""> 
                     </div>
@@ -94,4 +96,45 @@
         </div>
     </div>
 </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-full-width",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "3000",
+        "hideDuration": "10000",
+        "timeOut": "50000",
+        "extendedTimeOut": "10000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    @if(session()->has('flash_notification.message'))
+
+        var type = "{{ Session::get('flash_notification.level', 'info') }}";
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('flash_notification.message') }}");
+                break;
+            
+            case 'warning':
+                toastr.warning("{{ session('flash_notification.message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ session('flash_notification.message') }}");
+                break;
+            case 'danger':
+                toastr.error("{{ Session::get('flash_notification.message') }}");
+                break;
+        }
+    @endif
+</script>
 @endsection
