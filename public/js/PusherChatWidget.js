@@ -194,6 +194,8 @@ PusherChatWidget._createHTML = function(appendTo) {
 
 /* @private */
 PusherChatWidget._buildListItem = function(activity) {
+  var userName = activity.actor.displayName.replace(/\\'/g, "'");
+  var textMessage = activity.body.replace(/\\('|&quot;)/g, '$1');
   var li = $('<li class="activity"></li>');
   li.attr('data-activity-id', activity.id);
   var item = $('<div class="stream-item-content"></div>');
@@ -210,17 +212,16 @@ PusherChatWidget._buildListItem = function(activity) {
   
   var user = $('<div class="activity-row">' +
                 '<span class="user-name">' +
-                  '<a class="screen-name" title="' + activity.actor.displayName.replace(/\\'/g, "'") + '">' + activity.actor.displayName.replace(/\\'/g, "'") + '</a>' +
+                  '<a class="screen-name" title="' + userName + '">' + userName + '</a>' +
                   //'<span class="full-name">' + activity.actor.displayName + '</span>' +
                 '</span>' +
               '</div>');
   content.append(user);
   
   var message = $('<div class="activity-row">' +
-                    '<div class="text">' + activity.body.replace(/\\('|&quot;)/g, '$1') + '</div>' +
+                    '<div class="text">' + textMessage + '</div>' +
                   '</div>');
   content.append(message);
-  
   var time = $('<div class="activity-row">' + 
                 '<a ' + (activity.link?'href="' + activity.link + '" ':'') + ' class="timestamp">' +
                   '<span title="' + activity.published + '" data-activity-published="' + activity.published + '">' + PusherChatWidget.timeToDescription(activity.published) + '</span>' +
@@ -232,8 +233,35 @@ PusherChatWidget._buildListItem = function(activity) {
                 '</span>' +
               '</div>');
   content.append(time);
-                
-  
+  // Toastr notification for new message
+  toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": true,
+      "showDuration": "0",
+      "hideDuration": "0",
+      "timeOut": "0",
+      "extendedTimeOut": "100",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+   };
+  toastr.options.onclick = function() { 
+                  $(".pusher-chat-widget").css("background-color", "whitesmoke");
+                  $('.pusher-chat-widget-header').fadeToggle("slow");
+                  $('.pusher-chat-widget-messages').fadeToggle("slow");
+                  $('.pusher-chat-widget-input').fadeToggle("slow");
+                  $('.pusher-chat-widget-header').toggleClass( "hidden" );
+                  $('.pusher-chat-widget-messages').toggleClass( "hidden" );
+                  $('.pusher-chat-widget-input').toggleClass( "hidden" );
+                  $('#openChat').toggleClass( "hidden" );
+                  $(".pusher-chat-widget").toggleClass("chatBorder"); 
+                };
+  toastr.info('<img class="img-circle" src="' + imageInfo.url + '" width="' + 25 + '" height="' + 25 + '" />&nbsp'+userName +' : '+ textMessage );
   return li;
 };
 

@@ -15,7 +15,8 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    
+    <!-- CSS for toastr-->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -191,10 +192,11 @@
         });
     </script>
     <script src="http://js.pusher.com/3.0/pusher.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="/js/PusherChatWidget.js"></script>    
     <script>
       $(function() {     
-        var pusher = new Pusher("7f9c175e9c4a7b2c2710")
+        var pusher = new Pusher("7f9c175e9c4a7b2c2710")//pusher id
         var chatWidget = new PusherChatWidget(pusher, {
           appendTo: "#pusher_chat_widget"
         });
