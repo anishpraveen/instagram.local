@@ -8,5 +8,8 @@ return [
     'NoPostsExist' => '-1',
     'userDisplayCount' => '5',
     'placeIndex' => '2',
-    'firstIndex' => '0'
+    'firstIndex' => '0',
+    'redirectURL' => '/home',
+    'redirectURLName' => 'home',
+    'redirectTime' => '10'
 ];

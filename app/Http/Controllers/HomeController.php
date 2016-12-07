@@ -9,7 +9,7 @@ use Auth;
 use Hash;
 use App\Map;
 
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;//find or fail error exception class.
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -93,11 +93,19 @@ class HomeController extends Controller
       */
      public function viewProfile($id)
      {   
-        $user = User::Find($id);
-        $user = $user->getUserDetails($user);
-        $currentUser = User::Find(Auth::user()->id); 
-        $posts = $this->getPosts($user);
-        return view('pages.profile', compact('posts'), compact('user'));
+        try
+        {
+            $user = User::FindOrFail($id);
+            $user = $user->getUserDetails($user);
+            $currentUser = User::Find(Auth::user()->id); 
+            $posts = $this->getPosts($user);
+            return view('pages.profile', compact('posts'), compact('user'));
+        }
+        
+        catch(ModelNotFoundException $err)
+        {
+            return view('errors.404');
+        }
      }
 
      /**
@@ -148,7 +156,7 @@ class HomeController extends Controller
       * @param value (string) 
       * @return \Illuminate\Http\Response
       */
-     public function search($value)
+     public function search($value = '')
      {   
          $name = explode(' ', $value);
          if(empty($name[1]))
@@ -159,9 +167,11 @@ class HomeController extends Controller
                             ->where('lastname','like','%'.$name[1].'%')
                             ->orWhere('lastname','like','%'.$name[0].'%')                            
                             ->get()->toArray();
-         $userList = User::getFollowStatus($userList);    
+         $userList = User::getFollowStatus($userList);   
+         $perPage = config('constants.PaginationPageSize');
+         $userList =$this->paginateArray($userList,$perPage); 
          return view('pages.search', compact('userList'));
-     }
+     }     
 
      /**
       * Paginate Array   

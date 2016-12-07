@@ -22,9 +22,7 @@ Route::get('/profile', 'HomeController@profile');
 Route::get('/profile/{id}', 'HomeController@viewProfile');
 Route::get('/favourites', 'HomeController@favourites');
 Route::get('/settings', 'HomeController@settings');
-Route::get('/search/{id}', 'HomeController@search');
-
-
+Route::get('/search/{id?}', 'HomeController@search');
 
 Route::resource('posts', 'PostsController');
 Route::get('/posts', 'PostsController@get');
@@ -45,8 +43,7 @@ $social = 'social.';
 Route::get('/social/redirect/{provider}',   ['as' => 'social.redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);
 Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses' => 'Auth\SocialController@getSocialHandle']);
 
-// route for testing purpose only
-Route::get('/crop', function(){
-    //$post = Posts::FindorFail(68);
-    return view('crop', compact('post'));
-});
+/*Page not found*/
+Route::any('{catchall}', function() {
+    return view('errors.404');
+})->where('catchall', '.*');
