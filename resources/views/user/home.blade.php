@@ -10,7 +10,7 @@
             <div class="row" id="divPosts">                 
                 <!-- Previous Posts -->
               
-                @if(!empty($posts[0]))
+                @if(count($posts))
                     <div class="scroll">
                         @include('pages._posts')
                         {{$posts->setPath('home')->links()}}

@@ -22,7 +22,7 @@
                 <div class="">
                     <div class="btn-group" title="Rotate left">
                         <button type="button" class="btn btn-danger rotate" data-method="rotate" data-option="-90" title="Rotate -90 degrees">
-                            <img src="/icons/ic_rotate_left_black_24px.svg" alt="" height="20">
+                            <img src="/icons/ic_rotate_left_black_24px.svg" alt="" height="20" data-method="rotate" data-option="-90">
                             <!--Rotate Left-->
                         </button>
                         <button type="button" class="btn btn-warning rotate" data-method="rotate" data-option="-15">-15deg</button>
@@ -31,7 +31,7 @@
                     </div><div class="clearfix"></div><br>
                     <div class="btn-group" title="Rotate right">
                         <button type="button" class="btn btn-danger rotate" data-method="rotate" data-option="90" title="Rotate 90 degrees">
-                            <img src="/icons/ic_rotate_right_black_24px.svg" alt="" height="20">
+                            <img src="/icons/ic_rotate_right_black_24px.svg" alt="" height="20" data-method="rotate" data-option="90">
                             <!--Rotate Right-->
                         </button>
                         <button type="button" class="btn btn-warning rotate" data-method="rotate" data-option="15">+15deg</button>
@@ -151,7 +151,7 @@
                         }
                     });
             });
-            $('body').on('click', '.rotate', function (event) {
+            $('body').on('click', '.rotate', function (event) {                
                 var option = $(event.target).data('option');
                 $('#image').cropper('rotate', option);
             });

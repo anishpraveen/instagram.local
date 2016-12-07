@@ -157,9 +157,8 @@ class HomeController extends Controller
          }
          $userList = User::select('*')->where('name','like','%'.$name[0].'%')
                             ->where('lastname','like','%'.$name[1].'%')
-                            ->orWhere('lastname','like','%'.$name[0].'%')
+                            ->orWhere('lastname','like','%'.$name[0].'%')                            
                             ->get()->toArray();
-         $user = User::Find(Auth::user()->id);
          $userList = User::getFollowStatus($userList);    
          return view('pages.search', compact('userList'));
      }

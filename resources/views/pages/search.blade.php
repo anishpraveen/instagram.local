@@ -29,10 +29,10 @@
                                         <div class="col-md-1  " id="{{ $user['id'] }}"  >                                                       
                                             @if($user['follow'])  
                                                 <a onclick="unfollow({{ $user['id'] }});" >                                       
-                                                    <img src="/icons/followers.svg" style="" alt="following">
+                                                    <img src="/icons/followers.svg" title="Stop following" style="cursor:pointer;" alt="following">
                                                 </a>
                                             @else
-                                                <a  onclick="follow({{ $user['id'] }});" style="cursor:pointer;">  
+                                                <a  onclick="follow({{ $user['id'] }});" title="Follow me" style="cursor:pointer;">  
                                                     <img src="/icons/follow.svg" style="" alt="follow">
                                                 </a>
                                             @endif                                                
@@ -66,7 +66,7 @@
                 url: '/follow/'+$id,
                 data: "",
                 success: function(response) {
-                    $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg"  alt=""></a>'   
+                    $html = '<a onclick="unfollow('+$id+')" title="Stop following" ><img src="/icons/followers.svg" class="pointer" alt=""></a>'   
                     document.getElementById($id).innerHTML = $html;       
                 }
             });
@@ -78,7 +78,7 @@
                 url: '/follow/'+$id+'/unfollow',
                 data: "",
                 success: function(response) {                    
-                    $html = '<a  onclick="follow('+$id+');" ><img src="/icons/follow.svg" alt=""></a>'   
+                    $html = '<a  onclick="follow('+$id+');" title="Follow me"><img src="/icons/follow.svg" class="pointer" alt=""></a>'   
                     document.getElementById($id).innerHTML = $html;                    
                 }
             })
