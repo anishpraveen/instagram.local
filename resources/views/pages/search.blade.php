@@ -7,7 +7,7 @@
             <div class="panel panel-group">
                 <div class="panel-heading" id="recommendedPeopleHeading" style="color:#f02d88; text-align:left;">Search Results</div>
                 <div class="panel-body">
-                    @if(empty($userList)||!is_null($userList)) 
+                    @if(count($userList)) 
                         @foreach($userList as $user) 
                             <div class="left" style="float:left; padding-bottom:20px; ">
                                 <div class="container">
@@ -47,6 +47,8 @@
                             </div> 
                                       <hr style="margin:0; margin-bottom:20px;">    
                         @endforeach  
+                    @else
+                        No user(s) found.<br> Please refine your search criteria. 
                     @endif
                 </div>
             </div>

@@ -58,23 +58,23 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}" title="Home">
                         <img src="/icons/instagram_logo_inner.svg" alt="" height="25px">
                         
                        <!-- {{ config('app.name', 'Laravel') }}-->
                     </a>
-                    <a class="navbar-brand" href="{{ url('/home') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}" title="Home">
                     <img src="/Instagram_Logo_Text.png" alt="" style="float:left;">
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav ">
+                    <ul class="nav navbar-nav " title="Press enter to search">
                         @for($i=0;$i<9;$i++)
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         @endfor
-                         <input id="inputSearch" class="input-group-addon" type="text" placeholder="Search User" name="" value="">
+                         <input id="inputSearch"  class="input-group-addon" type="text" placeholder="Search user" name="" value="">
                     </ul>
 
                     <!-- Right Side Of Navbar -->
