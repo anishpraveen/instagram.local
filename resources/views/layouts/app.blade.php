@@ -45,7 +45,7 @@
     </div>
           
     <div id="app" >
-        <nav class="navbar navbar-default navbar-static-top gradiantleft" >
+        <nav class="navbar navbar-default navbar-fixed-top gradiantleft" >
             <div class="container">
                 <div class="navbar-header" >
 
@@ -74,7 +74,7 @@
                         @for($i=0;$i<9;$i++)
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         @endfor
-                         <input id="inputSearch"  class="input-group-addon" type="text" placeholder="Search user" name="" value="">
+                         <input id="inputSearch"  class="input-group-addon loseFocus" type="text" placeholder="Search user" name="" value="">
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -122,8 +122,12 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        
+        <div class="" style="padding-top:84px;">
+            @yield('content')
+        </div>
+        
+        
     </div>
 
     @yield('footer')

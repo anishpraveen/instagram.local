@@ -9,8 +9,8 @@
                 </div>    
                 <div class="row ">
                     <div class="col-md-8 col-sm-8">
-                        <img src="{{ $user[0]['profilePic'] }}" alt=""  class="img-circle" height="45" width="45">                                
-                         <a href="/profile/{{ $post['userId'] }}" class="postsUserName pointer" >{{ $user[0]['name'] }}</a>
+                        <img src="{{ $user[0]['profilePic'] }}" alt=""  class="img-circle" height="45" width="45">                  
+                         <a @if(!str_contains(Request::fullUrl(), 'profile'))href="/profile/{{ $post['userId'] }}" style="cursor:pointer;" @endif class="postsUserName " >{{ $user[0]['name'] }}</a>
                     </div>
                     <div class="text-right divPostDetails" id="kkkk" style="">
                         <span id="spanPostTime" style="-moz-padding-top: 10px;padding-right:5px; ">
@@ -19,7 +19,7 @@
                         </span>
                         <br>
                         <span style="padding-right:4px; color: #9a9a9a;">
-                            {{ $post['locationName'] }}&nbsp&nbsp 
+                            {{ strtok($post['locationName'],',') }}&nbsp&nbsp 
                             <a class="btnShow" id="4" style="cursor: pointer; padding-right:5px;" latitude="{{ $post['latitude'] }} " longitude="{{ $post['longitude'] }} ">
                                 <img src="/icons/pin5.svg" alt="">
                             </a>

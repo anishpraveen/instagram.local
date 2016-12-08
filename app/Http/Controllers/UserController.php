@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Notifications\Messages\MailMessage;
 //use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
@@ -80,43 +81,51 @@ class UserController extends Controller
         $json_url = Request::get('url');
         $json = file_get_contents($json_url);
         $data = json_decode($json, TRUE);
-        $place = null;
-        $locationId = null;
-        $selectPlaceIndex =config('constants.placeIndex');
-        $selectResultPlace = config('constants.firstIndex');
-        $user = User::Find(Auth::user()->id);
-        foreach ($data as $key) {
-            $place = $key;
-            break;
-        }
-
         $mapLocation = new Map;
-        $mapLocation->latitude = Request::get('latitude');
-        $mapLocation->longitude = Request::get('longitude');
-        $mapLocation->name = $place[$selectPlaceIndex]['formatted_address'];
-        $mapLocation->place_id = $place[$selectPlaceIndex]['place_id'];
-
-        $lat = round($mapLocation->latitude, 4);
-        $lng = round($mapLocation->longitude, 4);
-
-        $mapId = Map::select('*')->where('place_id','like',$place[$selectPlaceIndex]['place_id'])
-                            //->where('longitude','like',$lng.'%')
-                            ->get()->toArray();
-        
-        if(empty($mapId))
+        if($data['status'] == 'OK')
         {
-            $mapLocation->save();
-            $locationId = $mapLocation->id;
-        }
-        else
-        {
-            $locationId = $mapId[$selectResultPlace]['id'];
-        }
-        $user->mapId = $locationId;
-        $user->save();
+            $place = null;
+            $locationId = null;
+            $selectPlaceIndex =config('constants.placeIndex');
+            $selectResultPlace = config('constants.firstIndex');
+            $user = User::Find(Auth::user()->id);
+            foreach ($data as $key) {
+                $place = $key;
+                break;
+            }
+            
+            $mapLocation->latitude = Request::get('latitude');
+            $mapLocation->longitude = Request::get('longitude');
+            $mapLocation->name = $place[$selectPlaceIndex]['formatted_address'];
+            $mapLocation->place_id = $place[$selectPlaceIndex]['place_id'];
 
-        return $mapLocation->name;
-        //return $place[2]['place_id'];
+            $lat = round($mapLocation->latitude, 4);
+            $lng = round($mapLocation->longitude, 4);
+
+            
+
+            $mapId = Map::select('*')->where('place_id','like',$place[$selectPlaceIndex]['place_id'])
+                                //->where('longitude','like',$lng.'%')
+                                ->get()->toArray();
+            
+            if(empty($mapId))
+            {
+                $mapLocation->save();
+                $locationId = $mapLocation->id;
+            }
+            else
+            {
+                $locationId = $mapId[$selectResultPlace]['id'];
+            }
+            $user->mapId = $locationId;
+            $user->save();
+            $mapLocation->status = $data['status'];
+
+            return $mapLocation;
+            //return $place[2]['place_id'];
+        }
+        $mapLocation->status = $data['status'];
+        return $mapLocation;
         
     }
 

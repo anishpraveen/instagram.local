@@ -12,7 +12,7 @@ $(document).ready(function () {
             open: function () {                
                 var mapOptions = {
                     center: mapMarker,
-                    zoom: 17,
+                    zoom: 12,
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     disableDefaultUI: true
                 }
@@ -49,7 +49,7 @@ $(document).ready(function () {
                 
                 var mapOptions = {
                     center: mapMarker,
-                    zoom: 12,
+                    zoom: 10,
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     disableDefaultUI: true
                 }
@@ -82,13 +82,22 @@ $(document).ready(function () {
                             return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
                         },
                         success: function(response){
-                            infoWindow.setContent('Location updated');
-                            infoWindow.open(map, marker);
                             console.log(response);
-                            $('#spanProfileLocation').get(0).lastChild.nodeValue =(response);
+                            if(response['status'] == 'OK'){
+                                infoWindow.setContent('Location updated');
+                                infoWindow.open(map, marker);                            
+                                $('#spanProfileLocation').get(0).lastChild.nodeValue =(response['name']);
+                                $('#spanProfileLocation a').attr('latitude',response['latitude']);
+                                $('#spanProfileLocation a').attr('longitude',response['longitude']);
+                            }
+                            else{
+                                console.log('no loc');
+                                infoWindow.setContent('No location found');
+                                infoWindow.open(map, marker);  
+                            }
                         }
                     })
-                    console.log('updated');
+                    // console.log('updated');
                 });
             },
             closeText: 'X',

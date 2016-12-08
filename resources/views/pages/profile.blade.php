@@ -23,20 +23,20 @@
                          <span id="spanProfileName">{{ $user->name }}&nbsp{{ $user->lastName }}</span>
                          <br>
                          <span id="spanProfileLocation">
-                             <a class="btnShowProfile {{ $user->id == Auth::user()->id ? ' btnShowProfile' : 'btnShow' }}" style="cursor:pointer;" latitude="{{ $user['latitude'] }} " longitude="{{ $user['longitude'] }} ">
+                             <a class="btnShowProfile {{ $user->id == Auth::user()->id ? ' btnShowProfile' : 'btnShow' }}" style="cursor:pointer; text-decoration:none;" latitude="{{ $user['latitude'] }} " longitude="{{ $user['longitude'] }} ">
                                  <img src="/icons/pin_profile.svg" alt="">
                              </a>
                              &nbsp{{ $user->locationName }}
                         </span>
                         <br><br>
                         @if(Auth::user()->id != $user->id)
-                            <div id="divFollow">
+                            <div id="divFollow" >
                                 @if(!App\Follower::where('follower_id','=',Auth::user()->id)->where('user_id','=',$user->id)->count())
-                                    <button type="button" id="btnFollowMe" class="btn btn-large btn-block btn-default btnFollow">
+                                    <button type="button" id="btnFollowMe" style="outline: none;" class="btn btn-large btn-block btn-default btnFollow">
                                         <span id="{{ $user->id }}">Follow Me</span>
                                     </button>
                                 @else
-                                    <button type="button" id="btnFollowing" class="btn btn-large btn-block btn-default btnFollow">
+                                    <button type="button" id="btnFollowing" style="outline: none;" class="btn btn-large btn-block btn-default btnFollow">
                                         <span id="{{ $user->id }}">Following</span>
                                     </button>
                                 @endif
