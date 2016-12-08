@@ -133,15 +133,15 @@
 
                         <div class="clearfix">                    
                         </div>
-                        <div class="hidden edit">
-                            <div class="col-md-3 col-md-offset-1">
+                        <div class="hidden edit" >
+                            <div class="col-md-3 col-md-offset-1" style="padding-bottom:20px;">
                                 <a id="btnCancel" href="/settings" class="btn btn-danger form-control">
                                     CANCEL
                                 </a>
                             </div>
                         </div>
-                        <div class="hidden edit">
-                            <div class="col-md-3">
+                        <div class="hidden edit" >
+                            <div class="col-md-3" style="padding-bottom:20px;">
                                 <button id="btnSave" type="submit" class="btn btn-primary form-control">
                                     SAVE
                                 </button>
