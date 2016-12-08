@@ -154,4 +154,12 @@ class User extends Authenticatable
 
          return $user;
      }
+
+     // Set the verified status to true and make the email token null
+public function verified()
+{
+    $this->verified = 1;
+    $this->verification_token = null;
+    $this->save();
+}
 }

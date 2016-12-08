@@ -7,9 +7,11 @@ use App\Follower;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Mail\EmailVerification;
 use Carbon\Carbon;
 use Request;
 use Mail;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -82,12 +84,14 @@ class RegisterController extends Controller
         else{
             return false;
         }
+        $token = str_random(30);
         $user=User::create([
             'name' => $data['name'],
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]);
+            'verification_token' => $token,
+        ]); 
         //Uploading file
         if(!empty(Request::file('image')))
         {
@@ -105,7 +109,7 @@ class RegisterController extends Controller
         $user->lastname = $data['lastname'];
         $user->birthday = $DOB;
         $user->gender = $data['gender'];
-        
+        $user->verification_token = $token;
         
         $user->save();
 
@@ -125,4 +129,37 @@ class RegisterController extends Controller
             });
         return  $user;
     }
+
+    /**
+    *  Over-ridden the register method from the "RegistersUsers" trait
+    *  Remember to take care while upgrading laravel
+    */
+    public function register(Request $request)
+    {
+        
+        DB::beginTransaction();
+        try
+        {
+            $user = $this->create(Request::all());
+            // After creating the user send an email with the random token generated in the create method above
+            $email = new EmailVerification(new User(['verification_token' => $user->verification_token]));
+            Mail::to($user->email)->send($email);
+            DB::commit();
+            return back();
+        }
+        catch(Exception $e)
+        {
+            DB::rollback(); 
+            return back()->withErrors(['msg', 'Please check your inbox and verify your account']);;
+        }
+    }
+    // Get the user who has the same token and change his/her status to verified i.e. 1
+    public function verify($token)
+    {
+        // The verified method has been added to the user model and chained here
+        // for better readability
+        User::where('verification_token',$token)->firstOrFail()->verified();
+        return redirect('login');
+    }
+
 }

@@ -45,6 +45,8 @@ $social = 'social.';
 Route::get('/social/redirect/{provider}',   ['as' => 'social.redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);
 Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses' => 'Auth\SocialController@getSocialHandle']);
 
+Route::get('register/verify/{token}', 'Auth\RegisterController@verify'); 
+
 /*Page not found*/
 Route::any('{catchall}', function() {
     return view('errors.404');
