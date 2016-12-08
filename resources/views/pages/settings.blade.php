@@ -103,7 +103,8 @@
                             <label for="contact" class="col-md-4 labelSettings">Contact</label>
 
                             <div class="col-md-6 ">
-                                <input type="text" class="inputFieldsSettings" disabled name="email" value="{{ Auth::user()->email }} " required>
+                                
+                                <label id="lblUsername" class="inputFieldsSettings" >{{ Auth::user()->email }}</label>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -116,10 +117,10 @@
                         <div class="clearfix">                    
                         </div>
                         <hr class="noMargin">                    
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}" id="divPassword">
                             <label for="password" class="col-md-4 labelSettings">Password</label>
 
-                            <div class="col-md-6 ">
+                            <div id="divPasswordInput" class="col-md-6 ">
                                 <input id="password" type="password" class="inputFieldsSettings" disabled name="password" value="*********">
 
                                 @if ($errors->has('password'))
@@ -167,6 +168,30 @@
             $('.editAvatar').removeClass("hidden");
             $("#password").val("");
         });   
-        
+        $('#password').blur(function() {
+          $.ajax({
+                url: '/user/password',
+                type: 'POST',
+                data: {password:$('#password').val() },
+                beforeSend: function (request) {
+                            return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+                        },
+                success: function(data){
+                    if(data['status'] == 'invalid'){
+                        toastr.error(data["message"]);
+                        $('#btnSignUp').prop( "disabled", true );
+                        $('#divPassword').addClass('has-error');
+                        $( "#helpSpanPassword" ).remove();
+                        $( "#divPasswordInput" ).append( '<span id="helpSpanPassword" class="help-block"><strong>'+data["message"]+'</strong></span>' );
+                    }
+                    else{
+                        toastr.success(data["message"]);
+                        $('#btnSignUp').prop( "disabled", false );
+                        $('#divPassword').removeClass('has-error');
+                        $( "#helpSpanPassword" ).remove();
+                    }
+                }
+            });            
+      });
     </script>
 @endsection

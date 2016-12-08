@@ -26,8 +26,7 @@ class UserRequest extends FormRequest
         
         return [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255',
-            'password' => 'min:6',
+            'password' => 'min:6|regex:/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]*$/',
             'image' => 'mimes:jpeg,bmp,png',
             
         ];
@@ -36,7 +35,7 @@ class UserRequest extends FormRequest
     public function all()
     {
         $data = parent::all();
-        $data['email'] = trim($data['email']);
+        // $data['email'] = trim($data['email']);
      
         return $data;
     }

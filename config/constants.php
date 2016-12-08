@@ -11,5 +11,17 @@ return [
     'firstIndex' => '0',
     'redirectURL' => '/home',
     'redirectURLName' => 'home',
-    'redirectTime' => '10'
+    'redirectTime' => '5',
+    'month1' => 'Jan',
+    'month2' => 'Feb',
+    'month3' => 'Mar',
+    'month4' => 'Apr',
+    'month5' => 'May',
+    'month6' => 'Jun',
+    'month7' => 'Jul',
+    'month8' => 'Aug',
+    'month9' => 'Sep',
+    'month10' => 'Oct',
+    'month11' => 'Nov',
+    'month12' => 'Dec',
 ];

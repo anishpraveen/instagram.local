@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Carbon\Carbon;
 use Request;
-
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'lastname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|regex:/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]*$/',
             'gender' => 'required',
             'DOBYear' => 'required|not_in:Year',
             'DOBMonth' => 'required|not_in:Month',
@@ -82,6 +82,12 @@ class RegisterController extends Controller
         else{
             return false;
         }
+        $user=User::create([
+            'name' => $data['name'],
+            'lastname' => $data['lastname'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
         //Uploading file
         if(!empty(Request::file('image')))
         {
@@ -95,12 +101,7 @@ class RegisterController extends Controller
             }
             $user->profilePic='/'.config('constants.profilePicPath').''.$fileName;
         }
-        $user=User::create([
-            'name' => $data['name'],
-            'lastname' => $data['lastname'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        
         $user->lastname = $data['lastname'];
         $user->birthday = $DOB;
         $user->gender = $data['gender'];
@@ -113,7 +114,15 @@ class RegisterController extends Controller
         $follow->follower_id = $user->id;
         
         $follow->save();
-
+        $content = "Welcome ".$user->name." to our instagram family";
+        Mail::send('emails.welcome', ['title' => 'Welcome', 'content' => $content], function($message) use ($data)
+            {   
+                //$actionText
+                $message->from('no-reply@'.config('app.name'), config('app.name'));
+                $message->subject("Welcome to ".config('app.name'));
+                $message->to($data['email']);
+                $message->priority('High');
+            });
         return  $user;
     }
 }

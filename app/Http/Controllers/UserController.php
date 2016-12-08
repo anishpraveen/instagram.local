@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => ['checkEmail','checkPassword']]);
     }
 
     /**
@@ -39,7 +39,7 @@ class UserController extends Controller
          }
         $user->name = $name[0];
         $user->lastName = $name[1];
-        $user->email = $request['email'];
+        //$user->email = $request['email'];
         if(!empty($request['password']))
         {
             $user->password = bcrypt($request['password']);
@@ -118,5 +118,50 @@ class UserController extends Controller
         return $mapLocation->name;
         //return $place[2]['place_id'];
         
+    }
+
+    /**
+     * Check if email available and valid
+     *
+     * @return data
+     */
+    public function checkEmail()
+    {
+        $data[] = null;
+        if (!preg_match("/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/", Request::get('email'))) 
+        {       
+            $data['message'] = 'Invalid email format'; 
+            $data['status'] = 'taken';            
+            return $data;  
+        }
+        $validEmail = User::select('*')->where('email','=',Request::get('email'))->get()->toArray();
+        $data['status'] = 'availabe';
+        $data['message'] = 'The email is availabe.';
+        if(count($validEmail))
+        {
+            $data['message'] = 'The email is taken. Please login using it or use forget password.';            
+            $data['status'] = 'taken';            
+            return $data;
+        }
+        return $data;
+    }
+
+    /**
+     * Check password strength
+     *
+     * @return data
+     */
+    public function checkPassword()
+    {
+        $data[] = null;
+        if (!preg_match("/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[^a-zA-Z]).{6,}$/", Request::get('password'))) 
+        {       
+            $data['message'] = 'Need atleast 6 characters including uppercase, lowercase and a digit'; 
+            $data['status'] = 'invalid';            
+            return $data;  
+        }
+        $data['message'] = 'Valid password'; 
+        $data['status'] = 'Valid';            
+        return $data;  
     }
 }

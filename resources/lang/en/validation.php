@@ -99,6 +99,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'password' => [
+            'regex' => 'Need Uppercase, lowercase, digit',
+        ],
     ],
 
     /*

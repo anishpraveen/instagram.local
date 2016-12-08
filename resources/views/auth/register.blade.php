@@ -1,6 +1,9 @@
 @extends('layouts.guest')
 
 @section('content')
+<!-- CSS for toastr-->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+
 <div class="container" id="mydiv" >
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -20,7 +23,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <div style="postion: relative; ">
                                     <label class="btn ">
-                                    <input name="image" type="file" id="main-input" onchange="previewFile(this);"><img src="/icons/add_button.svg" class="addButton"></label>
+                                    <input name="image" type="file" id="main-input" accept="image/x-png,image/gif,image/jpeg" onchange="previewFile(this);"><img src="/icons/add_button.svg" class="addButton"></label>
                                     <img src="/icons/Avatar.svg" class="imgCircle" width="95" height="95" style=" border-radius: 50%;" id="avatar" alt="Profile picture">
                                 </div>
                                 @if ($errors->has('image'))
@@ -58,9 +61,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}" id="divEmail">
                             
-                            <div class="col-md-6 col-md-offset-3">
+                            <div id="divEmailInput" class="col-md-6 col-md-offset-3">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="Email Address" >
 
                                 @if ($errors->has('email'))
@@ -71,9 +74,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}" id="divPassword">
                             
-                            <div class="col-md-6 col-md-offset-3">
+                            <div id="divPasswordInput" class="col-md-6 col-md-offset-3">
                                 <input id="password" type="password" class="form-control" name="password" required placeholder="Password" >
 
                                 @if ($errors->has('password'))
@@ -103,6 +106,9 @@
                                 font-size: 15px;
                                 color: #bebebe;
                                 margin-right: 5px;
+                            }
+                            .ddl option {
+                            background-color: black;
                             }
                         </style>
                         <div class="form-group{{ $errors->has('DOBMonth') ? ' has-error' : '' }}{{ $errors->has('DOBYear') ? ' has-error' : '' }}">
@@ -140,18 +146,11 @@
                                 
                                     <select id="DOBMonth" required name="DOBMonth" class="ddl col-md-4">
                                         <option hidden value="">Month</option>
-                                        <option value="1">Jan</option>
-                                        <option value="2">Feb</option>
-                                        <option value="3">Mar</option>
-                                        <option value="4">Apr</option>
-                                        <option value="5">May</option>
-                                        <option value="6">Jun</option>
-                                        <option value="7" >Jul</option>
-                                        <option value="8">Aug</option>
-                                        <option value="9">Sep</option>
-                                        <option value="10">Oct</option>
-                                        <option value="11">Nov</option>
-                                        <option value="12">Dec</option>
+                                        @for ($i = 1 ; $i <=  12 ; $i++)
+                                            <option value="{{ $i }}" @if (old('DOBMonth') == $i) selected="selected" @endif>
+                                                {{config('constants.month'.$i)}}
+                                            </option>
+                                        @endfor
                                     </select>
                                 
                                     <select id="DOBYear" required name="DOBYear" class="ddl col-md-4">
@@ -237,7 +236,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-7 col-md-offset-3">
-                                <button type="submit" class="btn btn-primary form-control">
+                                <button type="submit" id="btnSignUp" class="btn btn-primary form-control">
                                     SIGN UP
                                 </button>
                             </div>
@@ -265,5 +264,63 @@
 @endif
 -->
 
-
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <script>
+      $('#email').blur(function() {
+          $.ajax({
+                url: '/user/email',
+                type: 'POST',
+                data: {email:$('#email').val() },
+                beforeSend: function (request) {
+                            return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+                        },
+                success: function(data){
+                    if(data['status'] == 'taken'){
+                        toastr.error(data["message"]);
+                        $('#btnSignUp').prop( "disabled", true );
+                        $('#divEmail').addClass('has-error');
+                        $( "#helpSpanEmail" ).remove();
+                        $( "#divEmailInput" ).append( '<span id="helpSpanEmail" class="help-block"><strong>'+data["message"]+'</strong></span>' );
+                    }
+                    else{
+                        toastr.success(data["message"]);
+                        $('#btnSignUp').prop( "disabled", false );
+                        $('#divEmail').removeClass('has-error');
+                        $( "#helpSpanEmail" ).remove();
+                    }
+                }
+            });            
+      });
+      $('#password').blur(function() {
+          $.ajax({
+                url: '/user/password',
+                type: 'POST',
+                data: {password:$('#password').val() },
+                beforeSend: function (request) {
+                            return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+                        },
+                success: function(data){
+                    // Success...
+                    console.log(data);
+                    if(data['status'] == 'invalid'){
+                        toastr.error(data["message"]);
+                        $('#btnSignUp').prop( "disabled", true );
+                        $('#divPassword').addClass('has-error');
+                        $( "#helpSpanPassword" ).remove();
+                        $( "#divPasswordInput" ).append( '<span id="helpSpanPassword" class="help-block"><strong>'+data["message"]+'</strong></span>' );
+                    }
+                    else{
+                        toastr.success(data["message"]);
+                        $('#btnSignUp').prop( "disabled", false );
+                        $('#divPassword').removeClass('has-error');
+                        $( "#helpSpanPassword" ).remove();
+                    }
+                }
+            });            
+      });
+  </script>
 @endsection
