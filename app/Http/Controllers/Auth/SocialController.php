@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 //use App\Social;
 use Mail;
 use App\User;
+use App\Follower;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
@@ -81,7 +82,12 @@ class SocialController extends Controller
                     $user['gender'] = 'male';
                 }
                 $newSocialUser->gender=$user['gender'];
-                $newSocialUser->save();               
+                $newSocialUser->save();   
+                $follow = new Follower;
+                $follow->user_id = $newSocialUser->id;
+                $follow->follower_id = $newSocialUser->id;
+                
+                $follow->save();               
                 $socialUser = $newSocialUser;
                 $content = "Welcome ".$socialUser->name." to our instagram family";
                 Mail::send('emails.welcome', ['title' => 'Welcome', 'content' => $content], function($message) use ($newSocialUser)
