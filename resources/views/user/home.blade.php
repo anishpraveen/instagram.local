@@ -23,7 +23,7 @@
                                 </div>
 
                                 <div class="panel-body postImage" style="padding-left:10px;">                                
-                                    Follow some one with posts.
+                                    Follow some one with more posts.
                                 </div>
                                 <div class="panel-footer" style="background-color: white; word-wrap: break-word;">   
                                    
@@ -84,7 +84,7 @@
                                             @endif                                                
                                         </div>
                                         
-                                        @if(empty($posts[0]) && $arrowTrue && !$user['follow'])
+                                        @if(!count($posts) && $arrowTrue && !$user['follow'])
                                             <div class="arrow bounce" title="Follow user"></div>  
                                             <div class="laravelInfo hidden">{{$arrowTrue = false}}</div>
                                         @endif
