@@ -59,11 +59,11 @@
                 <button type="button" class="btn transparent" id="mirrorImage">
                     <img src="/icons/ic_flip_black_24px.svg" alt="Vertical" title="Flip Vertical "  data-scaleX="1">
                 </button>
-                <button type="button" class="btn transparent" id="flipImage">
+                <button type="button" class="btn transparent " id="flipImage">
                     <img src="/icons/ic_flip_black_24px.svg" alt="Horizontal" title="Flip Horizontal" style="transform:rotate(90deg);" data-scaleY="1">
                 </button>
                 
-                <button type="button" class="btn  transparent" id="resetCrop" title="Undo all changes">
+                <button type="button" class="btn  transparent noOutline" id="resetCrop" title="Undo all changes">
                     <img src="/icons/ic_cached_black_24px.svg" alt="">    
                     Reset Image
                 </button>
