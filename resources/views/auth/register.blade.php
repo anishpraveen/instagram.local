@@ -323,4 +323,42 @@
             });            
       });
   </script>
+  <script>
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "3000",
+        "hideDuration": "10000",
+        "timeOut": "50000",
+        "extendedTimeOut": "10000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    @if(session()->has('flash_notification.message'))
+
+        var type = "{{ Session::get('flash_notification.level', 'info') }}";
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('flash_notification.message') }}");
+                break;
+            
+            case 'warning':
+                toastr.warning("{{ session('flash_notification.message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ session('flash_notification.message') }}");
+                break;
+            case 'danger':
+                toastr.error("{{ Session::get('flash_notification.message') }}");
+                break;
+        }
+    @endif
+  </script>
 @endsection

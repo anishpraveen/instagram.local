@@ -231,6 +231,26 @@
         }
         var fav = false;
     </script>
+    <script>
+        @if(session()->has('flash_notification.message'))
 
+            var type = "{{ Session::get('flash_notification.level', 'info') }}";
+            switch(type){
+                case 'info':
+                    toastr.info("{{ Session::get('flash_notification.message') }}");
+                    break;
+                
+                case 'warning':
+                    toastr.warning("{{ session('flash_notification.message') }}");
+                    break;
+                case 'success':
+                    toastr.success("{{ session('flash_notification.message') }}");
+                    break;
+                case 'danger':
+                    toastr.error("{{ Session::get('flash_notification.message') }}");
+                    break;
+            }
+        @endif
+    </script>
 </body>
 </html>

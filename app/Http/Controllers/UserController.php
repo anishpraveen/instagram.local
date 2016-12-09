@@ -67,6 +67,7 @@ class UserController extends Controller
             //dd('added');
         }
         $user->save();
+        flash(config('constants.editSuccess'), 'success');
         return redirect('/settings');
     }
 

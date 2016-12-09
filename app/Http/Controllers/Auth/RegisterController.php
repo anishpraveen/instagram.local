@@ -136,12 +136,13 @@ class RegisterController extends Controller
             $email = new EmailVerification($user);
             Mail::to($user->email)->send($email);
             DB::commit();
+            flash(config('constants.confirmMail'), 'success');
             return back();
         }
         catch(Exception $e)
         {
-            DB::rollback(); 
-            return back()->withErrors(['msg', 'Please check your inbox and verify your account']);;
+            DB::rollback();             
+            return back();
         }
     }
     // Get the user who has the same token and change his/her status to verified i.e. 1
@@ -150,6 +151,7 @@ class RegisterController extends Controller
         // The verified method has been added to the user model and chained here
         // for better readability
         User::where('verification_token',$token)->firstOrFail()->verified();
+        flash(config('constants.loginVerified'), 'success');
         return redirect('login');
     }
 

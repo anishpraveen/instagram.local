@@ -7,7 +7,6 @@
 @section('content')
 <div class="hidden laravelInfo" >
    {{ $mytime = Carbon\Carbon::now() }} 
-   
 </div>
     
 <div class="container">
@@ -193,5 +192,14 @@
         });
     </script>
 
- 
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js">
+ </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var tz = jstz.determine(); // Determines the time zone of the browser client
+    var timezone = tz.name(); //'Asia/Kolhata' for Indian Time.
+    console.log(timezone);
+    
+  });
+</script>
 @endsection

@@ -24,4 +24,7 @@ return [
     'month10' => 'Oct',
     'month11' => 'Nov',
     'month12' => 'Dec',
+    'confirmMail' => 'Please verify account using the email send to the your account.',
+    'loginVerified' => 'Login using the credentials provided during registration',
+    'editSuccess' => 'Profile edited successfully.'
 ];

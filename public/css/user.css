@@ -599,6 +599,9 @@ body{
     box-shadow: 0 0 10px rgba(81, 203, 238, 1);
   /*border: 1px solid rgba(81, 203, 238, 1);*/
 }
+.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close{
+    outline: none;
+}
 .arrow {
   
   position: relative;

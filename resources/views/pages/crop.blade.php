@@ -45,12 +45,12 @@
             <!--Edit Description-->            
             <div class="">
                 <label for="description" class="col-md-1 control-label" style="padding:0;padding-top:6px;">
-                    <a id="aEditText" class="pointer"   title="Edit description">
+                    <a id="aEditText"  title="Edit description">
                         <img src="/icons/ic_text_fields_black_24px.svg" height="25" alt="" >
                     </a>
                 </label>
                 <div class="col-md-8">
-                    <input type="text" id="inputDescription" name="description" class="form-control" disabled value="{{$post->description }}" maxlength="80"> 
+                    <input type="text" id="inputDescription" name="description" class="form-control" value="{{$post->description }}" maxlength="80"> 
                 </div>
                 
             </div>
