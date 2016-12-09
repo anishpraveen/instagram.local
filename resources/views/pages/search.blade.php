@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12 ">
             <div class="panel panel-group">
-                <div class="panel-heading" id="recommendedPeopleHeading" style="color:#f02d88; text-align:left;">Search Results</div>
+                <div class="panel-heading" id="recommendedPeopleHeading" style="color:#f02d88; text-align:left;">{{$pageHeading}}</div>
                 <div class="panel-body">
                     @if(count($userList)) 
                         <div class="scroll">

@@ -170,8 +170,67 @@ class HomeController extends Controller
          $userList = User::getFollowStatus($userList);   
          $perPage = config('constants.PaginationPageSize');
          $userList =$this->paginateArray($userList,$perPage); 
-         return view('pages.search', compact('userList'));
+         $pageHeading = 'Search Results';
+         return view('pages.search', compact('userList'), compact('pageHeading'));
      }     
+
+     /**
+      * Show the user followers.  
+      * @param value (string) 
+      * @return \Illuminate\Http\Response
+      */
+     public function followers($id)
+     {
+         try
+         {
+            $user = User::FindOrFail($id);
+            $followers = $user->followers->toArray();
+            $userList;
+            foreach ($followers as $key ) 
+            {
+                $userList[] = User::FindOrFail($key['follower_id']);
+            }
+            $userList = User::getFollowStatus($userList);   
+            $perPage = config('constants.PaginationPageSize');
+            $userList =$this->paginateArray($userList,$perPage); 
+            $pageHeading = $user->name.' is followed by';
+            return view('pages.search', compact('userList'), compact('pageHeading'));
+         }
+        
+        catch(ModelNotFoundException $err)
+        {
+            return view('errors.404');
+        }
+     }
+
+     /**
+      * Show the user following list.  
+      * @param value (string) 
+      * @return \Illuminate\Http\Response
+      */
+     public function following($id)
+     {
+         try
+         {
+            $user = User::FindOrFail($id);
+            $follow = $user->follow->toArray();
+            $userList;
+            foreach ($follow as $key ) 
+            {
+                $userList[] = User::FindOrFail($key['user_id']);
+            }
+            $userList = User::getFollowStatus($userList);   
+            $perPage = config('constants.PaginationPageSize');
+            $userList =$this->paginateArray($userList,$perPage); 
+            $pageHeading = $user->name.' is following';
+            return view('pages.search', compact('userList'), compact('pageHeading'));
+         }
+        
+        catch(ModelNotFoundException $err)
+        {
+            return view('errors.404');
+        }
+     }
 
      /**
       * Paginate Array   

@@ -130,6 +130,12 @@
         
         
     </div>
+    <!-- Image Modal -->
+    <div id="myModal" class="modal">
+        <span class="close"><img src="/icons/cancel.svg" height="25px" alt=""></span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
 
     @yield('footer')
     <div class="modal" id="mapModal">
@@ -138,6 +144,8 @@
             </div>
         </div>
     </div>
+     
+                
     <!-- Scripts
     <script src="/js/app.js"></script> -->
     <script src="/js/sweetalert.min.js"></script>

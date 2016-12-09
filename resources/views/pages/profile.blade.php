@@ -42,8 +42,12 @@
                             </div>
                         @endif
                         <br>
-                        <span class="spanFollow" id="spanFollowerCount" style="float:left; padding-left:8px;">{{ $user->followers }} Followers</span>
-                        <span class="spanFollow" style="float:right; padding-right:8px;">{{ $user->follow }}  Following</span>
+                        <span class="spanFollow" id="spanFollowerCount" style="float:left; padding-left:8px;">
+                            <a href="/profile/{{ $user->id}}/followers" style="text-decoration:none; color: #777777;">{{ $user->followers }} Followers</a>
+                        </span>
+                        <span class="spanFollow" style="float:right; padding-right:8px;">
+                            <a href="/profile/{{ $user->id}}/following" style="text-decoration:none; color: #777777;">{{ $user->follow }}  Following</a>
+                        </span>
                         
                         
                      </div>
@@ -97,7 +101,7 @@
                             </div>
                             <div class="col-md-12 " style="background-color:white; height:70px;padding-left:0;">
                                 <div class="col-md-10 col-sm-10 col-xs-7" style="padding-left:0;" >
-                                    <input id="description" type="textarea" class="form-control  " name="description" value="{{ old('description') }}" maxlength="80"  required placeholder="Type here"
+                                    <input id="description" type="textarea" class="form-control  " name="description" value="{{ old('description') }}" maxlength="80"  required placeholder="Post description"
                                      style="background-color:white; border:0;height:70px"
                                     >                                
                                 </div>
@@ -147,12 +151,7 @@
                         </div>
                     @endif
                 </div>
-                <!-- The Image Modal -->
-                <div id="myModal" class="modal">
-                    <span class="close">×</span>
-                    <img class="modal-content" id="img01">
-                    <div id="caption"></div>
-                </div>
+                
                   
             </div>            
         </div>

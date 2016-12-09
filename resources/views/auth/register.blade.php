@@ -87,13 +87,18 @@
                             </div>
                         </div>
 
-                        <!--<div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                            <!--<label for="password-confirm" class="col-md-4 control-label"></label>-->
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            <div class="col-md-6 col-md-offset-3">
+                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required placeholder="Confirm Password">
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                        </div>-->
+                        </div>
                         <style>
                             .ddl {
                                 
@@ -280,14 +285,14 @@
                         },
                 success: function(data){
                     if(data['status'] == 'taken'){
-                        toastr.error(data["message"]);
+                        // toastr.error(data["message"]);
                         $('#btnSignUp').prop( "disabled", true );
                         $('#divEmail').addClass('has-error');
                         $( "#helpSpanEmail" ).remove();
                         $( "#divEmailInput" ).append( '<span id="helpSpanEmail" class="help-block"><strong>'+data["message"]+'</strong></span>' );
                     }
                     else{
-                        toastr.success(data["message"]);
+                         toastr.success(data["message"]);
                         $('#btnSignUp').prop( "disabled", false );
                         $('#divEmail').removeClass('has-error');
                         $( "#helpSpanEmail" ).remove();
@@ -307,7 +312,7 @@
                     // Success...
                     console.log(data);
                     if(data['status'] == 'invalid'){
-                        toastr.error(data["message"]);
+                       // toastr.error(data["message"]);
                         $('#btnSignUp').prop( "disabled", true );
                         $('#divPassword').addClass('has-error');
                         $( "#helpSpanPassword" ).remove();
@@ -333,9 +338,9 @@
         "preventDuplicates": false,
         "onclick": null,
         "showDuration": "3000",
-        "hideDuration": "10000",
-        "timeOut": "50000",
-        "extendedTimeOut": "10000",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
         "showEasing": "swing",
         "hideEasing": "linear",
         "showMethod": "fadeIn",

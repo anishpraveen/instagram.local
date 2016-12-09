@@ -25,11 +25,11 @@ $(document).ready(function(){
                             div.remove();
                         });
                         console.log(id);
-                        swal("Deleted!", "Your post has been deleted.", "success");
+                        swal({title: "Deleted!", text: "Your post has been deleted.",timer: 1000, type: "success", showConfirmButton: false});
                     }.bind(this, id)
                 })                
             } else {
-                swal("Cancelled", "Your post is safe :)", "error");
+                swal({title: "Cancelled", text: "Your post is safe :)",timer: 1000, type:"error", showConfirmButton: false});
             }
         });
         console.log($(this).attr('data-id'));
