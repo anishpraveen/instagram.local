@@ -33,7 +33,7 @@
                         class=" img-responsive myImg " alt="/{{$post['imageName']}}" >
                 @if($post['userId'] == Auth::user()->id)
                     <a data-href="/delete/{{ $post['id'] }}" id="deletePost{{ $post['id'] }}" data-id="{{ $post['id'] }}" 
-                            style="padding-right:30px;" class="deletePost">
+                            style="padding-right:30px;" class="deletePost pointer">
                         <img src="/icons/delete.svg" alt="Delete" height='25px' title="Delete Post">
                     </a>
                     <a href="/edit/{{ $post['id'] }}"><img src="/icons/edit.svg" alt="Edit" title="Edit Post"></a>
