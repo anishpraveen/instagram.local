@@ -9,6 +9,7 @@ use App\User;
 use App\Map;
 use Request;
 use Auth;
+use File;
 
 class PostsController extends Controller
 {
@@ -203,4 +204,25 @@ class PostsController extends Controller
 
         return($success);        
     }
+
+    /**
+      * View edit post page
+      * @return \Illuminate\Http\Response
+      */
+    public function deletePost($id)
+    {
+        $post = Posts::FindorFail($id);
+        $user = User::Find(Auth::user()->id); 
+        if($user->id==$post->userId)
+        {   
+            $destinationPath = public_path($post->imageName);
+            File::delete($destinationPath);
+            $post->delete();
+            return redirect()->back();
+        }
+        //return view('pages.crop', compact('post'));
+        return redirect('/home');
+    }
+
+
 }

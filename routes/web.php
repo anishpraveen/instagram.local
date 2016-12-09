@@ -29,6 +29,7 @@ Route::get('/posts', 'PostsController@get');
 Route::post('/posts/savePost', 'PostsController@savePostEdits');
 
 Route::get('/edit/{id}', 'PostsController@viewEditPost');
+Route::get('/delete/{id}', 'PostsController@deletePost');
 
 Route::get('/follow/{id}', 'FollowController@follow');
 Route::get('/follow/{id}/unfollow', 'FollowController@unfollow');

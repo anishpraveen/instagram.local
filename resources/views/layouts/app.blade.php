@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 
     <!-- Styles -->
+    <link href="/css/sweetalert.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/user.css" rel="stylesheet">
@@ -139,7 +140,9 @@
     </div>
     <!-- Scripts
     <script src="/js/app.js"></script> -->
-
+    <script src="/js/sweetalert.min.js"></script>
+    <script src="/js/deletePost.js">
+    </script>
     <script>
         $( "input" ).keyup(function(e) {
             var value = $( this ).val();
