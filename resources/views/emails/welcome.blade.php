@@ -76,7 +76,7 @@ $style = [
                 <table width="100%" cellpadding="0" cellspacing="0">
                     <!-- Logo -->
                     <tr>
-                        <td style="{{ $style['email-masthead'] }}"class='gradiantleft'>
+                        <td style="{{ $style['email-masthead'] }}"class=''>
                             <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
                                 {{ config('app.name') }}
                             </a>

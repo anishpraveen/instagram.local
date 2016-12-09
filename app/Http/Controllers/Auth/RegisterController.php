@@ -117,16 +117,7 @@ class RegisterController extends Controller
         $follow->user_id = $user->id;
         $follow->follower_id = $user->id;
         
-        $follow->save();
-        $content = "Welcome ".$user->name." to our instagram family";
-        Mail::send('emails.welcome', ['title' => 'Welcome', 'content' => $content], function($message) use ($data)
-            {   
-                //$actionText
-                $message->from('no-reply@'.config('app.name'), config('app.name'));
-                $message->subject("Welcome to ".config('app.name'));
-                $message->to($data['email']);
-                $message->priority('High');
-            });
+        $follow->save();        
         return  $user;
     }
 
@@ -142,7 +133,7 @@ class RegisterController extends Controller
         {
             $user = $this->create(Request::all());
             // After creating the user send an email with the random token generated in the create method above
-            $email = new EmailVerification(new User(['verification_token' => $user->verification_token]));
+            $email = new EmailVerification($user);
             Mail::to($user->email)->send($email);
             DB::commit();
             return back();

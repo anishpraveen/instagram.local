@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Mail;
 use Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -156,10 +157,19 @@ class User extends Authenticatable
      }
 
      // Set the verified status to true and make the email token null
-public function verified()
-{
-    $this->verified = 1;
-    $this->verification_token = null;
-    $this->save();
-}
+    public function verified()
+    {
+        $this->verified = 1;
+        $this->verification_token = null;
+        $this->save();
+
+        $content = "Welcome ".$this->name." to our instagram family";
+        Mail::send('emails.welcome', ['title' => 'Welcome', 'content' => $content], function($message)
+            {   
+                $message->from('no-reply@'.config('app.name'), config('app.name'));
+                $message->subject("Welcome to ".config('app.name'));
+                $message->to($this->email);
+                $message->priority('High');
+            });
+    }
 }
