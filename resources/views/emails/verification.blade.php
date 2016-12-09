@@ -117,7 +117,22 @@ $style = [
                             </table>
                         </td>
                     </tr>
+                    <table style="{{ $style['body_sub'] }}">
+                        <tr>
+                            <td style="{{ $fontFamily }}">
+                                <p style="{{ $style['paragraph-sub'] }}">
+                                    If you’re having trouble clicking the Verify button,
+                                    copy and paste the URL below into your web browser:
+                                </p>
 
+                                <p style="{{ $style['paragraph-sub'] }}">
+                                    <a style="{{ $style['anchor'] }}" href="{{ url('register/verify/'.$user->verification_token) }}" target="_blank">
+                                        {{ url('register/verify/'.$user->verification_token) }}
+                                    </a>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
                     <!-- Footer -->
                     <tr>
                         <td>
