@@ -41,7 +41,7 @@
          <!-- Recommended List -->
         <div class="col-md-3 ">
             <div class="panel panel-group">
-                <div class="panel-heading" id="recommendedPeopleHeading" style="color:#f02d88; text-align:left;">Recommended Peoples</div>
+                <div class="panel-heading" id="recommendedPeopleHeading" style="color:#f02d88; text-align:left;">Recommended People</div>
 
                 <div class="panel-body">
                     @if(empty($userList)||!is_null($userList)) 
@@ -68,11 +68,11 @@
                                         </div>
                                         <div class="col-md-3  col-xs-3" id="{{ $user['id'] }}"  style="float:right;">                                                       
                                             @if($user['follow'])  
-                                                <a onclick="unfollow({{ $user['id'] }});" title="Stop following">                                       
+                                                <a onclick="unfollow({{ $user['id'] }});" title="Stop following {{ $user['name'] }}">                                       
                                                     <img src="/icons/followers.svg" class="pointer" style="float:right;" alt="following">
                                                 </a>
                                             @else
-                                                <a  onclick="follow({{ $user['id'] }});" title="Follow me">  
+                                                <a  onclick="follow({{ $user['id'] }});" title="Follow {{ $user['name'] }}">  
                                                     <img src="/icons/follow.svg" class="pointer" style="float:right;" alt="follow">
                                                 </a>
                                             @endif                                                

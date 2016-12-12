@@ -34,7 +34,7 @@
         <div class="col-md-9" style="padding-left:0;">
             <div class="panel panel-default" style="border:0;">
                 <div class="panel-heading" style="border:0;" id="recommendedPeopleHeading">
-                    General Accounts Settings
+                    General Account Settings
                     <a id="enableEdit" class="pointer"><img src="/icons/edit.svg" style="float:right; padding-top:3px;" alt=""></a>
                 </div>
                 <form class="" role="form" method="POST" action="{{ url('/user/save') }}" enctype="multipart/form-data">
@@ -178,7 +178,6 @@
                         },
                 success: function(data){
                     if(data['status'] == 'invalid'){
-                        toastr.error(data["message"]);
                         $('#btnSignUp').prop( "disabled", true );
                         $('#divPassword').addClass('has-error');
                         $( "#helpSpanPassword" ).remove();

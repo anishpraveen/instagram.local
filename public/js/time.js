@@ -3,7 +3,7 @@
 setInterval(function() {
     var time = formatAMPM();
     document.getElementById('lClock').innerHTML=time;
-}, 1000 * 60 * 1); // millisec * sec * min
+}, 1000 * 1 * 1); // millisec * sec * min
 
 /**
  * Gets current time and converts to AM PM time

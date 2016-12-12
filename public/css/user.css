@@ -206,7 +206,11 @@ body{
     text-decoration: none;
     cursor: pointer;
 }
+.ui-dialog.mapDialog.ui-widget.ui-widget-content.ui-front.ui-draggable.ui-resizable{
+    outline: none;
+}
 #dvMap{
+    outline: none;
    width: 590px;
    height: 333px;
    z-index: 9998;
@@ -214,13 +218,14 @@ body{
     border-style: solid;
     border-color: #f32c86;
 }
-#dialog{
+/*#dialog{
+    outline: none;
     border-width: 5px;
     border-style: solid;
     border-color: #f32c86;
     padding: 0;  
     z-index: 9999;
-}
+}*/
 .ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close{
     background-color: #f32c86;    
     border: 0 none;
@@ -228,8 +233,8 @@ body{
     z-index: 9999;
     color: white;
     font-weight: 900;
-    left: 573px;
-    top: 30px;
+    left: 570px;
+    top: 25px;
     float:right;
 }
 /* 100% Image Width on Smaller Screens */
@@ -265,6 +270,10 @@ body{
     
 }
 
+.rotate{
+    color: rgb(0,0,0);
+    font-weight: 600;
+}
 
 #divRecomendedRow{
     width:250px;
@@ -345,7 +354,7 @@ body{
     text-decoration: none;
 }
 
-.sideBar a :hover{
+.sideBar a:hover{
     font-size: 17px;
     color: #ff9f41;
 }

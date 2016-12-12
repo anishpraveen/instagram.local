@@ -35,7 +35,7 @@ $(document).ready(function () {
         });
          var modal = document.getElementById('mapModal');
          modal.style.display = "block";
-         
+         $('.ui-dialog-titlebar-close').removeAttr('title');
     });
 
     $('body').on('click', '.btnShowProfile', function () {

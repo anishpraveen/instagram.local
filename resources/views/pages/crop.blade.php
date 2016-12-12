@@ -74,18 +74,15 @@
     <div class="clearfix"></div><br>
     <!--Cancel editing-->
     <div class="col-md-2 col-md-offset-4">        
-        <button type="button" id="btnCancel" class="btn btn-large btn-block transparent">
-           
-                <img src="/icons/ic_cancel_black_24px.svg" height="25" alt="">
-            
+        <button type="button" id="btnCancel" class="btn btn-large btn-block btn-danger">
+                <!--<img src="/icons/ic_cancel_black_24px.svg" height="25" alt="">-->
             Cancel
         </button>
     </div>
      <!--Save Changes-->
     <div id="" class="col-md-2 ">
-        
-        <button type="button" class="btn col-md-12 transparent" id="aSaveChanges" title="Save changes">
-            <img src="/icons/ic_done_black_24px.svg" alt="">
+        <button type="button" class="btn col-md-12 btn-primary" id="aSaveChanges" title="Save changes">
+            <!--<img src="/icons/ic_done_black_24px.svg" alt="">-->
             Save
         </button>
     </div>

@@ -30,10 +30,10 @@
                                             <div class="col-md-1  " id="{{ $user['id'] }}"  >                                                       
                                                 @if($user['follow'])  
                                                     <a onclick="unfollow({{ $user['id'] }});" >                                       
-                                                        <img src="/icons/followers.svg" title="Stop following" style="cursor:pointer;" alt="following">
+                                                        <img src="/icons/followers.svg" title="Stop following {{ $user['name'] }}" style="cursor:pointer;" alt="following">
                                                     </a>
                                                 @else
-                                                    <a  onclick="follow({{ $user['id'] }});" title="Follow me" style="cursor:pointer;">  
+                                                    <a  onclick="follow({{ $user['id'] }});" title="Follow {{ $user['name'] }}" style="cursor:pointer;">  
                                                         <img src="/icons/follow.svg" style="" alt="follow">
                                                     </a>
                                                 @endif                                                
