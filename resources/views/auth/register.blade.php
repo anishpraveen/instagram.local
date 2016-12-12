@@ -87,11 +87,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}" id="divRePassword">
                             <!--<label for="password-confirm" class="col-md-4 control-label"></label>-->
 
-                            <div class="col-md-6 col-md-offset-3">
-                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required placeholder="Confirm Password">
+                            <div id="divRePasswordInput" class="col-md-6 col-md-offset-3">                            
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Confirm Password">
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -300,6 +300,8 @@
                 }
             });            
       });
+      var passwordTrue = false;
+      var rePasswordTrue = false;
       $('#password').blur(function() {
           $.ajax({
                 url: '/user/password',
@@ -309,10 +311,9 @@
                             return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
                         },
                 success: function(data){
-                    // Success...
-                    console.log(data);
                     if(data['status'] == 'invalid'){
                        // toastr.error(data["message"]);
+                        passwordTrue = false;
                         $('#btnSignUp').prop( "disabled", true );
                         $('#divPassword').addClass('has-error');
                         $( "#helpSpanPassword" ).remove();
@@ -320,12 +321,46 @@
                     }
                     else{
                         toastr.success(data["message"]);
-                        $('#btnSignUp').prop( "disabled", false );
+                        passwordTrue = true;
+                        if(rePasswordTrue == true)
+                            {
+                                $('#btnSignUp').prop( "disabled", false );
+                            }
+                        rePassword = $('#password-confirm').val();
+                        password=$('#password').val();
+                        if(password == rePassword ){
+                            rePasswordTrue = true
+                            $('#btnSignUp').prop( "disabled", false );
+                            $('#divRePassword').removeClass('has-error');
+                            $( "#helpSpanRePassword" ).remove();
+                        }
                         $('#divPassword').removeClass('has-error');
                         $( "#helpSpanPassword" ).remove();
                     }
                 }
             });            
+      });
+      $('#password-confirm').blur(function() {
+          rePassword = $('#password-confirm').val();
+          password=$('#password').val();
+          if(password != rePassword ){
+                rePasswordTrue = false;
+                $('#btnSignUp').prop( "disabled", true );
+                $('#divRePassword').addClass('has-error');
+                $( "#helpSpanRePassword" ).remove();
+                $( "#divRePasswordInput" ).append( '<span id="helpSpanRePassword" class="help-block"><strong>'+'Password mismatch'+'</strong></span>' );
+            }
+            else{
+                toastr.success('Passwords Match');
+                rePasswordTrue = true;
+                if(passwordTrue == true)
+                    {                        
+                        $('#btnSignUp').prop( "disabled", false );
+                    }
+                $('#divRePassword').removeClass('has-error');
+                $( "#helpSpanRePassword" ).remove();
+            }
+                 
       });
   </script>
   <script>

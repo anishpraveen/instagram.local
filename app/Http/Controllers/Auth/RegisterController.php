@@ -58,7 +58,6 @@ class RegisterController extends Controller
             'lastname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6|regex:/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]*$/',
-            'password_confirmation' => 'required',
             'gender' => 'required',
             'DOBYear' => 'required|not_in:Year',
             'DOBMonth' => 'required|not_in:Month',
