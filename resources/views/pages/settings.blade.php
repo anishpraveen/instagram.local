@@ -71,7 +71,7 @@
                             <label for="name" class="col-md-4 labelSettings">Name</label>
 
                             <div class="col-md-6 ">
-                                <input type="text" class="inputFieldsSettings" disabled name="name" value="{{ Auth::user()->name }} {{ Auth::user()->lastName }}" required placeholder="First Name"  autofocus>
+                                <input type="text" class="inputFieldsSettings" id="inputName" disabled name="name" value="{{ Auth::user()->name }} {{ Auth::user()->lastName }}" required placeholder="First Name"  autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -163,10 +163,12 @@
         $("#enableEdit").click(function(event){
             event.preventDefault();
             $('.inputFieldsSettings').prop("disabled", false); // Element(s) are now enabled.
+            $('#password').prop("disabled", true); 
+            $('#inputName').css('padding','5px');
             $('#imgAddAvatar').removeClass("hidden");
             $('.edit').removeClass("hidden");
             $('.editAvatar').removeClass("hidden");
-            $("#password").val("");
+            // $("#password").val("");
         });   
         $('#password').blur(function() {
           $.ajax({

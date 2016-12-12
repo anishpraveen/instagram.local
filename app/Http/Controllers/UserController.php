@@ -149,7 +149,7 @@ class UserController extends Controller
         $data['message'] = 'The email is availabe.';
         if(count($validEmail))
         {
-            $data['message'] = 'The email is taken. Please login using it or use forget password.';            
+            $data['message'] = 'The email is taken. Please login or use forget password.';            
             $data['status'] = 'taken';            
             return $data;
         }
