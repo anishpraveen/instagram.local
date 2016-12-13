@@ -59,7 +59,7 @@ class HomeController extends Controller
         
         // Get suggestion list
         $userList = $user->getUserRecomendation();
-
+        $userList = $this->encodeThisArrayId($userList);
         if(is_null($posts))
         {
             return view('user.home', compact('posts'), compact('userList'));
@@ -72,6 +72,7 @@ class HomeController extends Controller
         $posts = Posts::getLikePosts($posts,$userLikePosts);
         
         $posts= array_reverse($posts);
+        $posts = $this->encodeThisArrayId($posts);
         $perPage = config('constants.PaginationPageSize');
         $posts =$this->paginateArray($posts,$perPage);
         return view('user.home', compact('posts'), compact('userList'));
@@ -96,14 +97,7 @@ class HomeController extends Controller
       */
      public function viewProfile($id)
      {   
-        $id=(Hashids::decode($id)); 
-        if(count($id))
-            $id=$id[0];
-        else
-        {   
-            $message = config('constants.noUser');
-            return view('errors.404',compact('message'));
-        }
+        $id=$this->decodeThis($id);
         try
         {
             $user = User::FindOrFail($id);
@@ -115,7 +109,8 @@ class HomeController extends Controller
 
         catch(ModelNotFoundException $err)
         {
-            return view('errors.404');
+            $message = config('constants.noUser');
+            return view('errors.404',compact('message'));
         }
      }
 
@@ -147,6 +142,7 @@ class HomeController extends Controller
         $post = Posts::getLikePosts($post,$userLikePosts);
         
         $post= array_reverse($post);
+        $post = $this->encodeThisArrayId($post);
         $perPage = config('constants.PaginationPageSize');
         $posts =$this->paginateArray($post,$perPage);
         
@@ -178,7 +174,8 @@ class HomeController extends Controller
                             ->where('lastname','like','%'.$name[1].'%')
                             ->orWhere('lastname','like','%'.$name[0].'%')                            
                             ->get()->toArray();
-         $userList = User::getFollowStatus($userList);   
+         $userList = User::getFollowStatus($userList);  
+         $userList = $this->encodeThisArrayId($userList); 
          $perPage = config('constants.PaginationPageSize');
          $userList =$this->paginateArray($userList,$perPage); 
          $pageHeading = 'Search Results';
@@ -201,7 +198,8 @@ class HomeController extends Controller
             {
                 $userList[] = User::FindOrFail($key['follower_id']);
             }
-            $userList = User::getFollowStatus($userList);   
+            $userList = User::getFollowStatus($userList);
+            $userList = $this->encodeThisArrayId($userList);   
             $perPage = config('constants.PaginationPageSize');
             $userList =$this->paginateArray($userList,$perPage); 
             $pageHeading = $user->name.' is followed by';
@@ -231,6 +229,7 @@ class HomeController extends Controller
                 $userList[] = User::FindOrFail($key['user_id']);
             }
             $userList = User::getFollowStatus($userList);   
+            $userList = $this->encodeThisArrayId($userList);
             $perPage = config('constants.PaginationPageSize');
             $userList =$this->paginateArray($userList,$perPage); 
             $pageHeading = $user->name.' is following';
@@ -280,6 +279,7 @@ class HomeController extends Controller
         $posts = Posts::addLocation($posts);
         $posts = Posts::getLikePosts($posts,$userLikePosts);
         
+        $posts = $this->encodeThisArrayId($posts);
         $perPage = config('constants.PaginationPageSize');
         $posts =$this->paginateArray($posts,$perPage);
         return $posts;

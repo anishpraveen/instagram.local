@@ -22,7 +22,7 @@ $(document).ready(function(){
                     button.attr("id",'btnFollowing');
                     span.text('Following');
                     var fcount = $('body').find('#spanFollowerCount').text();
-                    var res = fcount.split(" ");
+                    var res = fcount.split(" F");
                     $('body').find('#spanFollowerCount').text(parseInt(res[0])+1+' Followers');
                 }
             })
@@ -39,7 +39,7 @@ $(document).ready(function(){
                     button.attr("id",'btnFollowMe');
                     span.text('Follow Me');
                     var fcount = $('body').find('#spanFollowerCount').text();
-                    var res = fcount.split(" ");
+                    var res = fcount.split(" F");
                     $('body').find('#spanFollowerCount').text(parseInt(res[0])-1+' Followers');
                 }
             })
@@ -101,3 +101,35 @@ $(document).ready(function(){
 //         }
 //     })
 // }
+
+$(document).ready(function(){            
+   $('body').on('click', 'div.followStatus', function(){                
+        var id = this.id;
+        var anchor = $( this ).find( "a" );
+        if(anchor.attr("class")=='follow'){   
+            $.ajax({
+                type: "GET",
+                url: '/follow/'+id,
+                data: "",
+                success: function(response) {
+                    anchor.removeClass( "follow" );
+                    anchor.addClass( "unfollow" );
+                    $(anchor).html('<img src="/icons/followers.svg" class="pointer" alt="">');
+                }
+            })
+        }
+
+        else if(anchor.attr("class")=='unfollow'){
+            $.ajax({
+                type: "GET",
+                url: '/follow/'+id+'/unfollow',
+                data: "",
+                success: function(response) {
+                    anchor.removeClass( "unfollow" );
+                    anchor.addClass( "follow" );
+                    $(anchor).html('<img src="/icons/follow.svg" class="pointer" alt="">');
+                }
+            })
+        }
+    });
+});

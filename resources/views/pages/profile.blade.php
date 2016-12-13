@@ -32,11 +32,11 @@
                             <div id="divFollow" >
                                 @if(!App\Follower::where('follower_id','=',Auth::user()->id)->where('user_id','=',$user->id)->count())
                                     <button type="button" id="btnFollowMe" style="outline: none;" class="btn btn-large btn-block btn-default btnFollow">
-                                        <span id="{{ $user->id }}">Follow Me</span>
+                                        <span id="{{ Hashids::encode($user->id) }}">Follow Me</span>
                                     </button>
                                 @else
                                     <button type="button" id="btnFollowing" style="outline: none;" class="btn btn-large btn-block btn-default btnFollow">
-                                        <span id="{{ $user->id }}">Following</span>
+                                        <span id="{{ Hashids::encode($user->id) }}">Following</span>
                                     </button>
                                 @endif
                             </div>
@@ -172,9 +172,7 @@
         <script src="/js/time.js"></script>
     @endif
     <script src="/js/modal.js"></script>
-    <script>
-        
-    </script>
+    
     <script src="/js/likePost.js"></script>
     <script src="/js/follow.js"></script>
     @if(!is_null($posts) && !empty($posts) && isset($posts))

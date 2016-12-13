@@ -36,7 +36,7 @@
                             style="padding-right:30px;" class="deletePost pointer">
                         <img src="/icons/delete.svg" alt="Delete" height='25px' title="Delete Post">
                     </a>
-                    <a href="/edit/{{ Hashids::encode($post['id']) }}"><img src="/icons/edit.svg" alt="Edit" title="Edit Post"></a>
+                    <a href="/edit/{{ ($post['id']) }}"><img src="/icons/edit.svg" alt="Edit" title="Edit Post"></a>
                 @endif
             </div>
             <div class="panel-footer postFooter container-fluid" style="background-color: white; ">   

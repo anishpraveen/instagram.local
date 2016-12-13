@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use Carbon\Carbon;
+use App\Traits\Hashing;
 use App\Posts;
 use App\User;
 use App\Map;
@@ -14,6 +15,7 @@ use File;
 
 class PostsController extends Controller
 {
+    use Hashing;
     /**
      * Create a new controller instance.
      *
@@ -220,6 +222,7 @@ class PostsController extends Controller
       */
     public function deletePost($id)
     {        
+        $id = $this->decodeThisPost($id);
         $post = Posts::FindorFail($id);
         $user = User::Find(Auth::user()->id); 
         if($user->id==$post->userId)

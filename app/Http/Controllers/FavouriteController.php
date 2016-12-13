@@ -7,6 +7,7 @@ use Auth;
 use App\User;
 use App\Posts;
 use App\Favourite;
+use App\Traits\Hashing;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -16,6 +17,7 @@ use Response;
 
 class FavouriteController extends Controller
 {
+    use Hashing;
     /**
      * like a post with id = @param.
      *
@@ -24,6 +26,7 @@ class FavouriteController extends Controller
      */
     public function like($id)
     {
+        $id = $this->decodeThisPost($id);
         $postExist = Posts::FindorFail($id);
         $like = new Favourite;
         $like->postId = $postExist->id;
@@ -42,6 +45,7 @@ class FavouriteController extends Controller
      */
     public function unlike($id)
     {
+        $id = $this->decodeThisPost($id);
         $postExist = Posts::FindorFail($id);
         $like = new Favourite;
         $like->postId = $postExist->id;

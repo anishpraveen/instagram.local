@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Follower;
+use App\Traits\Hashing;
 
 class FollowController extends Controller
 {
+    use Hashing;
     /**
      * Follow a user with id = @param.
      *
@@ -17,6 +19,7 @@ class FollowController extends Controller
      */
     public function follow($id)
     {
+        $id=$this->decodeThis($id);
         $userExist = User::FindorFail($id);
         $follow = new Follower;
         $follow->user_id = $userExist->id;
@@ -35,6 +38,7 @@ class FollowController extends Controller
      */
     public function unfollow($id)
     {
+        $id=$this->decodeThis($id);
         $userExist = User::FindorFail($id);
         $follow = new Follower;
         $follow->user_id = $userExist->id;

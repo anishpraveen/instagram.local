@@ -8,19 +8,40 @@ trait Hashing
         //echo "Hashing Trait executed";
         $id=(Hashids::decode($id)); 
         if(count($id))
-            $id=$id[0];
-        else
-        {   
-            $message = config('constants.noUser');
-            return view('errors.404',compact('message'));
+        { 
+            $id = $id[0];
+            return $id;
         }
         //dd($id);
-        return $id;
+        return -1;
     }
 
     public function encodeThis($id)
     {
-        Hashids::encode($id);
-        dd($id);
+        $id = Hashids::encode($id);
+        return ($id);
+    }
+    public function encodeThisArrayId($arr)
+    {
+        $count = 0;
+        foreach ($arr as $key ) {
+            $arr[$count]['id'] = Hashids::encode($arr[$count]['id'] );
+            $count++;
+        }
+        return($arr);
+    }
+    
+
+    public function decodeThisPost($id)
+    {
+        $id=(Hashids::decode($id)); 
+        if(count($id))
+            $id=$id[0];
+        else
+        {   
+            $message = config('constants.noPost');
+            return view('errors.404',compact('message'));
+        }
+        return $id;
     }
 }
