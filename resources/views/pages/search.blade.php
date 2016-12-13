@@ -10,7 +10,7 @@
                     @if(count($userList)) 
                         <div class="scroll">
                             @foreach($userList as $user) 
-                                <div class="left" style="float:left; padding-bottom:20px; ">
+                                <div class="left" id="rUser{{ ($user['id']) }}" style="float:left; padding-bottom:20px; ">
                                     <div class="container">
                                         <div class="row" style="width:">
                                             <div class="col-md-1" style="padding-right:0px; width:70px;">
@@ -48,7 +48,7 @@
                                 <div class="clearfix">
                                     
                                 </div> 
-                                        <hr style="margin:0; margin-bottom:20px;">    
+                                        <hr id="rUserHR{{ ($user['id']) }}" style="margin:0; margin-bottom:20px;">    
                             @endforeach  
                             {{$userList->setPath('')->links()}}
                         </div>

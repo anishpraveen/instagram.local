@@ -46,7 +46,7 @@
                 <div class="panel-body">
                     @if(empty($userList)||!is_null($userList)) 
                         @foreach($userList as $user) 
-                            <div class="left" style="float:left; padding-bottom:20px;">
+                            <div class="left " id="rUser{{ ($user['id']) }}" style="float:left; padding-bottom:20px;">
                                 <div class="container-fluid">
                                     <div class="row" id="divRecomendedRow" style="">
                                         <div class="col-md-3 col-xs-4" style="padding-right:5px;">
@@ -66,14 +66,16 @@
                                         </div>
                                         <div class="col-md-1">                                                    
                                         </div>
-                                        <div class="col-md-3  col-xs-3" id="{{ $user['id'] }}"  style="float:right;">                                                       
+                                        <div class="col-md-3  col-xs-3 followStatus" id="{{ $user['id'] }}"  style="float:right;">                                                       
                                             @if($user['follow'])  
-                                                <a onclick="unfollow({{ $user['id'] }});" title="Stop following {{ $user['name'] }}">                                       
-                                                    <img src="/icons/followers.svg" class="pointer" style="float:right;" alt="following">
+                                                <!--<a onclick="unfollow({{ $user['id'] }});" > -->
+                                                <a id="{{ $user['id'] }}" class="unfollow">                                      
+                                                    <img src="/icons/followers.svg" class="pointer" style="float:right;" title="Stop following {{ $user['name'] }}" alt="following">
                                                 </a>
                                             @else
-                                                <a  onclick="follow({{ $user['id'] }});" title="Follow {{ $user['name'] }}">  
-                                                    <img src="/icons/follow.svg" class="pointer" style="float:right;" alt="follow">
+                                                <!--<a  onclick="follow({{ $user['id'] }});">  -->
+                                                <a id="{{ $user['id'] }}" class="follow">
+                                                    <img src="/icons/follow.svg" class="pointer" style="float:right;" title="Follow {{ $user['name'] }}" alt="follow">
                                                 </a>
                                             @endif                                                
                                         </div>
@@ -106,50 +108,7 @@
     <!-- /.modal -->
     <script src="/js/modal.js"></script>
 
-    <script>
-        function follow($id){        
-            $.ajax({
-                type: "GET",
-                url: '/follow/'+$id,
-                data: "",
-                success: function(response) {
-                    $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg" class="pointer" style="float:right;" alt=""></a>'   
-                    document.getElementById($id).innerHTML = $html;                
-                    $.ajax({
-                        type: "GET",
-                        url: '/posts',
-                        data: "",
-                        success: function(response) {                
-                            //document.getElementById('divPosts').innerHTML = response;        
-                            window.location.replace("");               
-                        }
-                    })
-                }
-            })
-        }
-
-        function unfollow($id){
-            $.ajax({
-                type: "GET",
-                url: '/follow/'+$id+'/unfollow',
-                data: "",
-                success: function(response) {
-                    
-                    $html = '<a  onclick="follow('+$id+');" ><img src="/icons/follow.svg" class="pointer" style="float:right;" alt=""></a>'   
-                    document.getElementById($id).innerHTML = $html;
-                    $.ajax({
-                        type: "GET",
-                        url: '/posts',
-                        data: "",
-                        success: function(response) {
-                            //document.getElementById('divPosts').innerHTML = response;
-                            window.location.replace("");        
-                        }
-                    })
-                }
-            })
-        }
-    </script>
+    <script src="/js/follow.js"></script>
 
     <script src="/js/likePost.js"></script>
 

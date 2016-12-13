@@ -48,64 +48,11 @@ $(document).ready(function(){
 });
 
 
-// javascript function
-// /**
-//  * 
-//  * 
-//  * @param {any} $id
-//  */
-// function follow($id){        
-//     $.ajax({
-//         type: "GET",
-//         url: '/follow/'+$id,
-//         data: "",
-//         success: function(response) {
-//             $html = '<a onclick="unfollow('+$id+')" ><img src="/icons/followers.svg" style="float:right;" alt=""></a>'   
-//             document.getElementById($id).innerHTML = $html;                
-//             $.ajax({
-//                 type: "GET",
-//                 url: '/posts',
-//                 data: "",
-//                 success: function(response) {                
-//                     //document.getElementById('divPosts').innerHTML = response;        
-//                     window.location.replace("");               
-//                 }
-//             })
-//         }
-//     })
-// }
-
-// /**
-//  * 
-//  * 
-//  * @param {any} $id
-//  */
-// function unfollow($id){
-//     $.ajax({
-//         type: "GET",
-//         url: '/follow/'+$id+'/unfollow',
-//         data: "",
-//         success: function(response) {
-
-//             $html = '<a  onclick="follow('+$id+');" ><img src="/icons/follow.svg" style="float:right;" alt=""></a>'   
-//             document.getElementById($id).innerHTML = $html;
-//             $.ajax({
-//                 type: "GET",
-//                 url: '/posts',
-//                 data: "",
-//                 success: function(response) {
-//                     //document.getElementById('divPosts').innerHTML = response;
-//                     window.location.replace("");        
-//                 }
-//             })
-//         }
-//     })
-// }
-
 $(document).ready(function(){            
    $('body').on('click', 'div.followStatus', function(){                
         var id = this.id;
         var anchor = $( this ).find( "a" );
+        var url = [ location.pathname].join('');
         if(anchor.attr("class")=='follow'){   
             $.ajax({
                 type: "GET",
@@ -115,6 +62,15 @@ $(document).ready(function(){
                     anchor.removeClass( "follow" );
                     anchor.addClass( "unfollow" );
                     $(anchor).html('<img src="/icons/followers.svg" class="pointer" alt="">');
+                    
+                    // console.log(url);
+                    if(url == '/home')
+                    {
+                        var div = $('#rUser'+id);
+                        div.fadeOut(500, function(){ 
+                            div.remove();
+                        });
+                    }
                 }
             })
         }
@@ -128,8 +84,24 @@ $(document).ready(function(){
                     anchor.removeClass( "unfollow" );
                     anchor.addClass( "follow" );
                     $(anchor).html('<img src="/icons/follow.svg" class="pointer" alt="">');
+                    
+                    var res = url.split("/");
+                    // console.log(res[res.length-1]);
+                    url = res[res.length-1];
+                    if(url == 'following')
+                    {
+                        var div = $('#rUser'+id);
+                        var hr = $('#rUserHR'+id);
+                        div.fadeOut(500, function(){ 
+                            div.remove();
+                        });
+                        hr.fadeOut(500, function(){ 
+                            hr.remove();
+                        });
+                    }
                 }
             })
         }
+        
     });
 });

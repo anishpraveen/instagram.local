@@ -43,10 +43,10 @@
                         @endif
                         <br>
                         <span class="spanFollow" id="spanFollowerCount" style="float:left; padding-left:8px;">
-                            <a href="/profile/{{ $user->id}}/followers" style="text-decoration:none; color: #777777;">{{ $user->followers }} Followers</a>
+                            <a href="/profile/{{ Hashids::encode($user->id) }}/followers" style="text-decoration:none; color: #777777;">{{ $user->followers }} Followers</a>
                         </span>
                         <span class="spanFollow" style="float:right; padding-right:8px;">
-                            <a href="/profile/{{ $user->id}}/following" style="text-decoration:none; color: #777777;">{{ $user->follow }}  Following</a>
+                            <a href="/profile/{{ Hashids::encode($user->id) }}/following" style="text-decoration:none; color: #777777;">{{ $user->follow }}  Following</a>
                         </span>
                         
                         
