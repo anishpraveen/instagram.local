@@ -17,7 +17,7 @@
                                                 <img src="{{ $user['profilePic'] }}" class="img-circle" alt="" height="50" width="50">                            
                                             </div>                                        
                                             <div class="col-md-3 " style="padding-left:5px; word-wrap: break-word;">
-                                                <a href="/profile/{{ $user['id'] }}" class="userNameSearch">
+                                                <a href="/profile/{{ Hashids::encode($user['id']) }}" class="userNameSearch">
                                                 {{ $user['name'] }}&nbsp{{ $user['lastName'] }}</a>
                                                 <br>
                                                 <a class="userLocationSearch">

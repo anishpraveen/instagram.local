@@ -36,6 +36,10 @@ class ComposerStaticInitf5c69b450c77ce6e5078596e40a346bf
         array (
             'Webmozart\\Assert\\' => 17,
         ),
+        'V' => 
+        array (
+            'Vinkla\\Hashids\\' => 15,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Util\\' => 22,
@@ -87,11 +91,16 @@ class ComposerStaticInitf5c69b450c77ce6e5078596e40a346bf
             'Intervention\\Image\\' => 19,
             'Illuminate\\' => 11,
         ),
+        'H' => 
+        array (
+            'Hashids\\' => 8,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'GrahamCampbell\\Manager\\' => 23,
         ),
         'F' => 
         array (
@@ -135,6 +144,10 @@ class ComposerStaticInitf5c69b450c77ce6e5078596e40a346bf
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Vinkla\\Hashids\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vinkla/hashids/src',
         ),
         'Symfony\\Polyfill\\Util\\' => 
         array (
@@ -256,6 +269,10 @@ class ComposerStaticInitf5c69b450c77ce6e5078596e40a346bf
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
+        'Hashids\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hashids/hashids/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -267,6 +284,10 @@ class ComposerStaticInitf5c69b450c77ce6e5078596e40a346bf
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'GrahamCampbell\\Manager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/graham-campbell/manager/src',
         ),
         'Faker\\' => 
         array (
@@ -402,6 +423,7 @@ class ComposerStaticInitf5c69b450c77ce6e5078596e40a346bf
     );
 
     public static $classMap = array (
+        'AddVerificationToUserTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_13_070520_add_verification_to_user_table.php',
         'AlterFollowersTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_08_095219_alter_followers_table.php',
         'AlterUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_04_102545_alter_users_table.php',
         'CreateFavouritesTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_08_134358_create_favourites_table.php',

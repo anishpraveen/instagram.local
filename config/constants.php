@@ -26,5 +26,7 @@ return [
     'month12' => 'Dec',
     'confirmMail' => 'Please verify account using the email send to the your account.',
     'loginVerified' => 'Login using the credentials provided during registration',
-    'editSuccess' => 'Profile edited successfully.'
+    'editSuccess' => 'Profile edited successfully.',
+    'noUser' => 'The user you are searching doesn\'t exist',
+    'noPost' => 'The post you are searching doesn\'t exist',
 ];

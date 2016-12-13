@@ -10,7 +10,7 @@
                 <div class="row ">
                     <div class="col-md-8 col-sm-8">
                         <img src="{{ $user[0]['profilePic'] }}" alt=""  class="img-circle" height="45" width="45">                  
-                         <a @if(!str_contains(Request::fullUrl(), 'profile'))href="/profile/{{ $post['userId'] }}" style="cursor:pointer;" @endif class="postsUserName " >{{ $user[0]['name'] }}</a>
+                         <a @if(!str_contains(Request::fullUrl(), 'profile'))href="/profile/{{ Hashids::encode($post['userId']) }}" style="cursor:pointer;" @endif class="postsUserName " >{{ $user[0]['name'] }}</a>
                     </div>
                     <div class="text-right divPostDetails" id="kkkk" style="">
                         <span id="spanPostTime" style="-moz-padding-top: 10px;padding-right:5px; ">
@@ -36,7 +36,7 @@
                             style="padding-right:30px;" class="deletePost pointer">
                         <img src="/icons/delete.svg" alt="Delete" height='25px' title="Delete Post">
                     </a>
-                    <a href="/edit/{{ $post['id'] }}"><img src="/icons/edit.svg" alt="Edit" title="Edit Post"></a>
+                    <a href="/edit/{{ Hashids::encode($post['id']) }}"><img src="/icons/edit.svg" alt="Edit" title="Edit Post"></a>
                 @endif
             </div>
             <div class="panel-footer postFooter container-fluid" style="background-color: white; ">   

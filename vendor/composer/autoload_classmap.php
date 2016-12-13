@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddVerificationToUserTable' => $baseDir . '/database/migrations/2016_09_13_070520_add_verification_to_user_table.php',
     'AlterFollowersTable' => $baseDir . '/database/migrations/2016_11_08_095219_alter_followers_table.php',
     'AlterUsersTable' => $baseDir . '/database/migrations/2016_11_04_102545_alter_users_table.php',
     'CreateFavouritesTable' => $baseDir . '/database/migrations/2016_11_08_134358_create_favourites_table.php',

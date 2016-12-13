@@ -8,6 +8,7 @@ use App\Posts;
 use App\User;
 use App\Map;
 use Request;
+use Hashids;
 use Auth;
 use File;
 
@@ -170,6 +171,14 @@ class PostsController extends Controller
       */
     public function viewEditPost($id)
     {
+        $id=(Hashids::decode($id)); 
+        if(count($id))
+            $id=$id[0];
+        else
+        {   
+            $message = config('constants.noPost');
+            return view('errors.404',compact('message'));
+        }
         $post = Posts::FindorFail($id);
         $user = User::Find(Auth::user()->id); 
         if($user->id!=$post->userId)
@@ -210,7 +219,7 @@ class PostsController extends Controller
       * @return \Illuminate\Http\Response
       */
     public function deletePost($id)
-    {
+    {        
         $post = Posts::FindorFail($id);
         $user = User::Find(Auth::user()->id); 
         if($user->id==$post->userId)

@@ -9,7 +9,11 @@
     
     <div class="jumbotron">
         <div class="container">
-            <h1>Page not Found</h1>
+            @if(!empty($message))
+                <h1>{{$message}}</h1>
+            @else
+                <h1>Page not Found</h1>
+            @endif
             <p>
                 You will be redirected to {{config('constants.redirectURLName')}} in 
                 <span id="timer">{{config('constants.redirectTime')}}</span> 

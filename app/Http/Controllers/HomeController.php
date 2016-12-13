@@ -8,6 +8,8 @@ use App\Posts;
 use Auth;
 use Hash;
 use App\Map;
+use Hashids;
+use App\Traits\Hashing;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;//find or fail error exception class.
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -15,6 +17,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class HomeController extends Controller
 {
+    use Hashing;
     /**
      * Create a new controller instance.
      *
@@ -93,6 +96,14 @@ class HomeController extends Controller
       */
      public function viewProfile($id)
      {   
+        $id=(Hashids::decode($id)); 
+        if(count($id))
+            $id=$id[0];
+        else
+        {   
+            $message = config('constants.noUser');
+            return view('errors.404',compact('message'));
+        }
         try
         {
             $user = User::FindOrFail($id);
@@ -101,7 +112,7 @@ class HomeController extends Controller
             $posts = $this->getPosts($user);
             return view('pages.profile', compact('posts'), compact('user'));
         }
-        
+
         catch(ModelNotFoundException $err)
         {
             return view('errors.404');

@@ -55,7 +55,7 @@
                                             </a>                      
                                         </div>                                        
                                         <div class="col-md-6 col-xs-5" style="padding-left:15px; word-wrap: break-word;">
-                                            <a href="/profile/{{ $user['id'] }}" class="userNameSearch">
+                                            <a href="/profile/{{ Hashids::encode($user['id']) }}" class="userNameSearch">
                                                 {{ $user['name'] }}
                                             </a>
                                             <br>

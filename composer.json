@@ -14,7 +14,9 @@
         "intervention/image": "^2.3",
         "codeception/codeception": "*",
         "laracasts/flash": "^2.0",
-        "jrean/laravel-user-verification": "^3.0"
+        "jrean/laravel-user-verification": "^3.0",
+        "hashids/hashids": "^2.0",
+        "vinkla/hashids": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
