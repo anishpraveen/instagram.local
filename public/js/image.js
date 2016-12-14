@@ -20,29 +20,23 @@ function previewFile(input) {
 //previewFile();  //calls the function named previewFile()
 
 function editProfilePic(input){
-    previewFile(input);
-    //$('#imgAddAvatar').addClass("hidden");
-    // $("#dialog").dialog({          
-    //         modal: true,            
-    //         width: 600,
-    //         height:  380,            
-    //         open: function () {
-    //             $('#avatar').cropper({
-    //                 aspectRatio: 16 / 9,
-    //                 modal: true,
-    //                 crop: function(e) {
-    //                     // Output the result data for cropping image.
-    //                     console.log(e.x);
-    //                     console.log(e.y);
-    //                     // console.log(e.width);
-    //                     // console.log(e.height);
-    //                     // console.log(e.rotate);
-    //                     // console.log(e.scaleX);
-    //                     // console.log(e.scaleY);
-                        
-    //                 }
-    //             });
-    //          }
-    //     });
-    
+    previewFile(input);    
+}
+
+function previewPost(input) {
+
+    var div = document.querySelector('#divImgPreview');
+    var preview = document.querySelector('#imgPreview'); //selects the query named img
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
+    reader.onloadend = function () {
+        preview.src = reader.result;
+
+    }
+
+    if (file) {
+        $( "#divImgPreview" ).removeClass( "hidden" );
+        reader.readAsDataURL(file); //reads the data as a URL
+
+    } 
 }

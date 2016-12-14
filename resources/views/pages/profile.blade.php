@@ -8,6 +8,7 @@
 <div class="hidden laravelInfo" >
    {{ $mytime = Carbon\Carbon::now() }} 
 </div>
+    <link rel="stylesheet" href="/css/post-preview.css">
     
 <div class="container">
     <div class="row">
@@ -59,7 +60,7 @@
             <div class="row">
                 @if($user->id == Auth::user()->id)
                     <!-- Add New Post -->
-                    <div class="col-md-12" style="padding-bottom:30px;">
+                    <div class="col-md-12 " style="padding-bottom:30px;">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/posts') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="col-md-6" id="profileBar" >
@@ -79,7 +80,7 @@
                                     <div class="row">
                                         <div class="col-md-5 col-sm-5 col-xs-5 divImgProfileBar" >
                                             <label id="">
-                                                <input name="image" type="file" id="main-input" accept="image/x-png,image/gif,image/jpeg">
+                                                <input name="image" type="file" id="main-input" accept="image/x-png,image/gif,image/jpeg" onchange="previewPost(this);">
                                                 <img src="/icons/camera.svg" alt="" class="pointer">
                                             </label> 
                                         </div>
@@ -126,6 +127,15 @@
                         </form>
                         
                     </div>
+                    <div class="col-md-12 col-sm-6 col-xs-12 hidden box " id="divImgPreview">
+                        <!--<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+							<line class="top" x1="0" y1="0" x2="900" y2="0"/>
+							<line class="left" x1="0" y1="460" x2="0" y2="-920"/>
+							<line class="bottom" x1="300" y1="460" x2="-600" y2="460"/>
+							<line class="right" x1="300" y1="0" x2="300" y2="1380"/>
+						</svg>-->
+                        <img src="" id="imgPreview" alt="" class="col-md-12 col-sm-6 col-xs-12 imgPre draw">
+                    </div>
                 @endif
                 <!-- Previous Posts -->
                 <div class="scroll">
@@ -170,6 +180,7 @@
     <script src="/js/map.js"></script>
     @if(Auth::user()->id == $user->id)
         <script src="/js/time.js"></script>
+        <script src="/js/image.js"></script>
     @endif
     <script src="/js/modal.js"></script>
     
