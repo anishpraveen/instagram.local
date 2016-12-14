@@ -242,9 +242,9 @@
         }
         var fav = false;
     </script>
-    <script>
-        @if(session()->has('flash_notification.message'))
-
+    
+    @if(session()->has('flash_notification.message'))
+        <script>
             var type = "{{ Session::get('flash_notification.level', 'info') }}";
             switch(type){
                 case 'info':
@@ -261,7 +261,20 @@
                     toastr.error("{{ Session::get('flash_notification.message') }}");
                     break;
             }
-        @endif
-    </script>
+        </script>
+    @endif
+    
+    <script type="text/javascript"
+ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+ <script>
+      localStorage.setItem('logged', 'true');
+        function storageChange (event) {
+            if(event.key === 'logged') {
+                // alert('Logged ' + event.newValue)
+                window.location.replace("/home"); 
+            }
+        }
+        window.addEventListener('storage', storageChange, false)
+ </script>
 </body>
 </html>

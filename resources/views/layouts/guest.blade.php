@@ -46,5 +46,15 @@
     <!-- Scripts -->
     <script src="/js/app.js"></script>
     <script src="/js/image.js"></script>
+    <script>
+        localStorage.setItem('logged', 'false');
+        function storageChange (event) {
+            if(event.key === 'logged') {
+                // alert('Logged ' + event.newValue)
+                window.location.replace("/home"); 
+            }
+        }
+        window.addEventListener('storage', storageChange, false)
+    </script>
 </body>
 </html>
