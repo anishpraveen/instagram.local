@@ -9,7 +9,11 @@
     
     <div class="jumbotron">
         <div class="container">
-            <h1>You are unauthorized to access this page</h1>
+            @if(!empty($exception))
+                <h1>{{ $exception->getMessage() }}</h1>
+            @else
+                <h1>Access restricted</h1>
+            @endif
             <p>
                 You will be redirected to {{config('constants.redirectURLName')}} in 
                 <span id="timer">{{config('constants.redirectTime')}}</span> 
