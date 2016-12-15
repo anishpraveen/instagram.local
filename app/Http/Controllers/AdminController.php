@@ -32,8 +32,8 @@ class AdminController extends Controller
       */
      public function index()
      { 
-         abort_unless(auth()->user()->verified!=2, 403);
-         $userList = User::paginate(5);
+         abort_if(auth()->user()->verification_token!='admin', 403,'403 Forbidden access');
+         $userList = User::sortable()->paginate(5);
         //  redirect ('/home');
         return view('admin.users', compact('userList'));
      }

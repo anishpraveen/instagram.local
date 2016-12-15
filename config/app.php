@@ -184,6 +184,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Jrean\UserVerification\UserVerificationServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
     ],
 
     /*

@@ -37,30 +37,37 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        Start Bootstrap
+                        Admin Panel
                     </a>
                 </li>
                 <li>
                     <a href="#">Dashboard</a>
                 </li>
                 <li>
-                    <a href="#">Shortcuts</a>
+                    <a href="#">Users</a>
                 </li>
                 <li>
-                    <a href="#">Overview</a>
+                    <a href="#">Post</a>
                 </li>
                 <li>
-                    <a href="#">Events</a>
+                    <a href="#">Location</a>
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="#">Password Resets</a>
                 </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
+                <li class="lispace">
+                    <a href="{{ url('/logout') }}"
+                        onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();" >
+                    <!--<img src="/icons/logout_select.svg" alt=" Logout ">-->
+                    Logout
+                    </a>
+
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </li>   
+                
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -99,7 +106,7 @@
         $('#closeMenu').toggleClass("rotated");
     });
     </script>
-
+    <script src="/js/signin.js"></script>
 </body>
 
 </html>

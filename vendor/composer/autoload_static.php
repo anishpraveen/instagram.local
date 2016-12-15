@@ -82,6 +82,10 @@ class ComposerStaticInitf5c69b450c77ce6e5078596e40a346bf
             'League\\Flysystem\\' => 17,
             'Laravel\\Socialite\\' => 18,
         ),
+        'K' => 
+        array (
+            'Kyslik\\ColumnSortable\\' => 22,
+        ),
         'J' => 
         array (
             'Jrean\\UserVerification\\' => 23,
@@ -256,6 +260,10 @@ class ComposerStaticInitf5c69b450c77ce6e5078596e40a346bf
         'Laravel\\Socialite\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/socialite/src',
+        ),
+        'Kyslik\\ColumnSortable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kyslik/column-sortable/src/ColumnSortable',
         ),
         'Jrean\\UserVerification\\' => 
         array (

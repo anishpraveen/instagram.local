@@ -266,15 +266,6 @@
     
     <script type="text/javascript"
  src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
- <script>
-      localStorage.setItem('logged', 'true');
-        function storageChange (event) {
-            if(event.key === 'logged') {
-                // alert('Logged ' + event.newValue)
-                window.location.replace("/home"); 
-            }
-        }
-        window.addEventListener('storage', storageChange, false)
- </script>
+ <script src="/js/signin.js"></script>
 </body>
 </html>

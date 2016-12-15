@@ -6,10 +6,12 @@ use Mail;
 use Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Kyslik\ColumnSortable\Sortable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +31,13 @@ class User extends Authenticatable
         'password', 'remember_token', 'created_at', 'updated_at',  
     ];
 
+    public $sortable = ['id',
+                        'name',
+                        'email',
+                        'lastName',
+                        'birthday',
+                        'created_at',
+                        'updated_at'];
 
     /**
      * User has many posts

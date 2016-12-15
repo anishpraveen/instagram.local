@@ -9,7 +9,7 @@
     
     <div class="jumbotron">
         <div class="container">
-            @if(!empty($exception))
+            @if(!empty($exception->getMessage()))
                 <h1>{{ $exception->getMessage() }}</h1>
             @else
                 <h1>Access restricted</h1>
