@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Notifications\Messages\MailMessage;
 //use Illuminate\Http\Request;
+use App\Mail\AccountDeleted;
+use App\Mail\AccountBlocked;
+use App\Mail\AccountUnblocked;
 use App\Http\Requests\UserRequest;
 use App\User;
 use App\Map;
@@ -173,5 +176,101 @@ class UserController extends Controller
         $data['message'] = 'Valid password'; 
         $data['status'] = 'Valid';            
         return $data;  
+    }
+
+    /**
+     * Block a user
+     *
+     * @return data
+     */
+    public function block()
+    {
+        
+        if(auth()->user()->roles!='admin')
+        {
+            $message = config('messages.unauthorized');
+            return $message;
+        }
+        $id = Request::get('id');
+        try
+        {
+            $user = User::FindOrFail($id);
+            $user->blocked = 'true';
+            $user->save();
+            $message = config('messages.blocked');
+            $email = new AccountBlocked($user);
+            Mail::to($user->email)->queue($email);
+            return $message;
+        }
+
+        catch(ModelNotFoundException $err)
+        {
+            $message = config('messages.noUser');
+            return $message;
+        }
+
+    }
+
+    /**
+     * Unblock a user
+     *
+     * @return data
+     */
+    public function unblock()
+    {
+        if(auth()->user()->roles!='admin')
+        {
+            $message = config('messages.unauthorized');
+            return $message;
+        }
+        $id = Request::get('id');
+        try
+        {
+            $user = User::FindOrFail($id);
+            $user->blocked = 'false';
+            $user->save();
+            $message = config('messages.unblocked');
+            $email = new AccountUnblocked($user);
+            Mail::to($user->email)->queue($email);
+            return $message;
+        }
+
+        catch(ModelNotFoundException $err)
+        {
+            $message = config('messages.noUser');
+            return $message;
+        }
+
+    }
+
+    /**
+     * Unblock a user
+     *
+     * @return data
+     */
+    public function delete()
+    {
+        if(auth()->user()->roles!='admin')
+        {
+            $message = config('messages.unauthorized');
+            return $message;
+        }
+        $id = Request::get('id');
+        try
+        {
+            $user = User::FindOrFail($id);
+            $message = config('messages.account_deleted');
+            $email = new AccountDeleted($user);
+            Mail::to($user->email)->queue($email);
+            $user->delete();           
+            return $message;
+        }
+
+        catch(ModelNotFoundException $err)
+        {
+            $message = config('messages.noUser');
+            return $message;
+        }
+
     }
 }

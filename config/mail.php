@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'hello@instagram.com',
+        'address' => 'info@instagram.com',
         'name' => 'Instagram',
     ],
 

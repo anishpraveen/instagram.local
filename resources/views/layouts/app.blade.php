@@ -165,8 +165,7 @@
             name: {!! json_encode(Auth::user()->name) !!},
             profilePic : {!! json_encode(Auth::user()->profilePic) !!}
         }
-        //console.log(name);
-        //console.log(profilePic);
+        
         $(document).ready(function(){            
             $('body').on('click', '.pusher-chat-widget-header', function(){
                 $(".pusher-chat-widget").css("background-color", "transparent");

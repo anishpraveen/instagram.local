@@ -5,3 +5,9 @@
   -webkit-transform: rotate(180deg); /* Safari and Chrome */
   -o-transform: rotate(180deg); /* Opera */
 }
+.pagination{
+    visibility: visible;
+}
+button{
+  outline: none;
+}
