@@ -104,6 +104,7 @@ $style = [
                                         <!-- Outro -->
                                         
                                             <p style="{{ $style['paragraph'] }}">
+                                                If you feel it has been a mistake please contact the <a href="mailto:admin@instagram.com?Subject=Account%20Blocked" target="_top">admin</a>.
                                                 Thank you
                                             </p>
                                         

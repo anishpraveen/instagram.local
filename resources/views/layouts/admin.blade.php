@@ -62,7 +62,7 @@
                     <a href="#">Dashboard</a>
                 </li>
                 <li>
-                    <a href="#">Users</a>
+                    <a href="/admin/user">Users</a>
                 </li>
                 <li>
                     <a href="#">Post</a>
@@ -153,12 +153,12 @@
             $('body').on('click', '#spanUserIcon', function(){
                 window.location.href = "/profile";
             });
-             $( "input" ).keyup(function(e) {
-            var value = $( this ).val();
-            if(e.keyCode == 13){
-                window.location.replace("/search/"+value);
-            }
-        })
+            //  $( "input" ).keyup(function(e) {
+            // var value = $( this ).val();
+            // if(e.keyCode == 13){
+            //     window.location.replace("/search/"+value);
+            //     }
+            // })
     </script>
     <script src="/js/sweetalert.min.js"></script>
     <script src="http://js.pusher.com/3.0/pusher.min.js"></script>

@@ -27,7 +27,7 @@
                         @for($i=0;$i<9;$i++)
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         @endfor
-                         <input id="inputSearch"  class="input-group-addon loseFocus" type="text" placeholder="Search user" name="" value="">
+                         <!--<input id="inputSearch"  class="input-group-addon loseFocus" type="text" placeholder="Search user" name="" value="">-->
                     </ul>
 
                     <!-- Right Side Of Navbar -->

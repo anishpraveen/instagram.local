@@ -33,8 +33,28 @@ class AdminController extends Controller
      public function index()
      { 
          abort_if(auth()->user()->roles!='admin', 403,'403 Forbidden access');
-         $userList = User::sortable()->paginate(5);
+        //  $userList = User::sortable()->paginate(5);
         //  redirect ('/home');
         return view('admin.users', compact('userList'));
      }
+
+
+    /**
+      * Search user.     
+      * @return \Illuminate\Http\Response
+      */
+    public function getUserList($value = '')
+    {
+        $name = explode(' ', $value);
+         if(empty($name[1]))
+         {
+             $name[1] = '';
+         }
+         $userList = User::select('*')->where('name','like','%'.$name[0].'%')
+                            ->where('lastname','like','%'.$name[1].'%')
+                            ->orWhere('lastname','like','%'.$name[0].'%')                            
+                            ->sortable()->paginate(config('constants.PaginationAdmin'));
+
+        return view('admin._user_list', compact('userList'));
+    }
 }

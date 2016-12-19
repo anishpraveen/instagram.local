@@ -17,7 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/admin', 'AdminController@index');
+Route::get('/admin/user', 'AdminController@index');
+Route::get('/admin/user/{id?}', 'AdminController@getUserList');
 
 Route::get('/home', 'HomeController@index');
 Route::get('/profile', 'HomeController@profile');
@@ -34,6 +35,7 @@ Route::post('/posts/savePost', 'PostsController@savePostEdits');
 
 Route::get('/edit/{id}', 'PostsController@viewEditPost');
 Route::get('/delete/{id}', 'PostsController@deletePost');
+Route::post('/user/delete', 'PostsController@delete');
 
 Route::get('/follow/{id}', 'FollowController@follow');
 Route::get('/follow/{id}/unfollow', 'FollowController@unfollow');

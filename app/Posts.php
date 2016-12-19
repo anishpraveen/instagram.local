@@ -30,6 +30,11 @@ class Posts extends Model
         'created_at', 'updated_at',  
     ];
 
+    public $sortable = [
+        'userId', 'created_at', 'updated_at', 'publishedOn'
+        ];
+
+
     /**
      * Posts are owned by a user
      *

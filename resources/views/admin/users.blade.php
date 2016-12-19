@@ -1,60 +1,119 @@
 @extends('layouts.admin')
 @section('content')
+<style >
+    body {
+    margin: 0;
+    }
+    .loader {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    margin-left: 10%;
+    transform: translate3d(-50%, -50%, 0);
+    display: none;
+    }
+    .dot {
+    width: 24px;
+    height: 24px;
+    background: #3ac;
+    border-radius: 100%;
+    display: inline-block;
+    animation: slide 1s infinite;
+    }
+    .dot:nth-child(1) {
+    animation-delay: 0.1s;
+    background: #32aacc;
+    }
+    .dot:nth-child(2) {
+    animation-delay: 0.2s;
+    background: #64aacc;
+    }
+    .dot:nth-child(3) {
+    animation-delay: 0.3s;
+    background: #96aacc;
+    }
+    .dot:nth-child(4) {
+    animation-delay: 0.4s;
+    background: #c8aacc;
+    }
+    .dot:nth-child(5) {
+    animation-delay: 0.5s;
+    background: #faaacc;
+    }
+    @-moz-keyframes slide {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(1);
+    }
+    }
+    @-webkit-keyframes slide {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(1);
+    }
+    }
+    @-o-keyframes slide {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(1);
+    }
+    }
+    @keyframes slide {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(1);
+    }
+    }
+</style>
 <div class="container">
     <div class="row">
+        <div class="col-sm-7 form-group">
+            <div class="input-group">
+                <input class="form-control" id="search" 
+                    placeholder="Filter User"
+                    type="text">
+
+                <div class="input-group-btn">
+                    <button id="btnSearch" type="button" class="btn btn-default"><i
+                                class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>  
         
-        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">        
-            <table class="table table-responsive table-hover" style="border: solid 2px #dddddd;" >
-                <thead>
-                    <tr>
-                        <th>@sortablelink('id', 'ID')</th>
-                        <th>@sortablelink('name')</th>
-                        <th>@sortablelink('email')</th>
-                        <th>@sortablelink('birthday')</th>
-                        <th>@sortablelink('block_counter','Reported')</th>
-                        <th>@sortablelink('blocked','Block')</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($userList as $user)
-                    <tr id="user{{ $user->id }}">
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}&nbsp{{ $user->lastName }}</td>
-                        <!--<td></td>-->
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->birthday }}</td>
-                        <td>{{ $user->block_counter }}</td>
-                        <td id="blockStatus{{ $user->id }}">
-                            @if($user->blocked=='false')
-                                <div id="{{ $user->id }}" class="btn transparent blockStatus block " data-block="block" data-name="{{ $user->name }}">
-                                    <img id="img{{ $user->id }}" src="/icons/padlock-unlock.svg" height="20px" alt="">
-                                    <asd></asd>
-                                </div>
-                            @else
-                                <div id="{{ $user->id }}" class="btn transparent blockStatus blocked" data-block="blocked">
-                                    <img src="/icons/padlock.svg" height="20px" alt="">
-                                </div>
-                            @endif
-                        </td>
-                        <td>
-                            <div id="delete{{ $user->id }}" class="btn deleteUser transparent" data-name="{{ $user->name }}" data-id="{{ $user->id }}">
-                                <img src="/icons/cancel-button.svg" height="20px" alt="">
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    
-                </tfoot>
-            </table>        
+        <div class="loader">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
-
-
-        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-md-offset-4 col-xs-offset-2 col-sm-offset-2">
-            {!! $userList->appends(\Request::except('page'))->render() !!}
-
+        <div id="divUsersList">                
+            <!--include('admin._user_list')            -->
         </div>
     </div>
 </div>
@@ -65,5 +124,55 @@
 
 @section('scripts')
 <script src="/js/admin.js"></script>
+<script>
+getUserIni();
+    $.fn.enterKey = function (fnc) {
+    return this.each(function () {
+        $(this).keypress(function (ev) {
+            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+            if (keycode == '13') {
+                fnc.call(this, ev);
+            }
+        })
+    })
+}
+$("#search").enterKey(function () {
+    var search = $('#search').val();
+    getUser(search);
+})
+$(document).ready(function(){   
+    $('body').on('click', '#btnSearch', function(event){
+        var search = $('#search').val();  
+        getUser(search);
+    });
+});
+function getUser(search){
+    //  if(search.length){
+    //      search = '%20';
+    //  }console.log(search);
+    $('.loader').show();
+     $.ajax({
+        type: "GET",
+        url: '/admin/user/'+search,
+        data: "",
+        success: function(data) {
+            var div = $('#divUsersList');
+            div.html(data);
+            // div.fadeOut(500, function(){ 
+            //     div.remove();
+            // });
+            $('.loader').hide();
+        }
+    })          
+}
 
+function getUserIni(){
+   // $('.loader').show();
+     var search = '%20';getUser(search)
+}
+
+</script>
+<script>
+    
+</script>
 @endsection

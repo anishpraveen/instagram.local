@@ -5,6 +5,7 @@ return [
     'profilePicPath' => 'uploads/profilePic/',
     'postsPath' => 'uploads/posts/',
     'PaginationPageSize' => '8',
+    'PaginationAdmin' => '5',
     'NoPostsExist' => '-1',
     'userDisplayCount' => '5',
     'placeIndex' => '2',

@@ -77,7 +77,7 @@ $style = [
                                         <!-- Intro -->
                                        
                                             <p style="{{ $style['paragraph'] }}">
-                                               Your account has been deleted.
+                                               We regret to inform you that your account has been deleted.
                                             </p>
                                         
 
@@ -104,7 +104,7 @@ $style = [
                                         <!-- Outro -->
                                         
                                             <p style="{{ $style['paragraph'] }}">
-                                                Thank you for your patience.
+                                                If you feel it has been a mistake please contact the <a href="mailto:admin@instagram.com?Subject=Account%20Deletion" target="_top">admin</a>. Thank you for your patience.
                                             </p>
                                         
 
