@@ -6,7 +6,8 @@
                 <th>@sortablelink('name')</th>
                 <th>@sortablelink('email')</th>
                 <th>Posts</th>
-                <th>@sortablelink('birthday')</th>
+                <!--<th>@sortablelink('birthday')</th>-->
+                <th>@sortablelink('roles')</th>
                 <th>@sortablelink('block_counter','Reported')</th>
                 <th>@sortablelink('blocked','Block')</th>
                 <th>Delete</th>
@@ -17,10 +18,10 @@
             <tr id="user{{ $user->id }}">
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}&nbsp{{ $user->lastName }}</td>
-                <!--<td></td>-->
                 <td>{{ $user->email }}</td>
                 <td>{{$user->posts()->count()}}</td>
-                <td>{{ $user->birthday }}</td>
+                <td>{{ $user->roles }}</td>
+                <!--<td>{{ $user->birthday }}</td>-->
                 <td>{{ $user->block_counter }}</td>
                 <td id="blockStatus{{ $user->id }}">
                     @if($user->blocked=='false')

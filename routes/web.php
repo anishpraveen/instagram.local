@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/admin/user', 'AdminController@index');
 Route::get('/admin/user/{id?}', 'AdminController@getUserList');
+Route::get('/admin/post', 'AdminController@post');
 
 Route::get('/home', 'HomeController@index');
 Route::get('/profile', 'HomeController@profile');

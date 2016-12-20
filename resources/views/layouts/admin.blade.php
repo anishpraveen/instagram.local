@@ -28,6 +28,7 @@
     <link href="/css/user.css" rel="stylesheet">
     <link href="/css/simple-sidebar.css" rel="stylesheet">
     <link href="/css/admin.css" rel="stylesheet">
+    <link href="/css/loader.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,11 +62,11 @@
                 <li>
                     <a href="#">Dashboard</a>
                 </li>
-                <li>
-                    <a href="/admin/user">Users</a>
+                <li >
+                    <a href="/admin/user"  > Users</a>
                 </li>
                 <li>
-                    <a href="#">Post</a>
+                    <a href="/admin/post">Post</a>
                 </li>
                 <li>
                     <a href="#">Location</a>
@@ -103,7 +104,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        
+                        @include('loader')
                         @yield('content')
                         
                     </div>
@@ -117,7 +118,10 @@
 
     
     <!-- Latest compiled and minified JS -->
-    <script src="//code.jquery.com/jquery.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>

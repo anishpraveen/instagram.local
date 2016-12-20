@@ -24,6 +24,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        // $this->middleware('admin');
     }
 
     /**
@@ -32,7 +33,7 @@ class AdminController extends Controller
       */
      public function index()
      { 
-         abort_if(auth()->user()->roles!='admin', 403,'403 Forbidden access');
+        //  abort_if(auth()->user()->roles!='admin', 403,'403 Forbidden access');
         //  $userList = User::sortable()->paginate(5);
         //  redirect ('/home');
         return view('admin.users', compact('userList'));
