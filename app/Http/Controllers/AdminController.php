@@ -24,24 +24,31 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware('admin');
+        $this->middleware('admin');
     }
+
+    /**
+      * Show the admin dashboard.     
+      * @return \Illuminate\Http\Response
+      */
+     public function index()
+     { 
+        return view('admin.dashboard');
+     }
+
 
     /**
       * Show the home page of user.     
       * @return \Illuminate\Http\Response
       */
-     public function index()
+     public function user()
      { 
-        //  abort_if(auth()->user()->roles!='admin', 403,'403 Forbidden access');
-        //  $userList = User::sortable()->paginate(5);
-        //  redirect ('/home');
-        return view('admin.users', compact('userList'));
+        return view('admin.users');
      }
 
 
     /**
-      * Search user.     
+      * Get user list.     
       * @return \Illuminate\Http\Response
       */
     public function getUserList($value = '')
@@ -57,5 +64,38 @@ class AdminController extends Controller
                             ->sortable()->paginate(config('constants.PaginationAdmin'));
 
         return view('admin._user_list', compact('userList'));
+    }
+
+    /**
+      * Show the post.     
+      * @return \Illuminate\Http\Response
+      */
+     public function post()
+     { 
+        //  abort_if(auth()->user()->roles!='admin', 403,'403 Forbidden access');
+        //  $userList = User::sortable()->paginate(5);
+        //  redirect ('/home');
+        return view('admin.posts');
+     }
+
+    /**
+      * Get user list.     
+      * @return \Illuminate\Http\Response
+      */
+    public function getPostList($value = '')
+    { $value = base64_decode($value);
+         if(empty($value) || $value == ' ')
+         {
+             $postList = Posts::select('*') 
+                            ->sortable()->paginate(config('constants.PaginationAdmin'));
+         }
+         else
+         {
+             $postList = Posts::select('*')->where('description','like','%'.$value.'%')              
+                            ->sortable()->paginate(config('constants.PaginationAdmin'));
+         }
+         
+
+        return view('admin._post_list', compact('postList'));
     }
 }

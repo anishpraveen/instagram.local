@@ -60,7 +60,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">Dashboard</a>
+                    <a href="/admin">Dashboard</a>
                 </li>
                 <li >
                     <a href="/admin/user"  > Users</a>
@@ -126,7 +126,7 @@
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
+    <script src="/js/admin.js"></script>
     @yield('scripts')
     <!-- Menu Toggle Script -->
     <script>

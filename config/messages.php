@@ -11,4 +11,5 @@ return [
     'unblocked' => 'The user has been unblocked',
     'account_deleted' => 'Your account has been deleted',
     'unauthorized' => 'No access',
+    'post_deleted' => 'The post has been deleted',
 ];

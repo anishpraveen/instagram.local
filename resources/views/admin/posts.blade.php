@@ -7,46 +7,41 @@
 @section('scripts')
 
 <script>
-getUserIni();
+getPostIni();
    
 $("#search").enterKey(function () {
     var search = $('#search').val();
-    getUser(search);
+    getPost(search);
 })
 $(document).ready(function(){   
     $('body').on('click', '#btnSearch', function(event){
         var search = $('#search').val();  
-        getUser(search);
+        getPost(search);
     });
 });
-function getUser(search){
-    //  if(search.length){
-    //      search = '%20';
-    //  }
-    // console.log(search.length);
+function getPost(search){
+    
     if(search.length===0){
-         var search = '%20';
+        //  var search = '%20';
     }
     $('.loader').show();
+    search = (btoa(search));
      $.ajax({
         type: "GET",
-        url: '/admin/user/'+search,
+        url: '/admin/post/'+search,
         data: "",
         success: function(data) {
             var div = $('#divList');
             div.html(data);
-            // div.fadeOut(500, function(){ 
-            //     div.remove();
-            // });
             $('.loader').hide();
         }
     })          
 }
 
-function getUserIni(){
+function getPostIni(){
    // $('.loader').show();
-     var search = '%20';
-     getUser(search)
+     var search = ' ';
+     getPost(search)
 }
 
 </script>

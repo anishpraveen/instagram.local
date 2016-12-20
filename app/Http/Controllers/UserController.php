@@ -244,7 +244,7 @@ class UserController extends Controller
     }
 
     /**
-     * Unblock a user
+     * Delete a user
      *
      * @return data
      */

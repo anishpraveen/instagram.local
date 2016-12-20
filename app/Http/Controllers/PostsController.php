@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use Carbon\Carbon;
 use App\Traits\Hashing;
+use App\Mail\PostDeleted;
 use App\Posts;
 use App\User;
 use App\Map;
 use Request;
 use Hashids;
+use Mail;
 use Auth;
 use File;
 
@@ -51,7 +53,7 @@ class PostsController extends Controller
         $post->imageName=$uploadFolder.$fileName;
         $post->mapId=Auth::user()->mapId;
         $post->save();
-        return redirect('/edit/'.$post->id);
+        return redirect('/edit/'.$this->encodeThis($post->id));
     }
 
     /**
@@ -236,5 +238,36 @@ class PostsController extends Controller
         return redirect('/home');
     }
 
+    /**
+     * Delete a post by admin
+     *
+     * @return data
+     */
+    public function delete()
+    {
+        if(auth()->user()->roles!='admin')
+        {
+            $message = config('messages.unauthorized');
+            return $message;
+        }
+        $id = Request::get('id');
+        try
+        {
+            $post = Posts::FindorFail($id);
+            $message = config('messages.post_deleted');
+            $user = User::FindOrFail($post->userId);
+            $email = new PostDeleted($post, $user);
+            Mail::to($user->email)->queue($email);
+            // $post->delete();           
+            return $message;
+        }
+
+        catch(ModelNotFoundException $err)
+        {
+            $message = config('messages.noUser');
+            return $message;
+        }
+
+    }
 
 }

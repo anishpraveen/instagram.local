@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 use App\Map;
 
 class Posts extends Model
 {
+    use Sortable;
     /**
      * The attributes that are mass assignable.
      *
@@ -31,7 +33,7 @@ class Posts extends Model
     ];
 
     public $sortable = [
-        'userId', 'created_at', 'updated_at', 'publishedOn'
+        'id', 'description', 'userId', 'created_at', 'updated_at', 'publishedOn'
         ];
 
 

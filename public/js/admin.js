@@ -1,5 +1,5 @@
 $(document).ready(function(){            
-   $('body').on('click', 'div.blockStatus', function(){                
+    $('body').on('click', 'div.blockStatus', function(){                
         var id = this.id; 
         var name = $(this).data("name");
         var img = $( this ).find( "img" );
@@ -47,7 +47,7 @@ $(document).ready(function(){
 
         else if($(this).data("block")=='blocked'){
             $.ajax({
-                 type: "POST",
+                    type: "POST",
                 url: '/user/unblock',
                 data: {id:id},
                 beforeSend: function (request) {
@@ -113,5 +113,58 @@ $(document).ready(function(){
        
         
     });
+    $('body').on('click', 'div.deletePost', function(){                
+        var id = $(this).data("id"); console.log(id);
+        var name = $(this).data("name");
+        swal({
+            title: "Are you sure?",
+            text: "Mail will be send to the "+ $(this).data("name") +".",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, send it!",
+            cancelButtonText: "No, cancel please!",
+            closeOnConfirm: false,
+            closeOnCancel: false,
+            showLoaderOnConfirm: true
+            },
+            function(isConfirm){
+            if (isConfirm) {
+                $.ajax({
+                    type: "POST",
+                    url: '/post/delete',
+                    data: {id:id},
+                    beforeSend: function (request) {
+                        return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+                    },
+                    success: function(response) {
+                        $('#post'+id).remove();
+                        console.log('Deleted');
+                        swal({title: "Deleted!", text: "Mail has been send.",timer: 1000, type: "success", showConfirmButton: false});
+                    },
+                    error: function(response) {
+                        swal({title: "Cannot delete", type: "error", cancelButtonText: "Okay",closeOnConfirm: false,closeOnCancel: false});
+                        console.log('error in deleting post');
+                    }
+                })               
+            } else {
+                swal({title: "Cancelled", text: "",timer: 800, type:"error", showConfirmButton: false});
+            }
+        });
+            
+       
+        
+    });
 
 });
+
+$.fn.enterKey = function (fnc) {
+    return this.each(function () {
+        $(this).keypress(function (ev) {
+            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+            if (keycode == '13') {
+                fnc.call(this, ev);
+            }
+        })
+    })
+}   
