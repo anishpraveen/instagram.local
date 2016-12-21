@@ -117,23 +117,29 @@ $(document).ready(function(){
         var id = $(this).data("id"); console.log(id);
         var name = $(this).data("name");
         swal({
-            title: "Are you sure?",
+            title: "Are you sure to delete post?",
             text: "Mail will be send to the "+ $(this).data("name") +".",
-            type: "warning",
+            type: "input",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Yes, send it!",
             cancelButtonText: "No, cancel please!",
             closeOnConfirm: false,
             closeOnCancel: false,
-            showLoaderOnConfirm: true
+            showLoaderOnConfirm: true,
+            inputPlaceholder: "Message from admin"
             },
-            function(isConfirm){
-            if (isConfirm) {
+            function(isConfirm){  
+                // console.log(isConfirm);   
+                inputValue = $("fieldset input").val();  
+                if(inputValue.length===0){
+                    inputValue = 'no message';
+                }          
+            if (isConfirm === "" || isConfirm) {
                 $.ajax({
                     type: "POST",
                     url: '/post/delete',
-                    data: {id:id},
+                    data: {id:id, message:inputValue},
                     beforeSend: function (request) {
                         return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
                     },
@@ -143,7 +149,7 @@ $(document).ready(function(){
                         swal({title: "Deleted!", text: "Mail has been send.",timer: 1000, type: "success", showConfirmButton: false});
                     },
                     error: function(response) {
-                        swal({title: "Cannot delete", type: "error", cancelButtonText: "Okay",closeOnConfirm: false,closeOnCancel: false});
+                        swal({title: "Error in deleting. Please try after sometime.", type: "error", cancelButtonText: "Okay",closeOnConfirm: false,closeOnCancel: false});
                         console.log('error in deleting post');
                     }
                 })               

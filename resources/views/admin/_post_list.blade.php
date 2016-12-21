@@ -7,7 +7,7 @@
                 <th>@sortablelink('userId')</th>
                 <th>@sortablelink('publishedOn','Published')</th>
                 <!--<th>@sortablelink('created_at')</th>-->
-                <th>@sortablelink('blocked','Block')</th>
+                <!--<th>@sortablelink('blocked','Block')</th>-->
                 <th>Delete</th>
             </tr>
         </thead>
@@ -19,7 +19,7 @@
                 <td>{{ $post->userId }}</td>
                 <td>{{ $post->publishedOn->diffForHumans() }}</td>
                 <!--<td>{{ $post->created_at->diffForHumans() }}</td>    -->
-                <td id="blockPost{{ $post->id }}">
+                <!--<td id="blockPost{{ $post->id }}">
                     @if($post->blocked=='false')
                         <div id="{{ $post->id }}" class="btn transparent blockPost block " data-block="block" data-name="{{ $post->id }}">
                             <img id="img{{ $post->id }}" src="/icons/padlock-unlock.svg" height="20px" alt="">
@@ -30,7 +30,7 @@
                             <img src="/icons/padlock.svg" height="20px" alt="">
                         </div>
                     @endif
-                </td>           
+                </td>           -->
                 <td>
                     <div id="delete{{ $post->id }}" class="btn deletePost transparent" data-name="{{ $post->userId }}" data-id="{{ $post->id }}">
                         <img src="/icons/cancel-button.svg" height="20px" alt="">

@@ -14,15 +14,17 @@ class PostDeleted extends Mailable
     use Queueable, SerializesModels;
     public $post;
     public $user;
+    public $adminMessage;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Posts $post, User $user)
+    public function __construct(Posts $post, User $user, $adminMessage)
     {
         $this->post = $post;
         $this->user = $user;
+        $this->adminMessage = $adminMessage;
     }
 
     /**
@@ -35,6 +37,10 @@ class PostDeleted extends Mailable
         // $destinationPath = public_path(config('constants.postsPath'));
         // $image = $destinationPath+'/'+$post->imageName;
         return $this->view('emails.postDeleted')
+                    ->attach($this->post->imageName,[
+                        'as' => 'img.png',
+                        'mime' => 'application/png',
+                    ]);
                     // ->attach($destinationPath+'/'+$post->imageName, [
                     //     'as' => 'image.png',
                     //     'mime' => 'application/png',

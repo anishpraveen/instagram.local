@@ -251,12 +251,13 @@ class PostsController extends Controller
             return $message;
         }
         $id = Request::get('id');
+        $adminMessage = Request::get('message');
         try
         {
             $post = Posts::FindorFail($id);
             $message = config('messages.post_deleted');
             $user = User::FindOrFail($post->userId);
-            $email = new PostDeleted($post, $user);
+            $email = new PostDeleted($post, $user, $adminMessage);
             Mail::to($user->email)->queue($email);
             // $post->delete();           
             return $message;

@@ -58,6 +58,7 @@ $style = [
                     <tr>
                         <td style="{{ $style['email-masthead'] }}">
                             <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
+                            <img src="{{ $message->embed('Instagram_Logo.png') }}" style="padding:0px; margin:0px" height="20px" />
                                 {{ config('app.name') }}
                             </a>
                         </td>
@@ -77,28 +78,17 @@ $style = [
                                         <!-- Intro -->
                                        
                                             <p style="{{ $style['paragraph'] }}">
-                                               We regret to inform you that your post has been deleted.
+                                               We regret to inform you that your 
+                                               <b>post</b> published <b> {{ $post->publishedOn->diffForHumans() }}</b> ({{ $post->publishedOn }}) 
+                                               with description <i>{{ $post->description }}</i> has been <b>deleted</b>.
+                                               <img src="{{ $message->embed( $post->imageName ) }}" style="padding:0px; margin:0px" height="150px"/>
                                             </p>
                                         
-                                             
-                                        <!-- Action Button -->
-                                       
-                                            <!--<table style="{{ $style['body_action'] }}" align="center" width="100%" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td align="center">
-                                                        <?php
-                                                            $actionColor = 'button--blue';
-                                                        ?>
-
-                                                        <a href="{{ url('register/verify/'.$user->verification_token) }}"
-                                                            style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
-                                                            class="button"
-                                                            target="_blank">
-                                                            Verify
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </table>-->
+                                             @if($adminMessage != 'no message')
+                                                <p style="{{ $style['paragraph'] }}">
+                                                    Admin: <blockquote>{{ $adminMessage }} </blockquote>
+                                                </p>
+                                            @endif
                                     
 
                                         <!-- Outro -->
@@ -117,22 +107,6 @@ $style = [
                             </table>
                         </td>
                     </tr>
-                    <!--<table style="{{ $style['body_sub'] }}">
-                        <tr>
-                            <td style="{{ $fontFamily }}">
-                                <p style="{{ $style['paragraph-sub'] }}">
-                                    If you’re having trouble clicking the Verify button,
-                                    copy and paste the URL below into your web browser:
-                                </p>
-
-                                <p style="{{ $style['paragraph-sub'] }}">
-                                    <a style="{{ $style['anchor'] }}" href="{{ url('register/verify/'.$user->verification_token) }}" target="_blank">
-                                        {{ url('register/verify/'.$user->verification_token) }}
-                                    </a>
-                                </p>
-                            </td>
-                        </tr>
-                    </table>-->
                     <!-- Footer -->
                     <tr>
                         <td>
