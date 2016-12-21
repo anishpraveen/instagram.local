@@ -1,0 +1,43 @@
+body{
+	background-color: #2c3e50
+}
+.panel{
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 150px;
+}
+.panel-body{
+    text-align: center;
+}
+.panel-body span{
+    font-weight: bold;
+    font-size: 20px;
+    transition:
+        font-size 0.25s ease-in 0.25s;
+}
+/*.panel:hover{
+    -webkit-transform: rotateX(-90deg);
+					-moz-transform: rotateX(-90deg);
+transform: rotateX(-90deg);
+}*/
+.panel span{
+    font-size: 30px;
+    transition:
+        font-size 0.5s ease-in;
+}
+.panel:hover span{
+    font-size: 40px;
+    transition:
+        font-size 0.5s ease-out;
+}
+.panel-footer{
+    background-color: transparent;
+    border-top: none;
+    font-size: 20px;
+}
+
+.panel {
+  animation-duration: 3s;
+  /*-vendor-animation-delay: 2s;
+  -vendor-animation-iteration-count: infinite;*/
+}
