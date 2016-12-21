@@ -34,17 +34,10 @@ class PostDeleted extends Mailable
      */
     public function build()
     {
-        // $destinationPath = public_path(config('constants.postsPath'));
-        // $image = $destinationPath+'/'+$post->imageName;
         return $this->view('emails.postDeleted')
                     ->attach($this->post->imageName,[
                         'as' => 'img.png',
                         'mime' => 'application/png',
                     ]);
-                    // ->attach($destinationPath+'/'+$post->imageName, [
-                    //     'as' => 'image.png',
-                    //     'mime' => 'application/png',
-                    // ])
-                    ;
     }
 }

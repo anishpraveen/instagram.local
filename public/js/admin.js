@@ -114,7 +114,7 @@ $(document).ready(function(){
         
     });
     $('body').on('click', 'div.deletePost', function(){                
-        var id = $(this).data("id"); console.log(id);
+        var id = $(this).data("id"); 
         var name = $(this).data("name");
         swal({
             title: "Are you sure to delete post?",
@@ -130,7 +130,6 @@ $(document).ready(function(){
             inputPlaceholder: "Message from admin"
             },
             function(isConfirm){  
-                // console.log(isConfirm);   
                 inputValue = $("fieldset input").val();  
                 if(inputValue.length===0){
                     inputValue = 'no message';
@@ -145,12 +144,10 @@ $(document).ready(function(){
                     },
                     success: function(response) {
                         $('#post'+id).remove();
-                        console.log('Deleted');
                         swal({title: "Deleted!", text: "Mail has been send.",timer: 1000, type: "success", showConfirmButton: false});
                     },
                     error: function(response) {
                         swal({title: "Error in deleting. Please try after sometime.", type: "error", cancelButtonText: "Okay",closeOnConfirm: false,closeOnCancel: false});
-                        console.log('error in deleting post');
                     }
                 })               
             } else {

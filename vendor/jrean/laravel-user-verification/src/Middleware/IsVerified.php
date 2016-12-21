@@ -26,6 +26,12 @@ class IsVerified
             throw new UserNotVerifiedException;
         }
 
+        // if(auth()->user()->verified==0)
+        // {
+        //     flash(config('messages.not_verified'), 'danger');
+        //     Auth::logout();
+        //     return redirect('/login');
+        // }  
         return $next($request);
     }
 }

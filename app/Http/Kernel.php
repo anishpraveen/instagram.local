@@ -54,5 +54,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'isVerified' => Jrean\UserVerification\Middleware\IsVerified::class,
         'admin' => \App\Http\Middleware\IsAdmin::class,
+        'isblocked' => \App\Http\Middleware\IsBlocked::class,
     ];
 }
