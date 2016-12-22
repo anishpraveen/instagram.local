@@ -5,7 +5,7 @@
                 <th>@sortablelink('id', 'ID')</th>
                 <th>@sortablelink('name')</th>
                 <th>@sortablelink('email')</th>
-                <th>Posts</th>
+                <!--<th>Posts</th>-->
                 <!--<th>@sortablelink('birthday')</th>-->
                 <th>@sortablelink('roles')</th>
                 <th>@sortablelink('block_counter','Reported')</th>
@@ -19,8 +19,13 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}&nbsp{{ $user->lastName }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{$user->posts()->count()}}</td>
-                <td>{{ $user->roles }}</td>
+                <!--<td>{{$user->posts()->count()}}</td>-->
+                <td class="changeRole" >
+                    <img src="/icons/edit.svg" alt="Edit role" title="Edit role" height="15px" class="pointer editRole" 
+                         data-id="{{ $user->id }}" data-action="edit" data-roles="{{ $user->roles }}" data-name="{{ $user->name }}">
+                    <span>{{ $user->roles }}</span>
+                    
+                </td>
                 <!--<td>{{ $user->birthday }}</td>-->
                 <td>{{ $user->block_counter }}</td>
                 <td id="blockStatus{{ $user->id }}">

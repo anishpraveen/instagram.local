@@ -12,5 +12,7 @@ return [
     'account_deleted' => 'Your account has been deleted',
     'unauthorized' => 'No access',
     'post_deleted' => 'The post has been deleted',
-    'not_verified' => 'This account is not verified yet. Please verify using the mail sent to your inbox.'
+    'not_verified' => 'This account is not verified yet. Please verify using the mail sent to your inbox.',
+    'new_admin' => 'The user has been given admin privilages',
+    'del_admin' => 'The user\'s admin privilages have been revoked'
 ];

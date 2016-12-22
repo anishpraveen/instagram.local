@@ -11,3 +11,10 @@
 button{
   outline: none;
 }
+.cancel{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+select{
+  outline: none;
+}

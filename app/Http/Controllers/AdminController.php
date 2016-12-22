@@ -58,9 +58,9 @@ class AdminController extends Controller
          {
              $name[1] = '';
          }
-         $userList = User::select('*')->where('name','like','%'.$name[0].'%')
+         $userList = User::select('*')->where('name','like','%'.$name[0].'%')->where('id','<>',auth()->user()->id)
                             ->where('lastname','like','%'.$name[1].'%')
-                            ->orWhere('lastname','like','%'.$name[0].'%')                            
+                            ->orWhere('lastname','like','%'.$name[0].'%')->where('id','<>',auth()->user()->id)
                             ->sortable()->paginate(config('constants.PaginationAdmin'));
 
         return view('admin._user_list', compact('userList'));
@@ -79,11 +79,12 @@ class AdminController extends Controller
      }
 
     /**
-      * Get user list.     
+      * Get post list.     
       * @return \Illuminate\Http\Response
       */
     public function getPostList($value = '')
-    { $value = base64_decode($value);
+    { 
+         $value = base64_decode($value);
          if(empty($value) || $value == ' ')
          {
              $postList = Posts::select('*') 
@@ -98,4 +99,32 @@ class AdminController extends Controller
 
         return view('admin._post_list', compact('postList'));
     }
+    
+    /**
+      * Toggle roles of user     
+      * @return string
+      */
+    public function toggleRole()
+    {
+        $id = request('id');
+        $roles = request('option');
+        if($roles == 'admin')
+            $message = config('messages.new_admin');
+        else
+            $message = config('messages.del_admin');
+        try
+        {
+            $user = User::FindOrFail($id);
+            $user->roles = $roles;
+            $user->save();
+            return $message;
+        }
+
+        catch(ModelNotFoundException $err)
+        {
+            $message = config('messages.noUser');
+            return $message;
+        }
+    }
+
 }

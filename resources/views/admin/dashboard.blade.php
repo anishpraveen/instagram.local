@@ -57,7 +57,7 @@
                 </div>
                 <h1 class="col-xs-offset-1 pink">Admin Dashboard</h1>
                 <br>
-                <div class="panel panel-default col-sm-4 col-xs-offset-1 pointer " data-href="/admin/user">
+                <div class="panel panel-default col-sm-3 col-xs-offset-1 pointer " data-href="/admin/user">
                     <div class="panel-body">
                         <span>User List</span>
                         <div class="panel-footer hidden">
@@ -70,7 +70,7 @@
                 <!--<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">                    
                 </div>-->
                 
-                <div class="panel panel-default col-sm-4 pointer " data-href="/admin/post">
+                <div class="panel panel-default col-sm-3 pointer " data-href="/admin/post">
                     <div class="panel-body">
                        <span>Post List</span>
                         <div class="panel-footer hidden">
@@ -79,6 +79,17 @@
                     </div>
                 </div>
                 
+                <div class="panel panel-default col-sm-3 pointer " data-href="/logout">
+                    <div class="panel-body">
+                       <span>Logout</span>
+                        <div class="panel-footer hidden">
+                            Logout of your account
+                        </div>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </div>
+                </div>
                 
                 
             </div>
@@ -123,8 +134,14 @@
         $(document).ready(function(){  
             $('body').on('click', 'div.pointer', function(){
                 var href = $(this).data('href');
-                // window.location.replace(href); //no history to go back
-                window.location.href = href;
+                $(this).animateCss('flipOutX');
+                // $(this).fadeOut(500, function(){ 
+                //             });
+                if(href == '/logout'){
+                    document.getElementById('logout-form').submit();
+                }
+                else
+                    window.location.href = href;
             });
             $('.panel').on( 'mouseenter mouseleave', function( event ) {
                 var footer = $(this).find('.panel-footer');

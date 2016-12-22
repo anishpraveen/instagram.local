@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
@@ -68,12 +68,12 @@
                 <li>
                     <a href="/admin/post">Post</a>
                 </li>
-                <li>
+                <!--<li>
                     <a href="#">Location</a>
                 </li>
                 <li>
                     <a href="#">Password Resets</a>
-                </li>
+                </li>-->
                 <li class="lispace">
                     <a href="{{ url('/logout') }}"
                         onclick="event.preventDefault();

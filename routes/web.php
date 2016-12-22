@@ -22,6 +22,7 @@ Route::get('/admin/user', 'AdminController@user');
 Route::get('/admin/user/{id?}', 'AdminController@getUserList');
 Route::get('/admin/post', 'AdminController@post');
 Route::get('/admin/post/{id?}', 'AdminController@getPostList');
+Route::post('/admin/toggleRole', 'AdminController@toggleRole');
 
 Route::get('/home', 'HomeController@index');
 Route::get('/profile', 'HomeController@profile');
