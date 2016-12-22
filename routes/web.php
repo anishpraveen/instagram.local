@@ -54,6 +54,7 @@ Route::post('/user/password', 'UserController@checkPassword');
 Route::post('/user/delete', 'UserController@delete');
 Route::post('/user/block', 'UserController@block');
 Route::post('/user/unblock', 'UserController@unblock');
+Route::post('/user/report', 'UserController@report');
 
 $social = 'social.';
 Route::get('/social/redirect/{provider}',   ['as' => 'social.redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);

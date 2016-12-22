@@ -41,6 +41,10 @@
                                     </button>
                                 @endif
                             </div>
+                            <div class="pointer reportUser" style="padding-top: 5px;" 
+                                 data-id="{{Hashids::encode($user->id)}}" data-name="{{($user->name)}}" >
+                                <img src="/icons/block.svg" alt="">Report User
+                            </div>
                         @endif
                         <br>
                         <span class="spanFollow" id="spanFollowerCount" style="float:left; padding-left:8px;">
@@ -56,7 +60,7 @@
             </div>
         </div>
          <!--    Posts    -->
-         <div class="col-md-9 ">            
+        <div class="col-md-9 ">            
             <div class="row">
                 @if($user->id == Auth::user()->id)
                     <!-- Add New Post -->
@@ -196,6 +200,51 @@
             $("#main-input").on('change',function(){
                 $('#spanImage').text('Uploaded');
                 $('#spanImage').css('color','#ff5445');
+            });
+            $('.reportUser').on('click',function(){
+                var id = $(this).data('id');
+                swal({
+                    title: "Are you sure?",
+                    text:  $(this).data("name") +" will be reported to the admin.",
+                    type: "input",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, send it!",
+                    cancelButtonText: "No, cancel please!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false,
+                    showLoaderOnConfirm: true
+                    },
+                    function(inputValue){
+                    if (1) {
+                        if (inputValue === false) return false;
+  
+                        if (inputValue === "") {
+                            swal.showInputError("You need to write something!");
+                            return false
+                        }
+                        inputValue = $("fieldset input").val(); 
+                        if(inputValue.length===0){
+                            inputValue = 'no message';
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: '/user/report',
+                            data: {id:id,message:inputValue},
+                            beforeSend: function (request) {
+                                return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+                            },
+                            success: function(response) {
+                                swal({title: "Reported!", text: response,timer: 1000, type: "success", showConfirmButton: false});
+                            },
+                            error: function(response) {
+                                swal({title: "Error!", text: "Cannot report now",timer: 1000, type: "error", showConfirmButton: false});
+                            }
+                        })               
+                    } else {
+                        swal({title: "Cancelled", text: "",timer: 800, type:"error", showConfirmButton: false});
+                    }
+                });
             });
         });
     </script>

@@ -9,6 +9,8 @@ use App\Mail\AccountDeleted;
 use App\Mail\AccountBlocked;
 use App\Mail\AccountUnblocked;
 use App\Http\Requests\UserRequest;
+use App\Traits\Hashing;
+use App\Block;
 use App\User;
 use App\Map;
 use Request;
@@ -18,6 +20,8 @@ use Hash;
 
 class UserController extends Controller
 {
+    use Hashing;
+
     /**
      * Create a new controller instance.
      *
@@ -274,4 +278,35 @@ class UserController extends Controller
 
     }
 
+    /**
+     * Delete a user
+     *
+     * @return data
+     */
+    public function report()
+    {
+        $id = Request::get('id');
+        $id=$this->decodeThis($id);
+        $comment = Request::get('message');
+        $block = new Block;
+        $block->reporter_id = Auth::user()->id;
+        $block->user_id = $id;
+        $block->comment = $comment;
+        try 
+        {
+            $block->save();
+            $user = User::FindOrFail($id);
+            $user->block_counter++;
+            $user->save();
+        } 
+        catch ( \Illuminate\Database\QueryException $e) 
+        {
+            if($e->errorInfo[0]=='23000')
+            {
+                return 'already reported';
+            }
+        }
+        $message = config('messages.user_reported');
+        return $message;
+    }
 }
