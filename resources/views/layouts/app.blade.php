@@ -98,16 +98,21 @@
                                     <div >
                                        
                                         <li class="lispace">
-                                            <a href="/settings"><img src="/icons/settings_select.svg" alt="Settings"></a>
+                                            <a href="/settings"><img src="/icons/settings_select.svg" alt="Settings" title="Settings"></a>
                                         </li>
                                         <li class="lispace">
-                                            <a href="/favourites"><img src="/icons/fav.svg" alt="Heart"></a>
+                                            <a href="/favourites"><img src="/icons/fav.svg" alt="Favourites" title="Favourites"></a>
                                         </li>
+                                        @if( Auth::user()->roles == 'admin' )
+                                            <li class="lispace">
+                                                <a href="/admin"><img src="/icons/man-with-tie.svg" alt="Admin" title="Admin Panel" height="25px" style="margin-left: -5px;"></a>
+                                            </li>
+                                        @endif
                                         <li class="lispace">
                                             <a href="{{ url('/logout') }}"
                                                 onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();" >
-                                            <img src="/icons/logout_select.svg" alt=" Logout ">
+                                            <img src="/icons/logout_select.svg" alt=" Logout" title=" Logout">
                                             </a>
 
                                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
