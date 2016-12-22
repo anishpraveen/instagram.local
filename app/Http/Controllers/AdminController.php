@@ -58,9 +58,9 @@ class AdminController extends Controller
          {
              $name[1] = '';
          }
-         $userList = User::select('*')->where('name','like','%'.$name[0].'%')->where('id','<>',auth()->user()->id)
+         $userList = User::select('*')->where('name','like','%'.$name[0].'%')->where('id','<>',auth()->user()->id)->where('id','<>',3)
                             ->where('lastname','like','%'.$name[1].'%')
-                            ->orWhere('lastname','like','%'.$name[0].'%')->where('id','<>',auth()->user()->id)
+                            ->orWhere('lastname','like','%'.$name[0].'%')->where('id','<>',auth()->user()->id)->where('id','<>',3)
                             ->sortable()->paginate(config('constants.PaginationAdmin'));
 
         return view('admin._user_list', compact('userList'));

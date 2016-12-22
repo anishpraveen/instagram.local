@@ -78,6 +78,15 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="panel panel-default col-sm-3 pointer " data-href="/admin/report">
+                    <div class="panel-body">
+                       <span>Report Record</span>
+                        <!--<div class="panel-footer hidden">
+                            Detailed report of why each user was reported.
+                        </div>-->
+                    </div>
+                </div>
                 
                 <div class="panel panel-default col-sm-3 pointer " data-href="/logout">
                     <div class="panel-body">

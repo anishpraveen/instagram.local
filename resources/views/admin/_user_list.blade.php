@@ -20,7 +20,7 @@
                 <td>{{ $user->name }}&nbsp{{ $user->lastName }}</td>
                 <td>{{ $user->email }}</td>
                 <!--<td>{{$user->posts()->count()}}</td>-->
-                <td class="changeRole" >
+                <td class="changeRole" style="text-transform: capitalize;">
                     <img src="/icons/edit.svg" alt="Edit role" title="Edit role" height="15px" class="pointer editRole" 
                          data-id="{{ $user->id }}" data-action="edit" data-roles="{{ $user->roles }}" data-name="{{ $user->name }}">
                     <span>{{ $user->roles }}</span>
