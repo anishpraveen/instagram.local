@@ -11,7 +11,7 @@ getReportIni();
    
 $("#search").enterKey(function () {
     var search = $('#search').val();
-    getUser(search);
+    getReport(search);
 })
 $(document).ready(function(){   
     $('body').on('click', '#btnSearch', function(event){
@@ -22,10 +22,6 @@ $(document).ready(function(){
 
 
 function getReport(search){
-    //  if(search.length){
-    //      search = '%20';
-    //  }
-    // console.log(search.length);
     if(search.length===0){
          var search = '%20';
     }
@@ -37,9 +33,6 @@ function getReport(search){
         success: function(data) {
             var div = $('#divList');
             div.html(data);
-            // div.fadeOut(500, function(){ 
-            //     div.remove();
-            // });
             $('.loader').hide();
         }
     })          

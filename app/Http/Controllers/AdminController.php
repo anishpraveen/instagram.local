@@ -150,7 +150,11 @@ class AdminController extends Controller
          }
          $reportList = Block::select('*')
                             ->sortable()->paginate(config('constants.PaginationAdmin'));
-
+        foreach ($reportList as $key => $value) 
+        {
+            $reportList[$key]['reporter_name'] = User::select('name')->where('id','=',$value['reporter_id'])->get()->toArray();
+            $reportList[$key]['user_name'] = User::select('name')->where('id','=',$value['user_id'])->get()->toArray();
+        }
         return view('admin._reports_list', compact('reportList'));
     }
 }

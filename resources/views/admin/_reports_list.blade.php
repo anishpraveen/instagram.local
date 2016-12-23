@@ -3,10 +3,12 @@
         <thead>
             <tr>
                 <th>@sortablelink('id', 'SL')</th>
-                <th>@sortablelink('reporter_id')</th>
-                <th>@sortablelink('user_id')</th>
+                <!--<th>@sortablelink('reporter_id')</th>-->
+                <th>@sortablelink('reporter_id','Reporter')</th>
+                <!--<th>@sortablelink('user_id')</th>-->
+                <th>@sortablelink('user_id','User')</th>
                 <th>@sortablelink('comment')</th>
-                <th>@sortablelink('updated_at')</th>
+                <th>@sortablelink('updated_at','Reporting time')</th>
             </tr>
         </thead>
         <div class="hidden">
@@ -16,8 +18,10 @@
             @foreach ($reportList as $report)
             <tr id="report{{ $report->id }}">
                 <td>{{ $sl++ }}</td>
-                <td>{{ $report->reporter_id }}</td>
-                <td>{{ $report->user_id }}</td>
+                <!--<td>{{ $report->reporter_id }}</td>-->
+                <td>{{ ($report->reporter_name[0]['name']) }}</td>
+                <!--<td>{{ $report->user_id }}</td>-->
+                <td>{{ ($report->user_name[0]['name']) }}</td>
                 <td>{{ $report->comment }}</td>
                 <td>{{ $report->updated_at->diffForHumans() }}</td>
             </tr>

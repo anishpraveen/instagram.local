@@ -81,10 +81,10 @@
 
                 <div class="panel panel-default col-sm-3 pointer " data-href="/admin/report">
                     <div class="panel-body">
-                       <span>Report Record</span>
-                        <!--<div class="panel-footer hidden">
-                            Detailed report of why each user was reported.
-                        </div>-->
+                       <span>Reports</span>
+                        <div class="panel-footer hidden">
+                            Report of why each user was reported.
+                        </div>
                     </div>
                 </div>
                 
