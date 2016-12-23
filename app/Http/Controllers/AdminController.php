@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Traits\Hashing;
+use App\Mail\AdminMail;
 use App\Block;
 use App\Posts;
 use App\User;
 use App\Map;
 use Auth;
+use Mail;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;//find or fail error exception class.
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -173,6 +175,25 @@ class AdminController extends Controller
       */
     public function sendMail()
     {
+        $to = request('to');
+        $toCount = request('toCount');
+        $subject = request('subject');
+        $body = request('body');
+        $from = auth()->user()->email;
+        $message = 'mail send';
+        if( strcmp($to, 'user')!=0)
+        {
+            $message = 'invalid option';               
+            return $to;
+        }
+        $userList = User::all();
+        $email = new AdminMail($from, $subject, $body);
+        foreach ($userList as $user)
+        {
+            if($user->roles == $to)
+                Mail::to($user->email)->queue($email);
+        }
+        return $message;
         
     }
 }

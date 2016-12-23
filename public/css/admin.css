@@ -27,3 +27,13 @@ button.close {
   top: 0;
   right: 0;
 }
+
+input[type=file]{
+  display:inline;
+}
+.ui-helper-hidden-accessible{
+  display: none;
+}
+.radio label{
+  padding-left: 50px;
+}
