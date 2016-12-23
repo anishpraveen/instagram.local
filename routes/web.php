@@ -23,6 +23,8 @@ Route::get('/admin/user/{id?}', 'AdminController@getUserList');
 Route::get('/admin/post', 'AdminController@post');
 Route::get('/admin/post/{id?}', 'AdminController@getPostList');
 Route::post('/admin/toggleRole', 'AdminController@toggleRole');
+Route::get('/admin/report', 'AdminController@report');
+Route::get('/admin/report/{id?}', 'AdminController@getReportList');
 
 Route::get('/home', 'HomeController@index');
 Route::get('/profile', 'HomeController@profile');

@@ -68,10 +68,10 @@
                 <li>
                     <a href="/admin/post">Post</a>
                 </li>
-                <!--<li>
-                    <a href="#">Location</a>
-                </li>
                 <li>
+                    <a href="/admin/report">Report</a>
+                </li>
+                <!--<li>
                     <a href="#">Password Resets</a>
                 </li>-->
                 <li class="lispace">

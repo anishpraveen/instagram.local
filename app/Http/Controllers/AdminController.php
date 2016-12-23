@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Traits\Hashing;
+use App\Block;
 use App\Posts;
 use App\User;
 use App\Map;
@@ -127,4 +128,29 @@ class AdminController extends Controller
         }
     }
 
+    /**
+      * Show reported stats
+      * @return \Illuminate\Http\Response
+      */
+    public function report()
+    {
+         return view('admin.reports');
+    }
+
+    /**
+      * Get report list.     
+      * @return \Illuminate\Http\Response
+      */
+    public function getReportList($value = '')
+    {
+        $name = explode(' ', $value);
+         if(empty($name[1]))
+         {
+             $name[1] = '';
+         }
+         $reportList = Block::select('*')
+                            ->sortable()->paginate(config('constants.PaginationAdmin'));
+
+        return view('admin._reports_list', compact('reportList'));
+    }
 }

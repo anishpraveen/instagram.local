@@ -11,7 +11,7 @@ return [
     'placeIndex' => '2',
     'firstIndex' => '0',
     'redirectURL' => '/home',
-    'redirectURLName' => 'home',
+    'redirectURLName' => 'back',
     'redirectTime' => '5',
     'month1' => 'Jan',
     'month2' => 'Feb',

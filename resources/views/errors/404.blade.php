@@ -20,7 +20,8 @@
                 seconds
             </p>
             <p>
-                <a class="btn btn-info btn-lg" href="{{config('constants.redirectURL')}}">Return {{config('constants.redirectURLName')}}</a>
+            <!--href="config('constants.redirectURL')"-->
+                <a class="btn btn-info btn-lg" href="{{ URL::previous() }}">Return {{config('constants.redirectURLName')}}</a>
             </p>
         </div>
     </div>
@@ -35,7 +36,7 @@
     setInterval(function() {
         document.getElementById('timer').innerText = count--; 
         if(count == 0){
-            window.location="{{config('constants.redirectURL')}}";
+            window.location="{{ URL::previous() }}";
         }
     }, 1000 * 1 * 1); // millisec * sec * min
    
