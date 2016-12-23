@@ -157,4 +157,22 @@ class AdminController extends Controller
         }
         return view('admin._reports_list', compact('reportList'));
     }
+
+    /**
+      * Show mailing page
+      * @return \Illuminate\Http\Response
+      */
+    public function mail()
+    {
+         return view('admin.mail');
+    }
+
+    /**
+      * Show mailing page
+      * @return \Illuminate\Http\Response
+      */
+    public function sendMail()
+    {
+        
+    }
 }

@@ -87,6 +87,15 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="panel panel-default col-sm-3 pointer " data-href="/admin/mail">
+                    <div class="panel-body">
+                       <span>Mail</span>
+                        <div class="panel-footer hidden">
+                            Send mail to users.
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="panel panel-default col-sm-3 pointer " data-href="/logout">
                     <div class="panel-body">

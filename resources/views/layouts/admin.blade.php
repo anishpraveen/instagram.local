@@ -71,9 +71,9 @@
                 <li>
                     <a href="/admin/report">Report</a>
                 </li>
-                <!--<li>
-                    <a href="#">Password Resets</a>
-                </li>-->
+                <li>
+                    <a href="/admin/mail">Mails</a>
+                </li>
                 <li class="lispace">
                     <a href="{{ url('/logout') }}"
                         onclick="event.preventDefault();
@@ -122,9 +122,10 @@
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
     
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/js/admin.js"></script>
     @yield('scripts')
