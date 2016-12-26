@@ -181,19 +181,61 @@ class AdminController extends Controller
         $body = request('body');
         $from = auth()->user()->email;
         $message = 'mail send';
-        if( strcmp($to, 'user')!=0)
-        {
-            $message = 'invalid option';               
-            return $to;
-        }
+        $MailSend = true;
         $userList = User::all();
         $email = new AdminMail($from, $subject, $body);
+        switch ($to) {
+            case 'user':
+                foreach ($userList as $user)
+                {
+                    if($user->roles == $to)
+                        $emails[] = $user->email;
+                }
+                $message = 'to users';
+                break;
+            
+            case 'admin':
+                foreach ($userList as $user)
+                {
+                    if($user->roles == $to)
+                        $emails[] = $user->email;
+                }
+                              
+                $message = 'to admin';
+                break;
+            
+            case 'all':
+                foreach ($userList as $user)
+                {
+                    $emails[] = $user->email;
+                }
+                $message = 'to all';
+                break;
+
+            default:
+                $MailSend = false;
+                $message = 'invalid option';        
+                break;
+        }
+        
+        if($MailSend)
+            Mail::to($emails)->queue($email);  
+        return $message;
+    }
+
+    /**
+      * Get email ids of users
+      * @return json string
+      */
+    public function getEmails()
+    {
+        $userList = User::all();
+        $count = 0;
         foreach ($userList as $user)
         {
-            if($user->roles == $to)
-                Mail::to($user->email)->queue($email);
+            $emails[$count]['id'] = $user->id;
+            $emails[$count++]['text'] = $user->email;
         }
-        return $message;
-        
+        return ($emails);
     }
 }

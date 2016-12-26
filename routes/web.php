@@ -27,6 +27,7 @@ Route::get('/admin/report', 'AdminController@report');
 Route::get('/admin/report/{id?}', 'AdminController@getReportList');
 Route::get('/admin/mail', 'AdminController@mail');
 Route::post('/admin/mail', 'AdminController@sendMail');
+Route::post('/admin/emails', 'AdminController@getEmails');
 
 Route::get('/home', 'HomeController@index');
 Route::get('/profile', 'HomeController@profile');
