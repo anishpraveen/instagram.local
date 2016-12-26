@@ -38,12 +38,12 @@
         <div class="container-fluid">
             <div class="row">
                 
-            <div class="col-md-9">
-                 <select id="select2" class="select2" style="width: 100%" name="stavka"></select>
+            <div class="col-md-9" id="selectEmails">
+                 
                 
-                <span class="input-group-btn">
+                <!--<span class="input-group-btn">
                     <button type="button" id="iiii" class="btn btn-default">Go!</button>
-                </span>
+                </span>-->
                 
             </div>
             
@@ -128,50 +128,62 @@
         var selectedFirstTime = true;
         $('#selected').on('click',function(){
             if(selectedFirstTime){
-                $('#lblAddEmail').prepend('');
-                $('#lblAddEmail').find("#email"+emailCount).prop( "disabled", false );
-                var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+                $('#selectEmails').append('<select id="select2" class="select2" style="width: 100%" ></select>');
                 
-                $.ajax({
-                    type: "POST",
-                    url: '/admin/emails',
-                    data: {},
-                    beforeSend: function (request) {
-                        return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
-                    },
-                    success: function(response) {
-                        data = response;
-                        $(".select2").select2({
-                            // tags: true,
-                            multiple: true,
-                            tokenSeparators: [',', ' '],
-                            minimumInputLength: 0,
-                            minimumResultsForSearch: 10,
-                            data:data
-                        });  
-                    },
-                    error: function(response) {
-                        swal({title: "Error", type: "error", cancelButtonText: "Okay",closeOnConfirm: false,closeOnCancel: false});
+                $('.select2').select2({
+                    // tags: true,
+                    multiple: true,
+                    tokenSeparators: [',', ' '],
+                    minimumInputLength: 3,
+                    minimumResultsForSearch: 10,
+                    ajax: {
+                        url: '/admin/emails',
+                        dataType: "json",
+                        type: "POST",
+                        beforeSend: function (request) {
+                            return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+                        },
+                        data: function (params) {
+
+                            return {
+                                q: params.term, // search term
+                                page: params.page
+                            };
+                        },
+                        processResults: function (data) {
+                            // console.log(data);
+                            return {
+                                results: $.map(data, function (item) {
+                                    if(item.id== -1)                                        
+                                        return { 
+                                            text: item.text,
+                                            id: item.id,
+                                            disabled: true
+                                        }
+                                    else
+                                        return { 
+                                            text: item.text,
+                                            id: item.id
+                                        }
+                                })
+                            };
+                        }
                     }
-                })   
-                
+                });
+
                 selectedFirstTime = false;
                 
             }
         });
         $('input[type=radio][name=toRadio]').change(function() {
             if($("#selected").is(":not(:checked)")){
-                $('#lblAddEmail').find("#email"+emailCount).prop( "disabled", true );
+                $('#selectEmails').find("#select2").prop( "disabled", true );
             }
             else if($("#selected").is(":checked")){
-                // console.log('sel');
+                $('#selectEmails').find("#select2").prop( "disabled", false );
             }
         });
-        $('#addNewEmail').on('click',function(){
-            emailCount++;
-            console.log('clicked '+emailCount);
-            $('.col-xs-9.col-sm-9.col-md-9.col-lg-9').append('<input id="email'+emailCount+'" class="inputSendEmail form-control"  value="as" />');
-        });
+        
         $('#iiii').on('click',function(){
             console.log("Selected value is: "+$(".select2").val());
         });

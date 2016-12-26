@@ -229,12 +229,26 @@ class AdminController extends Controller
       */
     public function getEmails()
     {
+        $search = request('q');
         $userList = User::all();
+        $userList = User::select('*')
+        ->where('email', 'like', '%'.$search.'%')
+        ->get();
         $count = 0;
-        foreach ($userList as $user)
+        // $emails[$count]['id'] = 1;
+        // $emails[$count++]['text'] = $search;
+        if(count($userList))
         {
-            $emails[$count]['id'] = $user->id;
-            $emails[$count++]['text'] = $user->email;
+            foreach ($userList as $user)
+            {
+                $emails[$count]['id'] = $user->id;
+                $emails[$count++]['text'] = $user->email;
+            }
+        }
+        else
+        {
+            $emails[$count]['id'] = '-1';
+            $emails[$count++]['text'] = 'no result';
         }
         return ($emails);
     }
