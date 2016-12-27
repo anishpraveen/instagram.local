@@ -176,6 +176,7 @@ class AdminController extends Controller
     public function sendMail()
     {
         $to = request('to');
+        $selectedEmailID = request('selected');
         $toCount = request('toCount');
         $subject = request('subject');
         $body = request('body');
@@ -210,6 +211,15 @@ class AdminController extends Controller
                     $emails[] = $user->email;
                 }
                 $message = 'to all';
+                break;
+            
+            case 'selected':
+                $userList = User::whereIn('id', $selectedEmailID)->select('email')->get();
+                foreach ($userList as $user)
+                {
+                    $emails[] = $user->email;
+                }
+                $message = 'to selected emails';
                 break;
 
             default:

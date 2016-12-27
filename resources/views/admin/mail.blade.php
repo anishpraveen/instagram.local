@@ -81,14 +81,25 @@
             maxHeight: null,             // set maximum height of editor
             focus: false
         });  
+        var emailCount = 1;
         $('#divsendMail').on('click',function(){
             var markupStr = $('#summernote').summernote('code');
-            $('#summernote').summernote('reset');
+            
             var radioSelected = $('input[name=toRadio]:checked').val();
-            var count = 1;
+            var count = 0;
             var subject = $('input[name=subject]').val();
-            $('input[name=subject]').val('');
-            // console.log(subject);
+           
+            var selectedEmail = $(".select2").val();
+            if( typeof selectedEmail === 'undefined' || selectedEmail === null ){
+                // console.log('null');
+                selectedEmail = ["-1"];
+                // console.log( selectedEmail);
+            }
+            else{
+                console.log( selectedEmail.length);
+                count = selectedEmail.length;
+            }
+                
             swal({
                 title: "Send mail to "+radioSelected,
                 text: "Mail will be send to all people in the group.",
@@ -107,12 +118,15 @@
                     $.ajax({
                         type: "POST",
                         url: '/admin/mail',
-                        data: {to:radioSelected, toCount:count, subject:subject, body:markupStr},
+                        data: {to:radioSelected, toCount:count, selected:selectedEmail, subject:subject, body:markupStr},
                         beforeSend: function (request) {
                             return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
                         },
                         success: function(response) {
                             console.log(response);
+                            $('#summernote').summernote('reset');
+                            $('input[name=subject]').val('');
+                            $(".select2").val(null).trigger("change");
                             swal({title: "Mail queued", text: "Mail will be been send shortly.",timer: 1000, type: "success", showConfirmButton: false});
                         },
                         error: function(response) {
@@ -124,7 +138,7 @@
                 }
             });
         });
-        var emailCount = 1;
+        
         var selectedFirstTime = true;
         $('#selected').on('click',function(){
             if(selectedFirstTime){
